@@ -1,9 +1,9 @@
-package net.work100.training.stage2.design.patterns.factory;
+package net.work100.training.stage2.design.patterns.abstractfactory;
 
 /**
  * <p>Title: Rectangle</p>
  * <p>Description: </p>
- * <p>Url: http://www.work100.net/training/monolithic-architecture-design-patterns-factory-pattern.html</p>
+ * <p>Url: http://www.work100.net/training/monolithic-architecture-design-patterns-abstract-factory-pattern.html</p>
  *
  * @author liuxiaojun
  * @date 2020-02-07 20:35
