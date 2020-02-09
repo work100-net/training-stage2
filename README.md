@@ -48,7 +48,7 @@
         - [23.策略模式](http://www.work100.net/training/monolithic-architecture-design-patterns-strategy-pattern.html)
         - [24.模板模式](http://www.work100.net/training/monolithic-architecture-design-patterns-template-pattern.html)
         - [25.访问者模式](http://www.work100.net/training/monolithic-architecture-design-patterns-visitor-pattern.html)
-    
+    - [04.实践练习](http://www.work100.net/training/monolithic-architecture-test.html)
     
   - 常用框架
 
