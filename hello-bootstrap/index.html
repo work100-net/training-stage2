@@ -6,9 +6,73 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <link href="./assets/plugins/bootstrap/css/bootstrap.min.css" type="text/css" rel="stylesheet">
+    <link href="./assets/plugins/bootstrap/font-awesome/css/font-awesome.min.css" type="text/css" rel="stylesheet">
+
+    <style type="text/css">
+        .my_div {
+            border: 1px solid red;
+        }
+
+        @media screen and (max-width: 480px) {
+            .my_div {
+                border: 1px solid green;
+            }
+        }
+    </style>
 </head>
 <body>
 <h1>Hello Bootstrap</h1>
+
+<h2>1.网格布局</h2>
+<div class="container" style="border: 1px solid green;">
+    <div class="row">
+        <div class="col-md-6" style="border: 1px solid red;">左</div>
+        <div class="col-md-6" style="border: 1px solid red;">右</div>
+    </div>
+    <div class="row">
+        <div class="col-md-6" style="border: 1px solid blue;">左</div>
+        <div class="col-md-6" style="border: 1px solid blue;">右</div>
+    </div>
+</div>
+
+
+<h2>2.媒体查询</h2>
+<div class="my_div">
+    Hello 媒体查询
+</div>
+
+
+<h2>3.表格</h2>
+<div class="container">
+    <table class="table table-hover table-striped table-bordered">
+        <caption>基本的表格布局</caption>
+        <thead>
+        <tr>
+            <th>名称</th>
+            <th>城市</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>Tanmay</td>
+            <td>Bangalore</td>
+        </tr>
+        <tr>
+            <td>Sachin</td>
+            <td>Mumbai</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<h2>4.字体图标</h2>
+<div class="container">
+    <i class="fa fa-camera-retro fa-lg"></i> fa-lg
+    <i class="fa fa-camera-retro fa-2x"></i> fa-2x
+    <i class="fa fa-camera-retro fa-3x"></i> fa-3x
+    <i class="fa fa-camera-retro fa-4x"></i> fa-4x
+    <i class="fa fa-camera-retro fa-5x"></i> fa-5x
+</div>
 
 <script src="./assets/plugins/jquery-3.4.1.min.js"></script>
 <script src="./assets/plugins/bootstrap/js/bootstrap.min.js"></script>
