@@ -4,15 +4,6 @@
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
          version="4.0">
 
-    <context-param>
-        <param-name>contextConfigLocation</param-name>
-        <param-value>classpath:spring-context*.xml</param-value>
-    </context-param>
-    <listener>
-        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
-    </listener>
-
-    <!-- 如下注释掉的代码为 http://localhost:9000/training/monolithic-frameworks-example.html 章节所使用 -->
     <servlet>
         <servlet-name>loginController</servlet-name>
         <servlet-class>net.work100.training.stage2.iot.admin.web.controller.LoginController</servlet-class>
