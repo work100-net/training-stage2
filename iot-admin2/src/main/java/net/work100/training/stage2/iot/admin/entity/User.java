@@ -18,6 +18,7 @@ public class User implements Serializable {
     private String userName;
     private String loginId;
     private String loginPwd;
+    private boolean remember;
 
     public String getUserName() {
         return userName;
@@ -41,6 +42,14 @@ public class User implements Serializable {
 
     public void setLoginPwd(String loginPwd) {
         this.loginPwd = loginPwd;
+    }
+
+    public boolean isRemember() {
+        return remember;
+    }
+
+    public void setRemember(boolean remember) {
+        this.remember = remember;
     }
 
     @Override
