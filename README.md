@@ -67,7 +67,7 @@
     - 07.Spring MVC
         - [简介](http://www.work100.net/training/monolithic-frameworks-spring-mvc.html)
         - [项目重构(iot-admin3)](http://www.work100.net/training/monolithic-frameworks-spring-mvc-iot-admin3.html)
-        - [Maven 模块化开发](http://www.work100.net/training/monolithic-frameworks-spring-mvc-maven-module.html)
+        - [Maven 模块化开发(iot-cloud)](http://www.work100.net/training/monolithic-frameworks-spring-mvc-maven-module.html)
         - [表单标签库](http://www.work100.net/training/monolithic-frameworks-spring-mvc-form-tags.html)
         - [其它注解](http://www.work100.net/training/monolithic-frameworks-spring-mvc-other-annotation.html)
     - [08.MyBatis](http://www.work100.net/training/monolithic-frameworks-mybatis.html)
