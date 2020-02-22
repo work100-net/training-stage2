@@ -63,7 +63,7 @@
     - [03.JUnit](http://www.work100.net/training/monolithic-frameworks-junit.html)
     - [04.Log4j](http://www.work100.net/training/monolithic-frameworks-log4j.html)
     - [05.综合实例(iot-admin)](http://www.work100.net/training/monolithic-frameworks-example.html)
-    - [06.Spring Web(iot-admin)](http://www.work100.net/training/monolithic-frameworks-spring-web.html)
+    - [06.Spring Web(iot-admin2)](http://www.work100.net/training/monolithic-frameworks-spring-web.html)
     - 07.Spring MVC
         - [简介](http://www.work100.net/training/monolithic-frameworks-spring-mvc.html)
         - [项目重构(iot-admin3)](http://www.work100.net/training/monolithic-frameworks-spring-mvc-iot-admin3.html)
