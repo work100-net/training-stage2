@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>net.work100.training.stage2</groupId>
+    <artifactId>iot-cloud2</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
+
+    <modules>
+        <module>iot-cloud-dependencies</module>
+        <module>iot-cloud-commons</module>
+        <module>iot-cloud-domain</module>
+        <module>iot-cloud-web-admin</module>
+        <module>iot-cloud-web-console</module>
+        <module>iot-cloud-web-api</module>
+    </modules>
+</project>

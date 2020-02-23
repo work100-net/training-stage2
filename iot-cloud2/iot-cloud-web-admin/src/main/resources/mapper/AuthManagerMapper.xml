@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="net.work100.training.stage2.iot.cloud.web.admin.dao.AuthManagerDao">
+    <select id="selectAll" resultType="AuthManager">
+        SELECT
+          a.id,
+          a.user_key,
+          a.user_name,
+          a.password,
+          a.status,
+          a.superuser,
+          a.roles,
+          a.modify_password_time,
+          a.created,
+          a.updated
+        FROM
+          auth_manager AS a
+    </select>
+</mapper>
