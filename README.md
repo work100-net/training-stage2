@@ -70,4 +70,12 @@
         - [Maven 模块化开发(iot-cloud)](http://www.work100.net/training/monolithic-frameworks-spring-mvc-maven-module.html)
         - [表单标签库](http://www.work100.net/training/monolithic-frameworks-spring-mvc-form-tags.html)
         - [其它注解](http://www.work100.net/training/monolithic-frameworks-spring-mvc-other-annotation.html)
-    - [08.MyBatis](http://www.work100.net/training/monolithic-frameworks-mybatis.html)
+    - 08.MyBatis
+        - [MyBatis 简介](http://www.work100.net/training/monolithic-frameworks-mybatis.html)
+        - [Druid 简介](http://www.work100.net/training/monolithic-frameworks-mybatis-druid.html)
+        - [Spring 整合 Druid](http://www.work100.net/training/monolithic-frameworks-mybatis-druid-with-spring.html)
+        - [Spring 整合 MyBatis](http://www.work100.net/training/monolithic-frameworks-mybatis-with-spring.html)
+        - [MyBatis 对象关系映射](http://www.work100.net/training/monolithic-frameworks-mybatis-orm.html)
+        - [知识点：数据加密与密码](http://www.work100.net/training/monolithic-frameworks-mybatis-encryption.html)
+        - [MyBatis 单表 CRUD 操作](http://www.work100.net/training/monolithic-frameworks-mybatis-crud.html)
+        - [MyBatis 动态 SQL](http://www.work100.net/training/monolithic-frameworks-mybatis-sql.html)
