@@ -26,4 +26,44 @@ public interface AuthManagerDao {
      * @return
      */
     List<AuthManager> selectAll();
+
+
+    /**
+     * 新增
+     *
+     * @param authManager
+     */
+    void insert(AuthManager authManager);
+
+    /**
+     * 删除
+     *
+     * @param id
+     */
+    void delete(Long id);
+
+    /**
+     * 获取单个对象
+     *
+     * @param id
+     * @return
+     */
+    AuthManager getById(Long id);
+
+
+    /**
+     * 更新
+     *
+     * @param authManager
+     */
+    void update(AuthManager authManager);
+
+
+    /**
+     * 模糊查询
+     *
+     * @param userName
+     * @return
+     */
+    List<AuthManager> selectByName(String userName);
 }

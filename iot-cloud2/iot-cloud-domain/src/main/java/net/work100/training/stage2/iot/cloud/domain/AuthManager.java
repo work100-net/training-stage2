@@ -21,8 +21,14 @@ public class AuthManager implements Serializable {
     private String userKey;
     private String userName;
     private String password;
+    /**
+     * 状态：0=inactive, 1=active, 2=locked, 3=deleted
+     */
     private int status;
     private boolean superuser;
+    /**
+     * 角色：admin, editor
+     */
     private String roles;
     private Date modifyPasswordTime;
     private Date created;
@@ -114,6 +120,7 @@ public class AuthManager implements Serializable {
                 "id=" + id +
                 ", userKey='" + userKey + '\'' +
                 ", userName='" + userName + '\'' +
+                ", password='" + password + '\'' +
                 ", status=" + status +
                 ", superuser=" + superuser +
                 ", roles='" + roles + '\'' +

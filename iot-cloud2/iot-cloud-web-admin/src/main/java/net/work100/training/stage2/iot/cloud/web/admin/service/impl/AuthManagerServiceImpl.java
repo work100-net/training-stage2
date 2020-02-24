@@ -30,4 +30,29 @@ public class AuthManagerServiceImpl implements AuthManagerService {
     public List<AuthManager> selectAll() {
         return authManagerDao.selectAll();
     }
+
+    @Override
+    public void insert(AuthManager authManager) {
+        authManagerDao.insert(authManager);
+    }
+
+    @Override
+    public void delete(Long id) {
+        authManagerDao.delete(id);
+    }
+
+    @Override
+    public AuthManager getById(Long id) {
+        return authManagerDao.getById(id);
+    }
+
+    @Override
+    public void update(AuthManager authManager) {
+        authManagerDao.update(authManager);
+    }
+
+    @Override
+    public List<AuthManager> selectByName(String userName) {
+        return authManagerDao.selectByName(userName);
+    }
 }
