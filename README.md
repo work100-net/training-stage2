@@ -79,3 +79,34 @@
         - [知识点：数据加密与密码](http://www.work100.net/training/monolithic-frameworks-mybatis-encryption.html)
         - [MyBatis 单表 CRUD 操作](http://www.work100.net/training/monolithic-frameworks-mybatis-crud.html)
         - [MyBatis 动态 SQL](http://www.work100.net/training/monolithic-frameworks-mybatis-sql.html)
+        
+  - 项目实战(后台)
+
+    - [01.概览](http://www.work100.net/training/monolithic-project-iot-cloud-admin.html)
+    - [02.后台登录](http://www.work100.net/training/monolithic-project-iot-cloud-admin-login.html)
+    - [03.首页布局](http://www.work100.net/training/monolithic-project-iot-cloud-admin-index.html)
+    - [04.后台账户管理](http://www.work100.net/training/monolithic-project-iot-cloud-admin-manager.html)
+    - [05.租户管理](http://www.work100.net/training/monolithic-project-iot-cloud-admin-tenant.html)
+    - [06.租户账号管理](http://www.work100.net/training/monolithic-project-iot-cloud-admin-tenant-user.html)
+    
+  - Spring事务管理
+
+    - [01.简介](http://www.work100.net/training/monolithic-project-spring-transaction.html)
+    - [02.通过AOP配置管理事务](http://www.work100.net/training/monolithic-project-spring-transaction-aop.html)
+    - [03.通过注解管理事务](http://www.work100.net/training/monolithic-project-spring-transaction-annotation.html)
+    
+  - 模块间通信
+
+    - [01.概述](http://www.work100.net/training/monolithic-project-module-communication.html)
+    - [02.Apache HttpClient](http://www.work100.net/training/monolithic-project-module-communication-apache-httpclient.html)
+    - [03.Jackson](http://www.work100.net/training/monolithic-project-module-communication-jackson.html)
+    - [04.增加API接口模块](http://www.work100.net/training/monolithic-project-module-communication-api-module.html)
+    - [05.RESTful](http://www.work100.net/training/monolithic-project-module-communication-restful.html)
+
+  - 项目实战(前台)
+
+    - [01.概览](http://www.work100.net/training/monolithic-project-iot-cloud-console.html)
+    - [02.前台登录](http://www.work100.net/training/monolithic-project-iot-cloud-console-login.html)
+    - [03.首页布局](http://www.work100.net/training/monolithic-project-iot-cloud-console-index.html)
+    - [04.账户管理](http://www.work100.net/training/monolithic-project-iot-cloud-console-user.html)
+    - [05.设备管理](http://www.work100.net/training/monolithic-project-iot-cloud-console-device.html)
