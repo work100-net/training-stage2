@@ -4,6 +4,7 @@ import net.work100.training.stage2.iot.cloud.commons.utils.EncryptionUtils;
 import net.work100.training.stage2.iot.cloud.domain.AuthManager;
 import net.work100.training.stage2.iot.cloud.web.admin.service.AuthManagerService;
 import org.apache.commons.lang3.RandomStringUtils;
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -93,5 +94,14 @@ public class AuthManagerServiceTest {
             System.out.println("------------------------------------------------");
             System.out.println(authManager.toString());
         }
+    }
+
+    @Test
+    public void testLogin()
+    {
+        String userName = "xiaojun.liu";
+        String password = "123456";
+        AuthManager authManager = authManagerService.login(userName, password);
+        Assert.assertNotNull(authManager);
     }
 }
