@@ -85,7 +85,10 @@
     - [01.概览](http://www.work100.net/training/monolithic-project-iot-cloud-admin.html)
     - [02.后台登录](http://www.work100.net/training/monolithic-project-iot-cloud-admin-login.html)
     - [03.首页布局](http://www.work100.net/training/monolithic-project-iot-cloud-admin-index.html)
-    - [04.后台账户管理](http://www.work100.net/training/monolithic-project-iot-cloud-admin-manager.html)
+    - 04.后台账户管理
+        - [使用include](http://www.work100.net/training/monolithic-project-iot-cloud-admin-manager.html)
+        - [账户列表展示](http://www.work100.net/training/monolithic-project-iot-cloud-admin-manager-list1.html)
+        - [新增账户](http://www.work100.net/training/monolithic-project-iot-cloud-admin-manager-add.html)
     - [05.租户管理](http://www.work100.net/training/monolithic-project-iot-cloud-admin-tenant.html)
     - [06.租户账号管理](http://www.work100.net/training/monolithic-project-iot-cloud-admin-tenant-user.html)
     
