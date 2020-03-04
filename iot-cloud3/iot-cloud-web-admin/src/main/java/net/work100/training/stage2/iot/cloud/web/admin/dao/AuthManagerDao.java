@@ -38,9 +38,9 @@ public interface AuthManagerDao {
     /**
      * 删除
      *
-     * @param id
+     * @param userKey
      */
-    void delete(Long id);
+    void delete(String userKey);
 
     /**
      * 获取单个对象
@@ -74,4 +74,12 @@ public interface AuthManagerDao {
      * @return
      */
     AuthManager getByUserName(String userName);
+
+    /**
+     * 获取账户对象
+     *
+     * @param userKey 用户Key
+     * @return
+     */
+    AuthManager getByUserKey(String userKey);
 }

@@ -61,7 +61,7 @@ public class AuthManagerServiceTest {
 
     @Test
     public void testDelete() {
-        authManagerService.delete(6L);
+        authManagerService.delete("cc03e747a6afbbcbf8be7668acfebee5");
     }
 
     @Test

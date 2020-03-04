@@ -3,7 +3,7 @@
 <html>
 <head>
     <title>控制台 | IoT-Admin</title>
-    <jsp:include page="includes/resources_header.jsp" />
+    <jsp:include page="includes/resources_head.jsp" />
 </head>
 <body class="hold-transition sidebar-mini">
 <div class="wrapper">

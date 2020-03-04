@@ -5,7 +5,7 @@
 <html>
 <head>
     <title>查询列表 - 后台账户 | IoT-Admin</title>
-    <jsp:include page="../includes/resources_header.jsp" />
+    <jsp:include page="../includes/resources_head.jsp" />
 </head>
 <body class="hold-transition sidebar-mini">
 <div class="wrapper">
@@ -74,6 +74,7 @@
                                         <th>ID</th>
                                         <th>用户名</th>
                                         <th>角色</th>
+                                        <th>超级用户</th>
                                         <th>状态</th>
                                         <th>更新时间</th>
                                         <th width="120px" align="center">操作</th>
@@ -85,13 +86,14 @@
                                             <td>${authManager.id}</td>
                                             <td>${authManager.userName}</td>
                                             <td>${authManager.roles}</td>
+                                            <td>${authManager.superuser}</td>
                                             <td>${authManager.status}</td>
                                             <td><fmt:formatDate value="${authManager.updated}" pattern="yyyy-MM-dd HH:mm:ss" /></td>
                                             <td>
                                                 <div class="btn-group">
                                                     <a href="#" type="button" class="btn btn-default btn-sm"><i class="fas fa-eye"></i></a>
-                                                    <a href="#" type="button" class="btn btn-primary btn-sm"><i class="fas fa-edit"></i></a>
-                                                    <a href="#" type="button" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></a>
+                                                    <a href="/auth/manager/edit/${authManager.userKey}" type="button" class="btn btn-primary btn-sm"><i class="fas fa-edit"></i></a>
+                                                    <a href="/auth/manager/delete/${authManager.userKey}" type="button" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></a>
                                                 </div>
                                             </td>
                                         </tr>
@@ -116,5 +118,23 @@
 <!-- ./wrapper -->
 <jsp:include page="../includes/resources_body.jsp" />
 
+<script>
+$(function() {
+    if (${baseResult.status != null && baseResult.status == 200}) {
+        const Toast = Swal.mixin({
+            toast: true,
+            position: 'top',
+            showConfirmButton: false,
+            timer: 2000,
+            timerProgressBar: true
+        })
+
+        Toast.fire({
+            type: 'success',
+            title: '${baseResult.message}'
+        })
+    }
+})
+</script>
 </body>
 </html>

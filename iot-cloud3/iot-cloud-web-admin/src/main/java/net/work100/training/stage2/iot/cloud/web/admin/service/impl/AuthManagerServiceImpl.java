@@ -1,12 +1,17 @@
 package net.work100.training.stage2.iot.cloud.web.admin.service.impl;
 
+import net.work100.training.stage2.iot.cloud.commons.dto.BaseResult;
 import net.work100.training.stage2.iot.cloud.commons.utils.EncryptionUtils;
+import net.work100.training.stage2.iot.cloud.commons.utils.HttpUtils;
 import net.work100.training.stage2.iot.cloud.domain.AuthManager;
 import net.work100.training.stage2.iot.cloud.web.admin.dao.AuthManagerDao;
 import net.work100.training.stage2.iot.cloud.web.admin.service.AuthManagerService;
+import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.time.DateFormatUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -33,13 +38,29 @@ public class AuthManagerServiceImpl implements AuthManagerService {
     }
 
     @Override
-    public void insert(AuthManager authManager) {
-        authManagerDao.insert(authManager);
+    public BaseResult insert(AuthManager authManager) {
+        if (authManagerDao.getByUserName(authManager.getUserName()) != null) {
+            return BaseResult.fail("用户名已经存在");
+        }
+        try {
+            // 生成 userKey
+            authManager.setUserKey(EncryptionUtils.encryptText(EncryptionUtils.EncryptionType.MD5, authManager.getUserName().toLowerCase()));
+
+            // 密码加密
+            authManager.setPassword(EncryptionUtils.encryptPassword(EncryptionUtils.EncryptionType.MD5, authManager.getPassword()));
+            authManager.setCreated(new Date());
+            authManager.setUpdated(new Date());
+
+            authManagerDao.insert(authManager);
+            return BaseResult.success("新增账户成功");
+        } catch (Exception ex) {
+            return BaseResult.fail("未知错误");
+        }
     }
 
     @Override
-    public void delete(Long id) {
-        authManagerDao.delete(id);
+    public void delete(String userKey) {
+        authManagerDao.delete(userKey);
     }
 
     @Override
@@ -48,8 +69,18 @@ public class AuthManagerServiceImpl implements AuthManagerService {
     }
 
     @Override
-    public void update(AuthManager authManager) {
-        authManagerDao.update(authManager);
+    public BaseResult update(AuthManager authManager) {
+        if (authManagerDao.getByUserKey(authManager.getUserKey()) == null) {
+            return BaseResult.fail("用户不存在");
+        }
+        try {
+            authManager.setUpdated(new Date());
+
+            authManagerDao.update(authManager);
+            return BaseResult.success("账户更新成功");
+        } catch (Exception ex) {
+            return BaseResult.fail("未知错误");
+        }
     }
 
     @Override
@@ -68,4 +99,22 @@ public class AuthManagerServiceImpl implements AuthManagerService {
         }
         return null;
     }
+
+    @Override
+    public AuthManager getByUserKey(String userKey) {
+        return authManagerDao.getByUserKey(userKey);
+    }
+
+    /**
+     * 生成 userKey
+     *
+     * @param userName 用户名
+     * @return
+     */
+    private String generateUserKey(String userName) {
+        String strDate = DateFormatUtils.format(new Date(), "yyyy-MM-ddTHH:mm");
+        String sourceUserKey = String.format("%s%s", userName.toLowerCase(), strDate);
+        return EncryptionUtils.encryptText(EncryptionUtils.EncryptionType.MD5, sourceUserKey);
+    }
+
 }

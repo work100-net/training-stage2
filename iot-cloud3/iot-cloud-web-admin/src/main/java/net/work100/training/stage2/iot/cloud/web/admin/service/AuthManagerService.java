@@ -1,5 +1,6 @@
 package net.work100.training.stage2.iot.cloud.web.admin.service;
 
+import net.work100.training.stage2.iot.cloud.commons.dto.BaseResult;
 import net.work100.training.stage2.iot.cloud.domain.AuthManager;
 
 import java.util.List;
@@ -28,15 +29,16 @@ public interface AuthManagerService {
      * 新增
      *
      * @param authManager
+     * @return
      */
-    void insert(AuthManager authManager);
+    BaseResult insert(AuthManager authManager);
 
     /**
      * 删除
      *
-     * @param id
+     * @param userKey
      */
-    void delete(Long id);
+    void delete(String userKey);
 
     /**
      * 获取单个对象
@@ -51,8 +53,9 @@ public interface AuthManagerService {
      * 更新
      *
      * @param authManager
+     * @return
      */
-    void update(AuthManager authManager);
+    BaseResult update(AuthManager authManager);
 
 
     /**
@@ -71,4 +74,13 @@ public interface AuthManagerService {
      * @return
      */
     AuthManager login(String userName, String password);
+
+
+    /**
+     * 获取账户对象
+     *
+     * @param userKey 用户Key
+     * @return
+     */
+    AuthManager getByUserKey(String userKey);
 }

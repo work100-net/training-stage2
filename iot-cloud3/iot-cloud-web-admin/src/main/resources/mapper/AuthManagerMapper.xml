@@ -20,6 +20,7 @@
           <include refid="authManagerColumns" />
         FROM
           auth_manager AS a
+        ORDER BY id DESC
     </select>
 
     <insert id="insert" >
@@ -46,7 +47,7 @@
     </insert>
 
     <delete id="delete">
-        DELETE FROM auth_manager WHERE id = #{id}
+        DELETE FROM auth_manager WHERE user_key = #{userKey}
     </delete>
 
     <select id="getById" resultType="AuthManager">
@@ -62,14 +63,12 @@
         UPDATE
           auth_manager
         SET
-          password = #{password},
           status = #{status},
           superuser = #{superuser},
           roles = #{roles},
-          modify_password_time = #{modifyPasswordTime},
           updated = #{updated}
         WHERE
-          id = #{id}
+          user_key = #{userKey}
     </update>
 
     <select id="selectByName" resultType="AuthManager">
@@ -88,5 +87,14 @@
           auth_manager AS a
         WHERE
           a.user_name = #{userName}
+    </select>
+
+    <select id="getByUserKey" resultType="AuthManager">
+        SELECT
+        <include refid="authManagerColumns" />
+        FROM
+        auth_manager AS a
+        WHERE
+        a.user_key = #{userKey}
     </select>
 </mapper>
