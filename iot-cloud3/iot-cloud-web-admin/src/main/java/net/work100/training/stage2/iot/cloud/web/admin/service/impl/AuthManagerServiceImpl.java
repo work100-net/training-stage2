@@ -91,7 +91,7 @@ public class AuthManagerServiceImpl implements AuthManagerService {
     @Override
     public AuthManager login(String userName, String password) {
         AuthManager authManager = authManagerDao.getByUserName(userName);
-        if (authManager != null) {
+        if (authManager != null && authManager.getStatus() == 1) {
             // 验证密码，如果验证通过，则返回用户信息
             if (EncryptionUtils.validateEncryptPassword(password, authManager.getPassword())) {
                 return authManager;

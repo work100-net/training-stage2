@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>查询列表 - 后台账户 | IoT-Admin</title>
+    <title>新增账户 - 后台账户 | IoT-Admin</title>
     <jsp:include page="../includes/resources_head.jsp" />
 </head>
 <body class="hold-transition sidebar-mini">

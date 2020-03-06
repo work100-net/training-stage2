@@ -4,6 +4,7 @@ import net.work100.training.stage2.iot.cloud.commons.constant.ConstantUtils;
 import net.work100.training.stage2.iot.cloud.commons.utils.CookieUtils;
 import net.work100.training.stage2.iot.cloud.domain.AuthManager;
 import net.work100.training.stage2.iot.cloud.web.admin.service.AuthManagerService;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -39,7 +40,6 @@ public class LoginController {
      */
     @RequestMapping(value = {"", "login"}, method = RequestMethod.GET)
     public String login(HttpServletRequest request, Model model) {
-
         boolean isRemember = "on".equals(CookieUtils.getCookieValue(request, ConstantUtils.COOKIE_MANAGER_REMEMBER));
         if (isRemember) {
             String userName = CookieUtils.getCookieValue(request, ConstantUtils.COOKIE_MANAGER_USERNAME);
@@ -90,7 +90,7 @@ public class LoginController {
             model.addAttribute("userName", userName);
             model.addAttribute("remember", isRemember);
             model.addAttribute("message", "用户名或者密码错误！");
-            return login(request, model);
+            return "login";
         }
     }
 
