@@ -11,5 +11,10 @@
 <!-- SweetAlert2 -->
 <script src="/static/assets/plugins/sweetalert2/sweetalert2.min.js"></script>
 
+<!-- jquery-validation -->
+<script src="/static/assets/plugins/jquery-validation/jquery.validate.min.js"></script>
+<script src="/static/assets/plugins/jquery-validation/additional-methods.min.js"></script>
+<script src="/static/assets/plugins/jquery-validation/localization/messages_zh.min.js"></script>
+
 <!-- AdminLTE -->
 <script src="/static/assets/js/adminlte.js"></script>

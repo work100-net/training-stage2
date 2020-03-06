@@ -93,7 +93,7 @@
                                                 <div class="btn-group">
                                                     <a href="#" type="button" class="btn btn-default btn-sm"><i class="fas fa-eye"></i></a>
                                                     <a href="/auth/manager/edit/${authManager.userKey}" type="button" class="btn btn-primary btn-sm"><i class="fas fa-edit"></i></a>
-                                                    <a href="/auth/manager/delete/${authManager.userKey}" type="button" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></a>
+                                                    <a href="javascript:deleteConfirm('${authManager.userKey}');" type="button" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></a>
                                                 </div>
                                             </td>
                                         </tr>
@@ -112,6 +112,29 @@
         <!-- /.content -->
     </div>
     <!-- /.content-wrapper -->
+
+    <div class="modal fade" id="model-operate-confirm">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">操作确认</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>操作后不可恢复，确定吗？</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                    <button type="button" class="btn btn-primary">确定</button>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+    <!-- /.modal -->
 
     <jsp:include page="../includes/layout_footer.jsp" />
 </div>
@@ -134,7 +157,17 @@ $(function() {
             title: '${baseResult.message}'
         })
     }
+
 })
+
+function deleteConfirm(userKey) {
+    $('#model-operate-confirm').modal({
+        keyboard: false
+    }).on('hidden.bs.model', function(e) {
+        console.log('-----------------')
+        console.log(e.relatedTarget)
+    });
+}
 </script>
 </body>
 </html>

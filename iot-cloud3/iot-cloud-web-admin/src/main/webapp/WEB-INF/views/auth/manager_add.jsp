@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -39,44 +40,47 @@
                 <div class="row">
                     <div class="col">
                         <div class="card card-gray">
-                            <!-- /.card-header -->
                             <!-- form start -->
-                            <form action="/auth/manager/add" method="post">
+                            <form:form action="/auth/manager/add" id="form" method="post" modelAttribute="authManager">
                                 <div class="card-body">
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label for="userName">用户名 <font color="red">*</font></label>
-                                                <input type="text" class="form-control" id="userName" name="userName" placeholder="请输入用户名" value="${authManager.userName}">
+                                                <label for="userName">用户名</label>
+                                                <form:input path="userName" cssClass="form-control" placeholder="请输入用户名" />
                                             </div>
                                             <div class="form-group">
-                                                <label for="password">密码 <font color="red">*</font></label>
-                                                <input type="password" class="form-control" id="password" name="password" placeholder="请输入密码">
+                                                <label for="password">密码</label>
+                                                <form:password path="password" cssClass="form-control" placeholder="请输入密码" />
                                             </div>
                                             <div class="form-group">
-                                                <label for="status">状态 <font color="red">*</font></label>
-                                                <select class="form-control select2" style="width: 100%;" id="status" name="status">
+                                                <label for="status">状态</label>
+                                                <form:select path="status" cssClass="form-control select2" style="width: 100%;">
                                                     <option value="0" selected="selected">未激活</option>
                                                     <option value="1">激活</option>
                                                     <option value="2">锁定</option>
                                                     <option value="3">删除</option>
-                                                </select>
+                                                </form:select>
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label for="roles">角色 <font color="red">*</font></label>
-                                                <select class="select2" id="roles" name="roles" multiple="multiple" data-placeholder="请选择角色" style="width: 100%;">
-                                                    <option value="admin" ${authManager.roles.contains("admin")?"selected":""}>admin</option>
-                                                    <option value="editor" ${authManager.roles.contains("editor")?"selected":""}>editor</option>
-                                                </select>
+                                                <label for="roles">角色</label>
+                                                <form:select path="roles" cssClass="select2" multiple="multiple" data-placeholder="请选择角色" style="width: 100%;">
+                                                    <option value="admin" ${authManager.roles.contains("admin")?"selected":""}>
+                                                        admin
+                                                    </option>
+                                                    <option value="editor" ${authManager.roles.contains("editor")?"selected":""}>
+                                                        editor
+                                                    </option>
+                                                </form:select>
                                             </div>
                                             <div class="form-group">
-                                                <label for="superuser">是否超级用户 <font color="red">*</font></label>
-                                                <select class="form-control select2" id="superuser" name="superuser" style="width: 100%;">
+                                                <label for="superuser">是否超级用户</label>
+                                                <form:select path="superuser" cssClass="form-control select2" style="width: 100%;">
                                                     <option value="0" selected="selected">否</option>
                                                     <option value="1">是</option>
-                                                </select>
+                                                </form:select>
                                             </div>
                                         </div>
                                     </div>
@@ -87,7 +91,7 @@
                                     <button type="submit" class="btn btn-primary">保存</button>
                                     <a href="/auth/manager/list" type="button" class="btn btn-default">返回列表</a>
                                 </div>
-                            </form>
+                            </form:form>
                         </div>
                         <!-- /.card -->
                     </div>
@@ -132,6 +136,54 @@ $(function() {
             title: '${baseResult.message}'
         })
     }
+
+    $("#form").validate({
+        rules: {
+            userName: {
+                required: true,
+                minlength: 4,
+                maxlength: 20
+            },
+            password: {
+                required: true,
+                minlength: 6,
+                maxlength: 20
+            },
+            roles: {
+                required: true,
+                minlength: 1,
+                maxlength: 3
+            }
+        },
+        messages: {
+            userName: {
+                required: " 请输入用户名",
+                minlength: " 用户名不能小于4位",
+                maxlength: " 用户名不能大于于20位"
+            },
+            password: {
+                required: " 请输入密码",
+                minlength: " 密码不能小于6位",
+                maxlength: " 密码不能大于于20位"
+            },
+            roles: {
+                required: " 请选择角色",
+                minlength: " 至少选择1个角色",
+                maxlength: " 至多选择3个角色"
+            }
+        },
+        errorElement: 'span',
+        errorPlacement: function(error, element) {
+            error.addClass('invalid-feedback');
+            element.closest('.form-group').children('label').append(error);
+        },
+        highlight: function(element, errorClass, validClass) {
+            $(element).addClass('is-invalid');
+        },
+        unhighlight: function(element, errorClass, validClass) {
+            $(element).removeClass('is-invalid');
+        }
+    });
 })
 </script>
 </body>

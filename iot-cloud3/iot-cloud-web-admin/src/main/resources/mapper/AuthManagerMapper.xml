@@ -91,10 +91,10 @@
 
     <select id="getByUserKey" resultType="AuthManager">
         SELECT
-        <include refid="authManagerColumns" />
+          <include refid="authManagerColumns" />
         FROM
-        auth_manager AS a
+          auth_manager AS a
         WHERE
-        a.user_key = #{userKey}
+          a.user_key = #{userKey}
     </select>
 </mapper>

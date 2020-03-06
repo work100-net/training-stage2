@@ -42,7 +42,9 @@ public class ManagerController {
     }
 
     @RequestMapping(value = "add", method = RequestMethod.GET)
-    public String add() {
+    public String add(Model model) {
+        AuthManager authManager = new AuthManager();
+        model.addAttribute("authManager", authManager);
         return "auth/manager_add";
     }
 
