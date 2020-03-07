@@ -115,3 +115,12 @@
     - [03.首页布局](http://www.work100.net/training/monolithic-project-iot-cloud-console-index.html)
     - [04.账户管理](http://www.work100.net/training/monolithic-project-iot-cloud-console-user.html)
     - [05.设备管理](http://www.work100.net/training/monolithic-project-iot-cloud-console-device.html)
+
+
+-------------------
+
+> 如果对课程内容感兴趣，可以扫码关注我们的 `公众号` 或 `QQ群`，及时关注我们的课程更新
+
+<img src="http://contents.work100.net/images/about/contact/wechat_dingyuehao.jpg" width="160" />
+
+<img src="http://contents.work100.net/images/about/contact/qq_group_qrcode.jpg" width="160" />
