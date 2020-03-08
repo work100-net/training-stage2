@@ -5,6 +5,7 @@ import net.work100.training.stage2.iot.cloud.commons.utils.EncryptionUtils;
 import net.work100.training.stage2.iot.cloud.commons.utils.HttpUtils;
 import net.work100.training.stage2.iot.cloud.domain.AuthManager;
 import net.work100.training.stage2.iot.cloud.web.admin.dao.AuthManagerDao;
+import net.work100.training.stage2.iot.cloud.web.admin.dto.auth.ManagerSearcher;
 import net.work100.training.stage2.iot.cloud.web.admin.service.AuthManagerService;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.time.DateFormatUtils;
@@ -103,6 +104,21 @@ public class AuthManagerServiceImpl implements AuthManagerService {
     @Override
     public AuthManager getByUserKey(String userKey) {
         return authManagerDao.getByUserKey(userKey);
+    }
+
+    @Override
+    public List<AuthManager> search(ManagerSearcher managerSearcher) {
+        AuthManager authManager = new AuthManager();
+        if (!managerSearcher.isAdvanced()) {
+            authManager.setUserName(managerSearcher.getKeyword());
+            authManager.setRoles("");
+            authManager.setStatus(-1);
+        } else {
+            authManager.setUserName(managerSearcher.getUserName());
+            authManager.setRoles(managerSearcher.getRoles());
+            authManager.setStatus(managerSearcher.getStatus());
+        }
+        return authManagerDao.search(authManager);
     }
 
     /**

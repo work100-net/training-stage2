@@ -82,4 +82,12 @@ public interface AuthManagerDao {
      * @return
      */
     AuthManager getByUserKey(String userKey);
+
+    /**
+     * 搜索
+     *
+     * @param authManager
+     * @return
+     */
+    List<AuthManager> search(AuthManager authManager);
 }

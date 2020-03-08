@@ -20,7 +20,7 @@
           <include refid="authManagerColumns" />
         FROM
           auth_manager AS a
-        ORDER BY id DESC
+        ORDER BY a.id DESC
     </select>
 
     <insert id="insert" >
@@ -96,5 +96,24 @@
           auth_manager AS a
         WHERE
           a.user_key = #{userKey}
+    </select>
+
+    <select id="search" resultType="AuthManager">
+        SELECT
+          <include refid="authManagerColumns" />
+        FROM
+          auth_manager AS a
+        <where>
+            <if test="userName != null and userName != ''">
+                AND a.user_name LIKE CONCAT('%', #{userName}, '%')
+            </if>
+            <if test="roles != null and roles != ''">
+                AND a.roles LIKE CONCAT('%', #{roles}, '%')
+            </if>
+            <if test="status != -1">
+                AND a.status = #{status}
+            </if>
+        </where>
+        ORDER BY a.id DESC
     </select>
 </mapper>
