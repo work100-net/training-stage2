@@ -259,7 +259,7 @@ $(function() {
     })
 })
 
-
+// 显示高级搜索
 function showSearcher() {
     $("#advanced").val(true);
     $("#searcher").css('display', 'block');
@@ -267,6 +267,7 @@ function showSearcher() {
     $("#btnClose").css('display', 'block');
 }
 
+// 隐藏高级搜索
 function hideSearcher() {
     $("#advanced").val(false);
     $("#searcher").css('display', 'none');

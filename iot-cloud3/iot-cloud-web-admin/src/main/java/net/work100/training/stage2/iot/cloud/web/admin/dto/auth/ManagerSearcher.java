@@ -5,6 +5,7 @@ import net.work100.training.stage2.iot.cloud.commons.dto.BaseSearcher;
 /**
  * <p>Title: ManagerSearcher</p>
  * <p>Description: </p>
+ * <p>Url: http://www.work100.net/training/monolithic-project-iot-cloud-admin.html</p>
  *
  * @author liuxiaojun
  * @date 2020-03-08 17:02
