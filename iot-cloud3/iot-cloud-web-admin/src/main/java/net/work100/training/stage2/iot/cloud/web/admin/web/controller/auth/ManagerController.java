@@ -3,6 +3,7 @@ package net.work100.training.stage2.iot.cloud.web.admin.web.controller.auth;
 import net.work100.training.stage2.iot.cloud.commons.dto.BaseResult;
 import net.work100.training.stage2.iot.cloud.commons.utils.HttpUtils;
 import net.work100.training.stage2.iot.cloud.domain.AuthManager;
+import net.work100.training.stage2.iot.cloud.web.admin.dto.auth.ManagerSearcher;
 import net.work100.training.stage2.iot.cloud.web.admin.service.AuthManagerService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,7 +37,23 @@ public class ManagerController {
 
     @RequestMapping(value = "list", method = RequestMethod.GET)
     public String list(Model model) {
+        ManagerSearcher managerSearcher = new ManagerSearcher();
+        managerSearcher.setKeyword("");
+        managerSearcher.setAdvanced(false);
+        managerSearcher.setRoles("");
+        managerSearcher.setStatus(-1);
+        model.addAttribute(managerSearcher);
+
         List<AuthManager> authManagers = authManagerService.selectAll();
+        model.addAttribute("authManagers", authManagers);
+        return "auth/manager_list";
+    }
+
+    @RequestMapping(value = "search", method = RequestMethod.POST)
+    public String search(ManagerSearcher managerSearcher, Model model) {
+
+        List<AuthManager> authManagers = authManagerService.search(managerSearcher);
+        model.addAttribute("managerSearcher", managerSearcher);
         model.addAttribute("authManagers", authManagers);
         return "auth/manager_list";
     }
@@ -147,4 +164,5 @@ public class ManagerController {
         redirectAttributes.addFlashAttribute("baseResult", BaseResult.success(String.format("账户[%s]已被成功删除", authManager.getUserName())));
         return "redirect:/auth/manager/list";
     }
+
 }

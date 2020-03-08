@@ -2,6 +2,7 @@ package net.work100.training.stage2.iot.cloud.web.admin.service;
 
 import net.work100.training.stage2.iot.cloud.commons.dto.BaseResult;
 import net.work100.training.stage2.iot.cloud.domain.AuthManager;
+import net.work100.training.stage2.iot.cloud.web.admin.dto.auth.ManagerSearcher;
 
 import java.util.List;
 
@@ -83,4 +84,12 @@ public interface AuthManagerService {
      * @return
      */
     AuthManager getByUserKey(String userKey);
+
+    /**
+     * 搜索
+     *
+     * @param managerSearcher 搜索器
+     * @return
+     */
+    List<AuthManager> search(ManagerSearcher managerSearcher);
 }
