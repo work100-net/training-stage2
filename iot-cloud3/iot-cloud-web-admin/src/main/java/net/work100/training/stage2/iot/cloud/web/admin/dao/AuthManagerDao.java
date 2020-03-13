@@ -43,6 +43,13 @@ public interface AuthManagerDao {
     void delete(String userKey);
 
     /**
+     * 批量删除
+     *
+     * @param userKeys
+     */
+    void multiDelete(String[] userKeys);
+
+    /**
      * 获取单个对象
      *
      * @param id
