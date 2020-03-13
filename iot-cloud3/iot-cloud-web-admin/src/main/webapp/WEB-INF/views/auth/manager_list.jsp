@@ -188,8 +188,7 @@
                                                     <div class="btn-group">
                                                         <a href="#" type="button" class="btn btn-default btn-sm"><i class="fas fa-eye"></i></a>
                                                         <a href="/auth/manager/edit/${authManager.userKey}" type="button" class="btn btn-primary btn-sm"><i class="fas fa-edit"></i></a>
-                                                        <button type="button" class="btn btn-danger btn-sm" onclick="singleDelete('${authManager.userKey}');">
-                                                            <i class="fas fa-trash"></i></button>
+                                                        <button type="button" class="btn btn-danger btn-sm" onclick="singleDelete('${authManager.userKey}');"><i class="fas fa-trash"></i></button>
                                                     </div>
                                                 </td>
                                             </tr>
