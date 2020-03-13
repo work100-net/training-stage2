@@ -92,6 +92,8 @@
         - [编辑账户](http://www.work100.net/training/monolithic-project-iot-cloud-admin-manager-edit.html)
         - [删除账户](http://www.work100.net/training/monolithic-project-iot-cloud-admin-manager-delete.html)
         - [搜索功能](http://www.work100.net/training/monolithic-project-iot-cloud-admin-manager-search.html)
+        - [JS代码重构](http://www.work100.net/training/monolithic-project-iot-cloud-admin-manager-js.html)
+        - [批量删除](http://www.work100.net/training/monolithic-project-iot-cloud-admin-manager-multi-delete.html)
     - [05.租户管理](http://www.work100.net/training/monolithic-project-iot-cloud-admin-tenant.html)
     - [06.租户账号管理](http://www.work100.net/training/monolithic-project-iot-cloud-admin-tenant-user.html)
     
