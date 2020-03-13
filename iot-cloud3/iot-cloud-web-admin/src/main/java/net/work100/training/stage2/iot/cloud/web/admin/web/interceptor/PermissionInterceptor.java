@@ -28,7 +28,7 @@ public class PermissionInterceptor implements HandlerInterceptor {
 
     @Override
     public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
-        if ("login".equals(modelAndView.getViewName())) {
+        if (modelAndView != null && "login".equals(modelAndView.getViewName())) {
             AuthManager authManager = (AuthManager) request.getSession().getAttribute(ConstantUtils.SESSION_MANAGER);
             if (authManager != null) {
                 response.sendRedirect("/main");

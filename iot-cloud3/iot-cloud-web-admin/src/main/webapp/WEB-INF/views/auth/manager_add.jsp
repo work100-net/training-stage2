@@ -110,35 +110,13 @@
 
 <script>
 $(function() {
-    //Initialize Select2 Elements
-    $('.select2').select2();
-
-    //Initialize Select2 Elements
-    $('.select2bs4').select2({
-        theme: 'bootstrap4'
-    });
-
     if (${baseResult.status != null && baseResult.status != 200}) {
-        const Toast = Swal.mixin({
-            toast: true,
-            position: 'top',
-            showConfirmButton: false,
-            timer: 2000,
-            timerProgressBar: true,
-            onOpen: (toast) => {
-                toast.addEventListener('mouseenter', Swal.stopTimer)
-                toast.addEventListener('mouseleave', Swal.resumeTimer)
-            }
-        })
-
-        Toast.fire({
-            type: 'error',
-            title: '${baseResult.message}'
-        })
+        Message.showFail('${baseResult.message}');
     }
 
-    $("#form").validate({
-        rules: {
+    FormValidate.validate(
+        'form',
+        {
             userName: {
                 required: true,
                 minlength: 4,
@@ -155,7 +133,7 @@ $(function() {
                 maxlength: 3
             }
         },
-        messages: {
+        {
             userName: {
                 required: " 请输入用户名",
                 minlength: " 用户名不能小于4位",
@@ -171,20 +149,12 @@ $(function() {
                 minlength: " 至少选择1个角色",
                 maxlength: " 至多选择3个角色"
             }
-        },
-        errorElement: 'span',
-        errorPlacement: function(error, element) {
-            error.addClass('invalid-feedback');
-            element.closest('.form-group').children('label').append(error);
-        },
-        highlight: function(element, errorClass, validClass) {
-            $(element).addClass('is-invalid');
-        },
-        unhighlight: function(element, errorClass, validClass) {
-            $(element).removeClass('is-invalid');
         }
-    });
+    );
 })
 </script>
+<script src="/static/assets/js/select2-utils.js"></script>
+<script src="/static/assets/js/message-utils.js"></script>
+<script src="/static/assets/js/form-validate-utils.js"></script>
 </body>
 </html>

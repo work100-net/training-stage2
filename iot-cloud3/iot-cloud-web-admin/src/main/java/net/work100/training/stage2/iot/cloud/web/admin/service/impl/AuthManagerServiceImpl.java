@@ -12,6 +12,7 @@ import org.apache.commons.lang3.time.DateFormatUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -62,6 +63,11 @@ public class AuthManagerServiceImpl implements AuthManagerService {
     @Override
     public void delete(String userKey) {
         authManagerDao.delete(userKey);
+    }
+
+    @Override
+    public void multiDelete(String[] userKeys) {
+        authManagerDao.multiDelete(userKeys);
     }
 
     @Override

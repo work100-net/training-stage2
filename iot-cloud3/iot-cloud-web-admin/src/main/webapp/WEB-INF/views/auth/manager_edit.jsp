@@ -54,10 +54,10 @@
                                             <div class="form-group">
                                                 <label for="status">状态</label>
                                                 <form:select path="status" cssClass="form-control select2" style="width: 100%;">
-                                                    <option value="0" selected="selected">未激活</option>
-                                                    <option value="1">激活</option>
-                                                    <option value="2">锁定</option>
-                                                    <option value="3">删除</option>
+                                                    <option value="0" ${authManager.status==0?"selected":""}>未激活</option>
+                                                    <option value="1" ${authManager.status==1?"selected":""}>激活</option>
+                                                    <option value="2" ${authManager.status==2?"selected":""}>锁定</option>
+                                                    <option value="3" ${authManager.status==3?"selected":""}>删除</option>
                                                 </form:select>
                                             </div>
                                             <div class="form-group">
@@ -76,8 +76,8 @@
                                             <div class="form-group">
                                                 <label for="superuser">是否超级用户</label>
                                                 <form:select path="superuser" cssClass="form-control select2" style="width: 100%;">
-                                                    <option value="0" selected="selected">否</option>
-                                                    <option value="1">是</option>
+                                                    <option value="0" ${!authManager.superuser?"selected":""}>否</option>
+                                                    <option value="1" ${authManager.superuser?"selected":""}>是</option>
                                                 </form:select>
                                             </div>
                                             <div class="form-group">
@@ -112,35 +112,13 @@
 
 <script>
 $(function() {
-    //Initialize Select2 Elements
-    $('.select2').select2();
-
-    //Initialize Select2 Elements
-    $('.select2bs4').select2({
-        theme: 'bootstrap4'
-    });
-
     if (${baseResult.status != null && baseResult.status != 200}) {
-        const Toast = Swal.mixin({
-            toast: true,
-            position: 'top',
-            showConfirmButton: false,
-            timer: 2000,
-            timerProgressBar: true,
-            onOpen: (toast) => {
-                toast.addEventListener('mouseenter', Swal.stopTimer)
-                toast.addEventListener('mouseleave', Swal.resumeTimer)
-            }
-        })
-
-        Toast.fire({
-            type: 'error',
-            title: '${baseResult.message}'
-        })
+        Message.showFail('${baseResult.message}');
     }
 
-    $("#form").validate({
-        rules: {
+    FormValidate.validate(
+        'form',
+        {
             userName: {
                 required: true,
                 minlength: 4,
@@ -157,7 +135,7 @@ $(function() {
                 maxlength: 3
             }
         },
-        messages: {
+        {
             userName: {
                 required: " 请输入用户名",
                 minlength: " 用户名不能小于4位",
@@ -173,20 +151,12 @@ $(function() {
                 minlength: " 至少选择1个角色",
                 maxlength: " 至多选择3个角色"
             }
-        },
-        errorElement: 'span',
-        errorPlacement: function(error, element) {
-            error.addClass('invalid-feedback');
-            element.closest('.form-group').children('label').append(error);
-        },
-        highlight: function(element, errorClass, validClass) {
-            $(element).addClass('is-invalid');
-        },
-        unhighlight: function(element, errorClass, validClass) {
-            $(element).removeClass('is-invalid');
         }
-    });
+    );
 })
 </script>
+<script src="/static/assets/js/select2-utils.js"></script>
+<script src="/static/assets/js/message-utils.js"></script>
+<script src="/static/assets/js/form-validate-utils.js"></script>
 </body>
 </html>

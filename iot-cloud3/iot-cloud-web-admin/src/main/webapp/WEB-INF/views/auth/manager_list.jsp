@@ -54,14 +54,16 @@
                                                     <a class="dropdown-item" href="#">批量锁定</a>
                                                     <a class="dropdown-item" href="#">批量解锁</a>
                                                     <div class="dropdown-divider"></div>
-                                                    <a class="dropdown-item" href="#">批量删除</a>
+                                                    <a class="dropdown-item" href="#" onclick="multiDelete()">批量删除</a>
                                                 </div>
                                             </button>
                                         </div>
                                         <div class="btn-group">
                                             <a href="/auth/manager/list" type="button" class="btn btn-default" title="重新加载"><i class="fas fa-redo"></i></a>
-                                            <button type="button" class="btn btn-default" title="打印"><i class="fas fa-print"></i></button>
-                                            <button type="button" class="btn btn-default" title="下载"><i class="fas fa-download"></i></button>
+                                            <button type="button" class="btn btn-default" title="打印">
+                                                <i class="fas fa-print"></i></button>
+                                            <button type="button" class="btn btn-default" title="下载">
+                                                <i class="fas fa-download"></i></button>
                                         </div>
                                     </div>
                                     <div id="btnOpen" class="card-tools" style="display: ${managerSearcher.advanced?"none":"block"};">
@@ -126,7 +128,8 @@
                                                 <button type="submit" class="btn btn-primary">搜 索</button>
                                             </div>
                                             <div class="btn-group">
-                                                <a href="/auth/manager/list" type="button" class="btn btn-default">重 置</a>
+                                                <a href="/auth/manager/list" type="button" class="btn btn-default">重
+                                                    置</a>
                                             </div>
                                         </div>
                                     </div>
@@ -135,6 +138,12 @@
                                     <table class="table table-hover text-nowrap">
                                         <thead>
                                         <tr>
+                                            <th>
+                                                <div class="icheck-primary d-inline">
+                                                    <input type="checkbox" id="checkAll" name="checkAll" />
+                                                    <label for="checkAll" />
+                                                </div>
+                                            </th>
                                             <th>ID</th>
                                             <th>用户名</th>
                                             <th>角色</th>
@@ -147,6 +156,12 @@
                                         <tbody>
                                         <c:forEach items="${authManagers}" var="authManager">
                                             <tr>
+                                                <td>
+                                                    <div class="icheck-primary d-inline">
+                                                        <input type="checkbox" id="checkItem_${authManager.userKey}" name="checkItem" value="${authManager.userKey}" />
+                                                        <label for="checkItem_${authManager.userKey}" />
+                                                    </div>
+                                                </td>
                                                 <td>${authManager.id}</td>
                                                 <td>${authManager.userName}</td>
                                                 <td>${authManager.roles}</td>
@@ -154,16 +169,16 @@
                                                 <td>
                                                     <c:choose>
                                                         <c:when test="${authManager.status==0}">
-                                                            未激活
+                                                            <label class="text-muted">未激活</label>
                                                         </c:when>
                                                         <c:when test="${authManager.status==1}">
-                                                            已激活
+                                                            <label class="text-success">已激活</label>
                                                         </c:when>
                                                         <c:when test="${authManager.status==2}">
-                                                            锁定
+                                                            <label class="text-warning">锁定</label>
                                                         </c:when>
                                                         <c:when test="${authManager.status==3}">
-                                                            被删除
+                                                            <label class="text-danger">被删除</label>
                                                         </c:when>
                                                     </c:choose>
                                                 </td>
@@ -173,8 +188,7 @@
                                                     <div class="btn-group">
                                                         <a href="#" type="button" class="btn btn-default btn-sm"><i class="fas fa-eye"></i></a>
                                                         <a href="/auth/manager/edit/${authManager.userKey}" type="button" class="btn btn-primary btn-sm"><i class="fas fa-edit"></i></a>
-                                                        <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#modal-operate-confirm" data-whatever="${authManager.userKey}">
-                                                            <i class="fas fa-trash"></i></button>
+                                                        <button type="button" class="btn btn-danger btn-sm" onclick="singleDelete('${authManager.userKey}');"><i class="fas fa-trash"></i></button>
                                                     </div>
                                                 </td>
                                             </tr>
@@ -192,29 +206,6 @@
             <!-- /.container-fluid -->
         </div>
         <!-- /.content -->
-
-        <div class="modal fade" id="modal-operate-confirm">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h4 class="modal-title">操作确认</h4>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <p>操作后不可恢复，确定吗？</p>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-                        <button type="button" class="btn btn-primary">确定</button>
-                    </div>
-                </div>
-                <!-- /.modal-content -->
-            </div>
-            <!-- /.modal-dialog -->
-        </div>
-        <!-- /.modal -->
     </div>
     <!-- /.content-wrapper -->
 
@@ -225,55 +216,67 @@
 
 <script>
 $(function() {
-    //Initialize Select2 Elements
-    $('.select2').select2();
-
-    //Initialize Select2 Elements
-    $('.select2bs4').select2({
-        theme: 'bootstrap4'
-    });
-
+    // 消息框显示
     if (${baseResult.status != null && baseResult.status == 200}) {
-        const Toast = Swal.mixin({
-            toast: true,
-            position: 'top',
-            showConfirmButton: false,
-            timer: 2000,
-            timerProgressBar: true
-        })
-
-        Toast.fire({
-            type: 'success',
-            title: '${baseResult.message}'
-        })
+        Message.showSuccess('${baseResult.message}');
     }
-
-    $('#modal-operate-confirm').on('show.bs.modal', function(event) {
-        let trigger = $(event.relatedTarget)
-        let userKey = trigger.data('whatever')
-        let modal = $(this)
-        let ok = modal.find('.modal-footer button')[1]
-        $(ok).click(function(e) {
-            location.href = '/auth/manager/delete/' + userKey
-        })
-    })
 })
 
 // 显示高级搜索
 function showSearcher() {
-    $("#advanced").val(true);
-    $("#searcher").css('display', 'block');
-    $("#btnOpen").css('display', 'none');
-    $("#btnClose").css('display', 'block');
+    $('#advanced').val(true);
+    $('#searcher').css('display', 'block');
+    $('#btnOpen').css('display', 'none');
+    $('#btnClose').css('display', 'block');
 }
 
 // 隐藏高级搜索
 function hideSearcher() {
-    $("#advanced").val(false);
-    $("#searcher").css('display', 'none');
-    $("#btnOpen").css('display', 'block');
-    $("#btnClose").css('display', 'none');
+    $('#advanced').val(false);
+    $('#searcher').css('display', 'none');
+    $('#btnOpen').css('display', 'block');
+    $('#btnClose').css('display', 'none');
+}
+
+// 单个删除
+function singleDelete(userKey) {
+    ModalDialog.showConfirm('single-delete-confirm', '操作确认', '删除后数据不可恢复，您确认要操作吗？', singleDelete_callback, userKey);
+}
+
+function singleDelete_callback(userKey) {
+    location.href = '/auth/manager/delete/' + userKey;
+}
+
+// 批量删除
+function multiDelete() {
+    let userKeys = Table.getCheckboxCheckedValues();
+    if (userKeys.length == 0) {
+        Message.showFail('请至少选择一条记录');
+        return;
+    }
+    ModalDialog.showConfirm('multi-delete-confirm', '操作确认', '批量删除后数据不可恢复，您确认要操作吗？', multiDelete_callback, userKeys);
+}
+
+function multiDelete_callback(userKeys) {
+    $.ajax({
+        'url': '/auth/manager/multi-delete',
+        'type': 'POST',
+        'data': { 'userKeys': userKeys.toString() },
+        'dataType': 'JSON',
+        'success': function(ret) {
+            if (ret.status === 200) {
+                location.href = '/auth/manager/list';
+                // Message.showSuccess(ret.message);
+            } else {
+                Message.showFail(ret.message);
+            }
+        }
+    });
 }
 </script>
+<script src="/static/assets/js/select2-utils.js"></script>
+<script src="/static/assets/js/table-utils.js"></script>
+<script src="/static/assets/js/message-utils.js"></script>
+<script src="/static/assets/js/modal-dialog-utils.js"></script>
 </body>
 </html>

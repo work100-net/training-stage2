@@ -12,8 +12,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -165,4 +167,23 @@ public class ManagerController {
         return "redirect:/auth/manager/list";
     }
 
+    @ResponseBody
+    @RequestMapping(value = "multi-delete", method = RequestMethod.POST)
+    public BaseResult multiDelete(String userKeys) {
+        try {
+            String[] arrUserKeys = userKeys.split(",");
+            if (arrUserKeys == null || arrUserKeys.length <= 0) {
+                return BaseResult.fail("请至少选择一条记录");
+            }
+            for (String userKey : arrUserKeys) {
+                if ("8c41b9a54b2e2a4180cc1271b4672779".equals(userKey)) {
+                    return BaseResult.fail("不能删除默认管理员账号:xiaojun.liu");
+                }
+            }
+            authManagerService.multiDelete(arrUserKeys);
+            return BaseResult.success("操作成功");
+        } catch (Exception ex) {
+            return BaseResult.fail("未知错误");
+        }
+    }
 }
