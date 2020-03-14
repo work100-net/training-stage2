@@ -40,7 +40,7 @@
         <mybatis-spring.version>2.0.3</mybatis-spring.version>
 
         <!-- Jackson -->
-        <jackson.version>2.9.9</jackson.version>
+        <jackson.version>2.10.3</jackson.version>
     </properties>
 
     <dependencyManagement>
