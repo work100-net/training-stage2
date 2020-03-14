@@ -110,5 +110,5 @@ public interface AuthManagerService {
      * @param managerSearcher
      * @return
      */
-    PageInfo<AuthManager> page(int draw, int start, int length, ManagerSearcher managerSearcher);
+    PageInfo<AuthManager> pageSearch(int draw, int start, int length, ManagerSearcher managerSearcher);
 }

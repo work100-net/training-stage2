@@ -191,7 +191,7 @@ public class ManagerController {
     }
 
     @ResponseBody
-    @RequestMapping(value = "page", method = RequestMethod.POST)
+    @RequestMapping(value = "page-search", method = RequestMethod.POST)
     public PageInfo<AuthManager> page(HttpServletRequest request) {
         String strDraw = request.getParameter("draw");
         String strStart = request.getParameter("start");
@@ -215,6 +215,6 @@ public class ManagerController {
         managerSearcher.setRoles(roles);
         managerSearcher.setStatus(status);
 
-        return authManagerService.page(draw, start, length, managerSearcher);
+        return authManagerService.pageSearch(draw, start, length, managerSearcher);
     }
 }

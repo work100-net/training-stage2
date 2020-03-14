@@ -105,7 +105,7 @@ public interface AuthManagerDao {
      * @param params 查询条件及分页参数
      * @return
      */
-    List<AuthManager> page(Map<String, Object> params);
+    List<AuthManager> pageSearch(Map<String, Object> params);
 
     /**
      * 计数统计

@@ -271,7 +271,7 @@ function doSearch() {
     };
 
     // 加载 DataTable
-    Table.loadDataTable('/auth/manager/page', columns, searchParams);
+    Table.loadDataTable('/auth/manager/page-search', columns, searchParams);
 }
 
 // 单个删除

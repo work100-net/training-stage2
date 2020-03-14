@@ -130,7 +130,7 @@
         </if>
     </delete>
 
-    <select id="page" resultType="AuthManager" parameterType="java.util.Map">
+    <select id="pageSearch" resultType="AuthManager" parameterType="java.util.Map">
         SELECT
           <include refid="authManagerColumns" />
         FROM

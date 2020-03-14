@@ -127,7 +127,7 @@ public class AuthManagerServiceImpl implements AuthManagerService {
     }
 
     @Override
-    public PageInfo<AuthManager> page(int draw, int start, int length, ManagerSearcher managerSearcher) {
+    public PageInfo<AuthManager> pageSearch(int draw, int start, int length, ManagerSearcher managerSearcher) {
         Map<String, Object> params = new HashMap<>();
         params.put("start", start);
         params.put("length", length);
@@ -161,7 +161,7 @@ public class AuthManagerServiceImpl implements AuthManagerService {
         authManagerPageInfo.setRecordsFiltered(recordsTotal);
 
         // 获取分页数据
-        List<AuthManager> data = authManagerDao.page(params);
+        List<AuthManager> data = authManagerDao.pageSearch(params);
         authManagerPageInfo.setData(data);
 
         return authManagerPageInfo;
