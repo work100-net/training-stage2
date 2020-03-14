@@ -70,8 +70,7 @@
                                         <div class="input-group" style="padding-top: 5px;">
                                             <form:input path="keyword" cssClass="form-control" placeholder="关键字：用户名" />
                                             <div class="input-group-append">
-                                                <button type="button" class="btn btn-default" onclick="doSearch()">搜索
-                                                    <i class="fas fa-search"></i></button>
+                                                <button type="button" class="btn btn-default" onclick="doSearch()">搜索<i class="fas fa-search"></i></button>
                                             </div>
                                             <div class="input-group-append">
                                                 <button type="button" class="btn btn-default" title="展开更多" onclick="showSearcher()">
@@ -125,12 +124,10 @@
                                         </div>
                                         <div class="col-md-3">
                                             <div class="btn-group">
-                                                <button type="button" class="btn btn-primary" onclick="doSearch()">搜 索
-                                                </button>
+                                                <button type="button" class="btn btn-primary" onclick="doSearch()">搜 索</button>
                                             </div>
                                             <div class="btn-group">
-                                                <a href="/auth/manager/list" type="button" class="btn btn-default">重
-                                                    置</a>
+                                                <a href="/auth/manager/list" type="button" class="btn btn-default">重 置</a>
                                             </div>
                                         </div>
                                     </div>

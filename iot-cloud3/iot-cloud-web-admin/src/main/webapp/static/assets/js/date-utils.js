@@ -88,5 +88,3 @@ let DateUtils = function() {
         }
     }
 }();
-
-

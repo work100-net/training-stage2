@@ -94,6 +94,7 @@
         - [搜索功能](http://www.work100.net/training/monolithic-project-iot-cloud-admin-manager-search.html)
         - [JS代码重构](http://www.work100.net/training/monolithic-project-iot-cloud-admin-manager-js.html)
         - [批量删除](http://www.work100.net/training/monolithic-project-iot-cloud-admin-manager-multi-delete.html)
+        - [分页功能](http://www.work100.net/training/monolithic-project-iot-cloud-admin-manager-page-search.html)
     - [05.租户管理](http://www.work100.net/training/monolithic-project-iot-cloud-admin-tenant.html)
     - [06.租户账号管理](http://www.work100.net/training/monolithic-project-iot-cloud-admin-tenant-user.html)
     
