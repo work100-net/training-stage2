@@ -4,6 +4,7 @@ import net.work100.training.stage2.iot.cloud.domain.AuthManager;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * <p>Title: AuthManagerDao</p>
@@ -93,8 +94,24 @@ public interface AuthManagerDao {
     /**
      * 搜索
      *
-     * @param authManager
+     * @param authManager 查询条件
      * @return
      */
     List<AuthManager> search(AuthManager authManager);
+
+    /**
+     * 分页查询
+     *
+     * @param params 查询条件及分页参数
+     * @return
+     */
+    List<AuthManager> page(Map<String, Object> params);
+
+    /**
+     * 计数统计
+     *
+     * @param authManager 查询条件
+     * @return
+     */
+    int count(AuthManager authManager);
 }

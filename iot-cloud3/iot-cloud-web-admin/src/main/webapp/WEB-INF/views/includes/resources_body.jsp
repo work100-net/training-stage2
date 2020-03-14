@@ -16,5 +16,9 @@
 <script src="/static/assets/plugins/jquery-validation/additional-methods.min.js"></script>
 <script src="/static/assets/plugins/jquery-validation/localization/messages_zh.min.js"></script>
 
+<!-- DataTables -->
+<script src="/static/assets/plugins/datatables/jquery.dataTables.js"></script>
+<script src="/static/assets/plugins/datatables-bs4/js/dataTables.bootstrap4.js"></script>
+
 <!-- AdminLTE -->
 <script src="/static/assets/js/adminlte.js"></script>

@@ -70,7 +70,7 @@
                                         <div class="input-group" style="padding-top: 5px;">
                                             <form:input path="keyword" cssClass="form-control" placeholder="关键字：用户名" />
                                             <div class="input-group-append">
-                                                <button type="submit" class="btn btn-default">搜索
+                                                <button type="button" class="btn btn-default" onclick="doSearch()">搜索
                                                     <i class="fas fa-search"></i></button>
                                             </div>
                                             <div class="input-group-append">
@@ -125,7 +125,8 @@
                                         </div>
                                         <div class="col-md-3">
                                             <div class="btn-group">
-                                                <button type="submit" class="btn btn-primary">搜 索</button>
+                                                <button type="button" class="btn btn-primary" onclick="doSearch()">搜 索
+                                                </button>
                                             </div>
                                             <div class="btn-group">
                                                 <a href="/auth/manager/list" type="button" class="btn btn-default">重
@@ -135,7 +136,7 @@
                                     </div>
                                 </div>
                                 <div class="card-body table-responsive p-0">
-                                    <table class="table table-hover text-nowrap">
+                                    <table id="dataTable" class="table table-hover text-nowrap">
                                         <thead>
                                         <tr>
                                             <th>
@@ -154,45 +155,6 @@
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        <c:forEach items="${authManagers}" var="authManager">
-                                            <tr>
-                                                <td>
-                                                    <div class="icheck-primary d-inline">
-                                                        <input type="checkbox" id="checkItem_${authManager.userKey}" name="checkItem" value="${authManager.userKey}" />
-                                                        <label for="checkItem_${authManager.userKey}" />
-                                                    </div>
-                                                </td>
-                                                <td>${authManager.id}</td>
-                                                <td>${authManager.userName}</td>
-                                                <td>${authManager.roles}</td>
-                                                <td>${authManager.superuser?"是":"否"}</td>
-                                                <td>
-                                                    <c:choose>
-                                                        <c:when test="${authManager.status==0}">
-                                                            <label class="text-muted">未激活</label>
-                                                        </c:when>
-                                                        <c:when test="${authManager.status==1}">
-                                                            <label class="text-success">已激活</label>
-                                                        </c:when>
-                                                        <c:when test="${authManager.status==2}">
-                                                            <label class="text-warning">锁定</label>
-                                                        </c:when>
-                                                        <c:when test="${authManager.status==3}">
-                                                            <label class="text-danger">被删除</label>
-                                                        </c:when>
-                                                    </c:choose>
-                                                </td>
-                                                <td>
-                                                    <fmt:formatDate value="${authManager.updated}" pattern="yyyy-MM-dd HH:mm:ss" /></td>
-                                                <td>
-                                                    <div class="btn-group">
-                                                        <a href="#" type="button" class="btn btn-default btn-sm"><i class="fas fa-eye"></i></a>
-                                                        <a href="/auth/manager/edit/${authManager.userKey}" type="button" class="btn btn-primary btn-sm"><i class="fas fa-edit"></i></a>
-                                                        <button type="button" class="btn btn-danger btn-sm" onclick="singleDelete('${authManager.userKey}');"><i class="fas fa-trash"></i></button>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                        </c:forEach>
                                         </tbody>
                                     </table>
                                 </div>
@@ -220,6 +182,9 @@ $(function() {
     if (${baseResult.status != null && baseResult.status == 200}) {
         Message.showSuccess('${baseResult.message}');
     }
+
+    // 初始加载列表查询
+    doSearch();
 })
 
 // 显示高级搜索
@@ -236,6 +201,71 @@ function hideSearcher() {
     $('#searcher').css('display', 'none');
     $('#btnOpen').css('display', 'block');
     $('#btnClose').css('display', 'none');
+}
+
+function doSearch() {
+    const columns = [
+        {
+            'data': function(row, type, val, meta) {
+                return '<div class="icheck-primary d-inline">' +
+                    '   <input type="checkbox" id="checkItem_' + row.userKey + '" name="checkItem" value="' + row.userKey + '" />' +
+                    '   <label for="checkItem_' + row.userKey + '" />' +
+                    '</div>'
+            }
+        },
+        { 'data': 'id' },
+        { 'data': 'userName' },
+        { 'data': 'roles' },
+        {
+            'data': function(row, type, val, meta) {
+                return row.superuser ? '是' : '否'
+            }
+        },
+        {
+            'data': function(row, type, val, meta) {
+                switch (row.status) {
+                    case 0:
+                        return '<label class="text-muted">未激活</label>';
+                    case 1:
+                        return '<label class="text-success">已激活</label>';
+                    case 2:
+                        return '<label class="text-warning">锁定</label>';
+                    case 3:
+                        return '<label class="text-danger">被删除</label>';
+                    default:
+                        return '';
+                }
+                return '<div class="btn-group">' +
+                    '   <a href="#" type="button" class="btn btn-default btn-sm"><i class="fas fa-eye"></i></a>' +
+                    '   <a href="/auth/manager/edit/' + row.userKey + '" type="button" class="btn btn-primary btn-sm"><i class="fas fa-edit"></i></a>' +
+                    '   <button type="button" class="btn btn-danger btn-sm" onclick="singleDelete(\'' + row.userKey + '\');"><i class="fas fa-trash"></i></button>' +
+                    '</div>'
+            }
+        },
+        { 'data': 'updated' },
+        {
+            'data': function(row, type, val, meta) {
+                return '<div class="btn-group">' +
+                    '   <a href="#" type="button" class="btn btn-default btn-sm"><i class="fas fa-eye"></i></a>' +
+                    '   <a href="/auth/manager/edit/' + row.userKey + '" type="button" class="btn btn-primary btn-sm"><i class="fas fa-edit"></i></a>' +
+                    '   <button type="button" class="btn btn-danger btn-sm" onclick="singleDelete(\'' + row.userKey + '\');"><i class="fas fa-trash"></i></button>' +
+                    '</div>'
+            }
+        }
+    ];
+
+    let searchParams = {
+        'advanced': $('#advanced').val(),
+        'keyword': $('#keyword').val(),
+        'userName': $('#userName').val(),
+        'roles': $('#roles').val(),
+        'status': $('#status').val(),
+    };
+
+    console.log(searchParams);
+
+    // 加载 DataTable
+    Table.loadDataTable('/auth/manager/page', columns, searchParams);
 }
 
 // 单个删除

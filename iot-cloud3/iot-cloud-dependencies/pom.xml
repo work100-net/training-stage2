@@ -151,7 +151,6 @@
                 <version>${jackson.version}</version>
             </dependency>
             <!-- Jackson End -->
-
         </dependencies>
     </dependencyManagement>
 

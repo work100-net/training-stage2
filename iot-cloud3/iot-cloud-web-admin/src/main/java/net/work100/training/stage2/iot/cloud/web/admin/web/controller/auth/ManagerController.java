@@ -1,12 +1,14 @@
 package net.work100.training.stage2.iot.cloud.web.admin.web.controller.auth;
 
 import net.work100.training.stage2.iot.cloud.commons.dto.BaseResult;
+import net.work100.training.stage2.iot.cloud.commons.dto.PageInfo;
 import net.work100.training.stage2.iot.cloud.commons.utils.HttpUtils;
 import net.work100.training.stage2.iot.cloud.domain.AuthManager;
 import net.work100.training.stage2.iot.cloud.web.admin.dto.auth.ManagerSearcher;
 import net.work100.training.stage2.iot.cloud.web.admin.service.AuthManagerService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.Arrays;
 import java.util.List;
 
@@ -185,5 +188,33 @@ public class ManagerController {
         } catch (Exception ex) {
             return BaseResult.fail("未知错误");
         }
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "page", method = RequestMethod.POST)
+    public PageInfo<AuthManager> page(HttpServletRequest request) {
+        String strDraw = request.getParameter("draw");
+        String strStart = request.getParameter("start");
+        String strLength = request.getParameter("length");
+        String strAdvanced = request.getParameter("advanced");
+        String keyword = request.getParameter("keyword");
+        String userName = request.getParameter("userName");
+        String roles = request.getParameter("roles");
+        String strStatus = request.getParameter("status");
+
+        int draw = strDraw == null ? 0 : Integer.parseInt(strDraw);
+        int start = strStart == null ? 0 : Integer.parseInt(strStart);
+        int length = strLength == null ? 0 : Integer.parseInt(strLength);
+        boolean advanced = strAdvanced == null ? false : Boolean.parseBoolean(strAdvanced);
+        int status = strStatus == null ? 0 : Integer.parseInt(strStatus);
+
+        ManagerSearcher managerSearcher = new ManagerSearcher();
+        managerSearcher.setAdvanced(advanced);
+        managerSearcher.setKeyword(keyword);
+        managerSearcher.setUserName(userName);
+        managerSearcher.setRoles(roles);
+        managerSearcher.setStatus(status);
+
+        return authManagerService.page(draw, start, length, managerSearcher);
     }
 }

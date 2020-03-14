@@ -129,4 +129,42 @@
             WHERE 1 = 2
         </if>
     </delete>
+
+    <select id="page" resultType="AuthManager" parameterType="java.util.Map">
+        SELECT
+          <include refid="authManagerColumns" />
+        FROM
+          auth_manager AS a
+        <where>
+            <if test="userName != null and userName != ''">
+                AND a.user_name LIKE CONCAT('%', #{userName}, '%')
+            </if>
+            <if test="roles != null and roles != ''">
+                AND a.roles LIKE CONCAT('%', #{roles}, '%')
+            </if>
+            <if test="status != -1">
+                AND a.status = #{status}
+            </if>
+        </where>
+        ORDER BY a.id DESC
+        LIMIT #{start}, #{length}
+    </select>
+
+    <select id="count" resultType="int">
+        SELECT
+          COUNT(*)
+        FROM
+          auth_manager AS a
+        <where>
+            <if test="userName != null and userName != ''">
+                AND a.user_name LIKE CONCAT('%', #{userName}, '%')
+            </if>
+            <if test="roles != null and roles != ''">
+                AND a.roles LIKE CONCAT('%', #{roles}, '%')
+            </if>
+            <if test="status != -1">
+                AND a.status = #{status}
+            </if>
+        </where>
+    </select>
 </mapper>

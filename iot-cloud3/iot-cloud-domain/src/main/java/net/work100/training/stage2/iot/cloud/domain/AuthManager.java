@@ -1,5 +1,7 @@
 package net.work100.training.stage2.iot.cloud.domain;
 
+import net.work100.training.stage2.iot.cloud.commons.dto.AbstractBaseDomain;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -15,9 +17,8 @@ import java.util.Date;
  * 2020-02-23   liuxiaojun     初始创建
  * -----------------------------------------------
  */
-public class AuthManager implements Serializable {
+public class AuthManager extends AbstractBaseDomain {
 
-    private Long id;
     private String userKey;
     private String userName;
     private String password;
@@ -31,16 +32,7 @@ public class AuthManager implements Serializable {
      */
     private String roles;
     private Date modifyPasswordTime;
-    private Date created;
-    private Date updated;
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public String getUserKey() {
         return userKey;
@@ -98,35 +90,16 @@ public class AuthManager implements Serializable {
         this.modifyPasswordTime = modifyPasswordTime;
     }
 
-    public Date getCreated() {
-        return created;
-    }
-
-    public void setCreated(Date created) {
-        this.created = created;
-    }
-
-    public Date getUpdated() {
-        return updated;
-    }
-
-    public void setUpdated(Date updated) {
-        this.updated = updated;
-    }
-
     @Override
     public String toString() {
         return "AuthManager{" +
-                "id=" + id +
-                ", userKey='" + userKey + '\'' +
+                "userKey='" + userKey + '\'' +
                 ", userName='" + userName + '\'' +
                 ", password='" + password + '\'' +
                 ", status=" + status +
                 ", superuser=" + superuser +
                 ", roles='" + roles + '\'' +
                 ", modifyPasswordTime=" + modifyPasswordTime +
-                ", created=" + created +
-                ", updated=" + updated +
                 '}';
     }
 }

@@ -1,6 +1,7 @@
 package net.work100.training.stage2.iot.cloud.web.admin.service;
 
 import net.work100.training.stage2.iot.cloud.commons.dto.BaseResult;
+import net.work100.training.stage2.iot.cloud.commons.dto.PageInfo;
 import net.work100.training.stage2.iot.cloud.domain.AuthManager;
 import net.work100.training.stage2.iot.cloud.web.admin.dto.auth.ManagerSearcher;
 
@@ -99,4 +100,15 @@ public interface AuthManagerService {
      * @return
      */
     List<AuthManager> search(ManagerSearcher managerSearcher);
+
+    /**
+     * 分页搜索
+     *
+     * @param draw
+     * @param start           起始位置
+     * @param length          每页长度
+     * @param managerSearcher
+     * @return
+     */
+    PageInfo<AuthManager> page(int draw, int start, int length, ManagerSearcher managerSearcher);
 }

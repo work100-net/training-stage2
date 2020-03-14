@@ -15,6 +15,9 @@
 <!-- SweetAlert2 -->
 <link rel="stylesheet" href="/static/assets/plugins/sweetalert2/sweetalert2.min.css">
 
+<!-- DataTables -->
+<link rel="stylesheet" href="/static/assets/plugins/datatables-bs4/css/dataTables.bootstrap4.css">
+
 <!-- Theme style -->
 <link rel="stylesheet" href="/static/assets/css/adminlte.min.css">
 <link rel="icon" href="/static/assets/img/favicon.ico">
