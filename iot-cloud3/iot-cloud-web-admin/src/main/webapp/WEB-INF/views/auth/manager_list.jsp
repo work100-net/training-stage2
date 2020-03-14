@@ -135,11 +135,11 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="card-body table-responsive p-0">
-                                    <table id="dataTable" class="table table-hover text-nowrap">
+                                <div class="card-body">
+                                    <table id="dataTable" class="table table-bordered table-hover">
                                         <thead>
                                         <tr>
-                                            <th>
+                                            <th width="30" align="center">
                                                 <div class="icheck-primary d-inline">
                                                     <input type="checkbox" id="checkAll" name="checkAll" />
                                                     <label for="checkAll" />
@@ -150,7 +150,7 @@
                                             <th>角色</th>
                                             <th>超级用户</th>
                                             <th>状态</th>
-                                            <th>更新时间</th>
+                                            <th>创建时间</th>
                                             <th width="120px" align="center">操作</th>
                                         </tr>
                                         </thead>
@@ -239,17 +239,25 @@ function doSearch() {
                     '   <a href="#" type="button" class="btn btn-default btn-sm"><i class="fas fa-eye"></i></a>' +
                     '   <a href="/auth/manager/edit/' + row.userKey + '" type="button" class="btn btn-primary btn-sm"><i class="fas fa-edit"></i></a>' +
                     '   <button type="button" class="btn btn-danger btn-sm" onclick="singleDelete(\'' + row.userKey + '\');"><i class="fas fa-trash"></i></button>' +
-                    '</div>'
+                    '</div>';
             }
         },
-        { 'data': 'updated' },
+        {
+            'data': function(row, type, val, meta) {
+                if (row.created != null) {
+                    return DateUtils.formatDate(new Date(row.created), "yyyy-MM-dd HH:mm:ss");
+                } else {
+                    return '';
+                }
+            }
+        },
         {
             'data': function(row, type, val, meta) {
                 return '<div class="btn-group">' +
                     '   <a href="#" type="button" class="btn btn-default btn-sm"><i class="fas fa-eye"></i></a>' +
                     '   <a href="/auth/manager/edit/' + row.userKey + '" type="button" class="btn btn-primary btn-sm"><i class="fas fa-edit"></i></a>' +
                     '   <button type="button" class="btn btn-danger btn-sm" onclick="singleDelete(\'' + row.userKey + '\');"><i class="fas fa-trash"></i></button>' +
-                    '</div>'
+                    '</div>';
             }
         }
     ];
@@ -261,8 +269,6 @@ function doSearch() {
         'roles': $('#roles').val(),
         'status': $('#status').val(),
     };
-
-    console.log(searchParams);
 
     // 加载 DataTable
     Table.loadDataTable('/auth/manager/page', columns, searchParams);
@@ -308,5 +314,6 @@ function multiDelete_callback(userKeys) {
 <script src="/static/assets/js/table-utils.js"></script>
 <script src="/static/assets/js/message-utils.js"></script>
 <script src="/static/assets/js/modal-dialog-utils.js"></script>
+<script src="/static/assets/js/date-utils.js"></script>
 </body>
 </html>
