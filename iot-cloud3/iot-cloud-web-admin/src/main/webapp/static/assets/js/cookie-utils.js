@@ -1,19 +1,20 @@
 let CookieUtils = function() {
+    const cookie_key_sidebar_collapse = 'sidebar_collapse';
     const defaultSidebarCollapse = 'false';
     const expiresDays = 7;
 
     let handleInitSidebarCollapse = function() {
-        if ($.cookie('sidebar_collapse') == undefined) {
-            $.cookie('sidebar_collapse', defaultSidebarCollapse, { expires: expiresDays });
+        if ($.cookie(cookie_key_sidebar_collapse) == undefined) {
+            $.cookie(cookie_key_sidebar_collapse, defaultSidebarCollapse, { expires: expiresDays });
         }
     }
 
     let handleChangeSidebarCollapse = function() {
-        let sidebar_collapse = $.cookie('sidebar_collapse');
+        let sidebar_collapse = $.cookie(cookie_key_sidebar_collapse);
         if (sidebar_collapse == undefined) {
-            $.cookie('sidebar_collapse', defaultSidebarCollapse == 'true' ? 'false' : 'true', { expires: expiresDays });
+            $.cookie(cookie_key_sidebar_collapse, defaultSidebarCollapse == 'true' ? 'false' : 'true', { expires: expiresDays });
         } else {
-            $.cookie('sidebar_collapse', sidebar_collapse == 'true' ? 'false' : 'true', { expires: expiresDays });
+            $.cookie(cookie_key_sidebar_collapse, sidebar_collapse == 'true' ? 'false' : 'true', { expires: expiresDays });
         }
     }
 
