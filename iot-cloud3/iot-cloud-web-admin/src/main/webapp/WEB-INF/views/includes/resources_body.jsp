@@ -3,6 +3,9 @@
 
 <!-- jQuery -->
 <script src="/static/assets/plugins/jquery/jquery.min.js"></script>
+<script src="/static/assets/plugins/jquery-cookie/jquery.cookie.js"></script>
+<script src="/static/assets/js/cookie-utils.js"></script>
+
 <!-- Bootstrap -->
 <script src="/static/assets/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <!-- Select2 -->

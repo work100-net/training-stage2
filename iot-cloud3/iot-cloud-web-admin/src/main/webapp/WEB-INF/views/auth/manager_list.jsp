@@ -8,7 +8,7 @@
     <title>查询列表 - 后台账户 | IoT-Admin</title>
     <jsp:include page="../includes/resources_head.jsp" />
 </head>
-<body class="hold-transition sidebar-mini">
+<body class="hold-transition sidebar-mini ${cookie.sidebar_collapse.value=='true'?'sidebar-collapse':''}">
 <div class="wrapper">
 
     <jsp:include page="../includes/layout_header.jsp" />
@@ -70,7 +70,8 @@
                                         <div class="input-group" style="padding-top: 5px;">
                                             <form:input path="keyword" cssClass="form-control" placeholder="关键字：用户名" />
                                             <div class="input-group-append">
-                                                <button type="button" class="btn btn-default" onclick="doSearch()">搜索<i class="fas fa-search"></i></button>
+                                                <button type="button" class="btn btn-default" onclick="doSearch()">
+                                                    搜索<i class="fas fa-search"></i></button>
                                             </div>
                                             <div class="input-group-append">
                                                 <button type="button" class="btn btn-default" title="展开更多" onclick="showSearcher()">
@@ -124,10 +125,12 @@
                                         </div>
                                         <div class="col-md-3">
                                             <div class="btn-group">
-                                                <button type="button" class="btn btn-primary" onclick="doSearch()">搜 索</button>
+                                                <button type="button" class="btn btn-primary" onclick="doSearch()">搜 索
+                                                </button>
                                             </div>
                                             <div class="btn-group">
-                                                <a href="/auth/manager/list" type="button" class="btn btn-default">重 置</a>
+                                                <a href="/auth/manager/list" type="button" class="btn btn-default">重
+                                                    置</a>
                                             </div>
                                         </div>
                                     </div>
@@ -232,11 +235,6 @@ function doSearch() {
                     default:
                         return '';
                 }
-                return '<div class="btn-group">' +
-                    '   <a href="#" type="button" class="btn btn-default btn-sm"><i class="fas fa-eye"></i></a>' +
-                    '   <a href="/auth/manager/edit/' + row.userKey + '" type="button" class="btn btn-primary btn-sm"><i class="fas fa-edit"></i></a>' +
-                    '   <button type="button" class="btn btn-danger btn-sm" onclick="singleDelete(\'' + row.userKey + '\');"><i class="fas fa-trash"></i></button>' +
-                    '</div>';
             }
         },
         {
@@ -251,7 +249,7 @@ function doSearch() {
         {
             'data': function(row, type, val, meta) {
                 return '<div class="btn-group">' +
-                    '   <a href="#" type="button" class="btn btn-default btn-sm"><i class="fas fa-eye"></i></a>' +
+                    '   <a href="#" type="button" class="btn btn-default btn-sm" onclick="showDetail(\'' + row.userName + '\',\'' + row.roles + '\',' + row.superuser + ',' + row.status + ',' + row.created + ',' + row.updated + ');"><i class="fas fa-eye"></i></a>' +
                     '   <a href="/auth/manager/edit/' + row.userKey + '" type="button" class="btn btn-primary btn-sm"><i class="fas fa-edit"></i></a>' +
                     '   <button type="button" class="btn btn-danger btn-sm" onclick="singleDelete(\'' + row.userKey + '\');"><i class="fas fa-trash"></i></button>' +
                     '</div>';
@@ -269,6 +267,53 @@ function doSearch() {
 
     // 加载 DataTable
     Table.loadDataTable('/auth/manager/page-search', columns, searchParams);
+}
+
+function showDetail(userName, roles, superuser, status, created, updated) {
+    superuser = superuser ? '是' : '否';
+    switch (status) {
+        case 0:
+            status = '<label class="text-muted">未激活</label>';
+            break;
+        case 1:
+            status = '<label class="text-success">已激活</label>';
+            break;
+        case 2:
+            status = '<label class="text-warning">锁定</label>';
+            break;
+        case 3:
+            status = '<label class="text-danger">被删除</label>';
+            break;
+        default:
+            status = '';
+            break;
+    }
+    let html = '';
+    html = html + '<div class="row" style="padding: 4px;">';
+    html = html + '  <div class="col-md-3" style="font-weight: bold;">用户名</div>';
+    html = html + '  <div class="col-md-9">' + userName + '</div>';
+    html = html + '</div>';
+    html = html + '<div class="row" style="padding: 4px;">';
+    html = html + '  <div class="col-md-3" style="font-weight: bold;">角色</div>';
+    html = html + '  <div class="col-md-9">' + roles + '</div>';
+    html = html + '</div>';
+    html = html + '<div class="row" style="padding: 4px;">';
+    html = html + '  <div class="col-md-3" style="font-weight: bold;">超级用户</div>';
+    html = html + '  <div class="col-md-9">' + superuser + '</div>';
+    html = html + '</div>';
+    html = html + '<div class="row" style="padding: 4px;">';
+    html = html + '  <div class="col-md-3" style="font-weight: bold;">状态</div>';
+    html = html + '  <div class="col-md-9">' + status + '</div>';
+    html = html + '</div>';
+    html = html + '<div class="row" style="padding: 4px;">';
+    html = html + '  <div class="col-md-3" style="font-weight: bold;">创建时间</div>';
+    html = html + '  <div class="col-md-9">' + DateUtils.formatDate(new Date(created), "yyyy-MM-dd HH:mm:ss") + '</div>';
+    html = html + '</div>';
+    html = html + '<div class="row" style="padding: 4px;">';
+    html = html + '  <div class="col-md-3" style="font-weight: bold;">更新时间</div>';
+    html = html + '  <div class="col-md-9">' + DateUtils.formatDate(new Date(updated), "yyyy-MM-dd HH:mm:ss") + '</div>';
+    html = html + '</div>';
+    ModalDialog.showAlert('show-detail', '查看用户', html);
 }
 
 // 单个删除
