@@ -38,6 +38,7 @@
         <mysql-connector-java.version>8.0.19</mysql-connector-java.version>
         <mybatis.version>3.5.4</mybatis.version>
         <mybatis-spring.version>2.0.3</mybatis-spring.version>
+        <hibernate-validator.version>6.0.17.Final</hibernate-validator.version>
 
         <!-- Jackson -->
         <jackson.version>2.10.3</jackson.version>
@@ -139,6 +140,12 @@
                 <groupId>org.springframework</groupId>
                 <artifactId>spring-jdbc</artifactId>
                 <version>${spring.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.hibernate.validator</groupId>
+                <artifactId>hibernate-validator</artifactId>
+                <version>${hibernate-validator.version}</version>
             </dependency>
             <!-- Database End -->
 

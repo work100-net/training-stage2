@@ -43,6 +43,13 @@
         </dependency>
         <!-- Commons End -->
 
+        <!-- Database Begin -->
+        <dependency>
+            <groupId>org.hibernate.validator</groupId>
+            <artifactId>hibernate-validator</artifactId>
+        </dependency>
+        <!-- Database End -->
+
         <!-- Jackson Begin -->
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
@@ -60,5 +67,11 @@
             <artifactId>lombok</artifactId>
         </dependency>
         <!-- Lombok End -->
+
+        <dependency>
+            <groupId>org.hibernate.validator</groupId>
+            <artifactId>hibernate-validator</artifactId>
+            <version>${hibernate-validator.version}</version>
+        </dependency>
     </dependencies>
 </project>

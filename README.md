@@ -98,6 +98,7 @@
         - [查看账户](http://www.work100.net/training/monolithic-project-iot-cloud-admin-manager-show.html)
         - [菜单优化](http://www.work100.net/training/monolithic-project-iot-cloud-admin-manager-menu.html)
         - [使用Lombok](http://www.work100.net/training/monolithic-project-iot-cloud-admin-manager-lombok.html)
+        - [Spring Validation](http://www.work100.net/training/monolithic-project-iot-cloud-admin-manager-spring-validation.html)
     - [05.租户管理](http://www.work100.net/training/monolithic-project-iot-cloud-admin-tenant.html)
     - [06.租户账号管理](http://www.work100.net/training/monolithic-project-iot-cloud-admin-tenant-user.html)
     

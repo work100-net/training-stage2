@@ -3,6 +3,7 @@ package net.work100.training.stage2.iot.cloud.web.admin.web.controller.auth;
 import net.work100.training.stage2.iot.cloud.commons.dto.BaseResult;
 import net.work100.training.stage2.iot.cloud.commons.dto.PageInfo;
 import net.work100.training.stage2.iot.cloud.commons.utils.HttpUtils;
+import net.work100.training.stage2.iot.cloud.commons.validator.BeanValidator;
 import net.work100.training.stage2.iot.cloud.domain.AuthManager;
 import net.work100.training.stage2.iot.cloud.web.admin.dto.auth.ManagerSearcher;
 import net.work100.training.stage2.iot.cloud.web.admin.service.AuthManagerService;
@@ -72,29 +73,9 @@ public class ManagerController {
 
     @RequestMapping(value = "add", method = RequestMethod.POST)
     public String add(AuthManager authManager, Model model, RedirectAttributes redirectAttributes) {
-        // 表单验证
-        if (StringUtils.isBlank(authManager.getUserName())) {
-            model.addAttribute("baseResult", BaseResult.fail("用户名不能空"));
-            model.addAttribute("authManager", authManager);
-            return "auth/manager_add";
-        }
-        if (authManager.getUserName().length() < 4 || authManager.getUserName().length() > 20) {
-            model.addAttribute("baseResult", BaseResult.fail("用户名不能小于4位且不能大于20位"));
-            model.addAttribute("authManager", authManager);
-            return "auth/manager_add";
-        }
-        if (StringUtils.isBlank(authManager.getPassword())) {
-            model.addAttribute("baseResult", BaseResult.fail("密码不能空且不能少于"));
-            model.addAttribute("authManager", authManager);
-            return "auth/manager_add";
-        }
-        if (authManager.getPassword().length() < 6 || authManager.getUserName().length() > 20) {
-            model.addAttribute("baseResult", BaseResult.fail("密码不能小于6个位且不能大于20位"));
-            model.addAttribute("authManager", authManager);
-            return "auth/manager_add";
-        }
-        if (StringUtils.isBlank(authManager.getRoles())) {
-            model.addAttribute("baseResult", BaseResult.fail("角色不能空"));
+        String validator = BeanValidator.validator(authManager);
+        if(validator!=null){
+            model.addAttribute("baseResult", BaseResult.fail(validator));
             model.addAttribute("authManager", authManager);
             return "auth/manager_add";
         }
@@ -136,8 +117,9 @@ public class ManagerController {
             redirectAttributes.addFlashAttribute("baseResult", BaseResult.fail("非法请求"));
             return "redirect:/auth/manager/list";
         }
-        if (StringUtils.isBlank(authManager.getRoles())) {
-            model.addAttribute("baseResult", BaseResult.fail("角色不能空"));
+        String validator = BeanValidator.validator(authManager);
+        if(validator!=null){
+            model.addAttribute("baseResult", BaseResult.fail(validator));
             model.addAttribute("authManager", authManager);
             return "auth/manager_edit";
         }
