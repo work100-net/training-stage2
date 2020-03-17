@@ -5,7 +5,7 @@
     <title>控制台 | IoT-Admin</title>
     <jsp:include page="includes/resources_head.jsp" />
 </head>
-<body class="hold-transition sidebar-mini">
+<body class="hold-transition sidebar-mini ${cookie.sidebar_collapse.value=='true'?'sidebar-collapse':''}">
 <div class="wrapper">
 
     <jsp:include page="includes/layout_header.jsp" />
