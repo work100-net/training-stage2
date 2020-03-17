@@ -53,5 +53,12 @@
             <artifactId>jackson-databind</artifactId>
         </dependency>
         <!-- Jackson End -->
+
+        <!-- Lombok Begin -->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+        </dependency>
+        <!-- Lombok End -->
     </dependencies>
 </project>

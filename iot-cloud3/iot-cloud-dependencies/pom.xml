@@ -41,6 +41,9 @@
 
         <!-- Jackson -->
         <jackson.version>2.10.3</jackson.version>
+
+        <!-- Lombok -->
+        <lombok.version>1.18.8</lombok.version>
     </properties>
 
     <dependencyManagement>
@@ -151,6 +154,14 @@
                 <version>${jackson.version}</version>
             </dependency>
             <!-- Jackson End -->
+
+            <!-- Lombok Begin -->
+            <dependency>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok</artifactId>
+                <version>${lombok.version}</version>
+            </dependency>
+            <!-- Lombok End -->
         </dependencies>
     </dependencyManagement>
 
