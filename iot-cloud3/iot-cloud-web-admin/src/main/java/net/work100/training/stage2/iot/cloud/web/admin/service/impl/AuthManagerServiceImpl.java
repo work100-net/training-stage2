@@ -3,12 +3,10 @@ package net.work100.training.stage2.iot.cloud.web.admin.service.impl;
 import net.work100.training.stage2.iot.cloud.commons.dto.BaseResult;
 import net.work100.training.stage2.iot.cloud.commons.dto.PageInfo;
 import net.work100.training.stage2.iot.cloud.commons.utils.EncryptionUtils;
-import net.work100.training.stage2.iot.cloud.commons.utils.HttpUtils;
 import net.work100.training.stage2.iot.cloud.domain.AuthManager;
 import net.work100.training.stage2.iot.cloud.web.admin.dao.AuthManagerDao;
 import net.work100.training.stage2.iot.cloud.web.admin.dto.auth.ManagerSearcher;
 import net.work100.training.stage2.iot.cloud.web.admin.service.AuthManagerService;
-import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.time.DateFormatUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -60,6 +58,21 @@ public class AuthManagerServiceImpl implements AuthManagerService {
     }
 
     @Override
+    public BaseResult update(AuthManager authManager) {
+        if (authManagerDao.getByKey(authManager.getUserKey()) == null) {
+            return BaseResult.fail("用户不存在");
+        }
+        try {
+            authManager.setUpdated(new Date());
+
+            authManagerDao.update(authManager);
+            return BaseResult.success("账户更新成功");
+        } catch (Exception ex) {
+            return BaseResult.fail("未知错误");
+        }
+    }
+
+    @Override
     public void delete(String userKey) {
         authManagerDao.delete(userKey);
     }
@@ -75,40 +88,8 @@ public class AuthManagerServiceImpl implements AuthManagerService {
     }
 
     @Override
-    public BaseResult update(AuthManager authManager) {
-        if (authManagerDao.getByUserKey(authManager.getUserKey()) == null) {
-            return BaseResult.fail("用户不存在");
-        }
-        try {
-            authManager.setUpdated(new Date());
-
-            authManagerDao.update(authManager);
-            return BaseResult.success("账户更新成功");
-        } catch (Exception ex) {
-            return BaseResult.fail("未知错误");
-        }
-    }
-
-    @Override
-    public List<AuthManager> selectByName(String userName) {
-        return authManagerDao.selectByName(userName);
-    }
-
-    @Override
-    public AuthManager login(String userName, String password) {
-        AuthManager authManager = authManagerDao.getByUserName(userName);
-        if (authManager != null && authManager.getStatus() == 1) {
-            // 验证密码，如果验证通过，则返回用户信息
-            if (EncryptionUtils.validateEncryptPassword(password, authManager.getPassword())) {
-                return authManager;
-            }
-        }
-        return null;
-    }
-
-    @Override
-    public AuthManager getByUserKey(String userKey) {
-        return authManagerDao.getByUserKey(userKey);
+    public AuthManager getByKey(String userKey) {
+        return authManagerDao.getByKey(userKey);
     }
 
     @Override
@@ -165,6 +146,23 @@ public class AuthManagerServiceImpl implements AuthManagerService {
         authManagerPageInfo.setData(data);
 
         return authManagerPageInfo;
+    }
+
+    @Override
+    public List<AuthManager> selectByName(String userName) {
+        return authManagerDao.selectByName(userName);
+    }
+
+    @Override
+    public AuthManager login(String userName, String password) {
+        AuthManager authManager = authManagerDao.getByUserName(userName);
+        if (authManager != null && authManager.getStatus() == 1) {
+            // 验证密码，如果验证通过，则返回用户信息
+            if (EncryptionUtils.validateEncryptPassword(password, authManager.getPassword())) {
+                return authManager;
+            }
+        }
+        return null;
     }
 
     /**

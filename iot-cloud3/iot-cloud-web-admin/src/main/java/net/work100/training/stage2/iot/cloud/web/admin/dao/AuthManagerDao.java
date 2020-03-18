@@ -1,10 +1,10 @@
 package net.work100.training.stage2.iot.cloud.web.admin.dao;
 
+import net.work100.training.stage2.iot.cloud.commons.dao.BaseDao;
 import net.work100.training.stage2.iot.cloud.domain.AuthManager;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
-import java.util.Map;
 
 /**
  * <p>Title: AuthManagerDao</p>
@@ -19,53 +19,7 @@ import java.util.Map;
  * -----------------------------------------------
  */
 @Repository
-public interface AuthManagerDao {
-
-    /**
-     * 查询全部表记录
-     *
-     * @return
-     */
-    List<AuthManager> selectAll();
-
-
-    /**
-     * 新增
-     *
-     * @param authManager
-     */
-    void insert(AuthManager authManager);
-
-    /**
-     * 删除
-     *
-     * @param userKey
-     */
-    void delete(String userKey);
-
-    /**
-     * 批量删除
-     *
-     * @param userKeys
-     */
-    void multiDelete(String[] userKeys);
-
-    /**
-     * 获取单个对象
-     *
-     * @param id
-     * @return
-     */
-    AuthManager getById(Long id);
-
-
-    /**
-     * 更新
-     *
-     * @param authManager
-     */
-    void update(AuthManager authManager);
-
+public interface AuthManagerDao extends BaseDao<AuthManager> {
 
     /**
      * 模糊查询
@@ -82,36 +36,4 @@ public interface AuthManagerDao {
      * @return
      */
     AuthManager getByUserName(String userName);
-
-    /**
-     * 获取账户对象
-     *
-     * @param userKey 用户Key
-     * @return
-     */
-    AuthManager getByUserKey(String userKey);
-
-    /**
-     * 搜索
-     *
-     * @param authManager 查询条件
-     * @return
-     */
-    List<AuthManager> search(AuthManager authManager);
-
-    /**
-     * 分页查询
-     *
-     * @param params 查询条件及分页参数
-     * @return
-     */
-    List<AuthManager> pageSearch(Map<String, Object> params);
-
-    /**
-     * 计数统计
-     *
-     * @param authManager 查询条件
-     * @return
-     */
-    int count(AuthManager authManager);
 }

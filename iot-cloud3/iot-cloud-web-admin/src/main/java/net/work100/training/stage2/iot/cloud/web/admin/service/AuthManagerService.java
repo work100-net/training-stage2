@@ -1,7 +1,6 @@
 package net.work100.training.stage2.iot.cloud.web.admin.service;
 
-import net.work100.training.stage2.iot.cloud.commons.dto.BaseResult;
-import net.work100.training.stage2.iot.cloud.commons.dto.PageInfo;
+import net.work100.training.stage2.iot.cloud.commons.service.BaseService;
 import net.work100.training.stage2.iot.cloud.domain.AuthManager;
 import net.work100.training.stage2.iot.cloud.web.admin.dto.auth.ManagerSearcher;
 
@@ -19,53 +18,7 @@ import java.util.List;
  * 2020-02-23   liuxiaojun     初始创建
  * -----------------------------------------------
  */
-public interface AuthManagerService {
-    /**
-     * 查询全部表记录
-     *
-     * @return
-     */
-    List<AuthManager> selectAll();
-
-    /**
-     * 新增
-     *
-     * @param authManager
-     * @return
-     */
-    BaseResult insert(AuthManager authManager);
-
-    /**
-     * 删除
-     *
-     * @param userKey
-     */
-    void delete(String userKey);
-
-    /**
-     * 批量删除
-     *
-     * @param userKeys
-     */
-    void multiDelete(String[] userKeys);
-
-    /**
-     * 获取单个对象
-     *
-     * @param id
-     * @return
-     */
-    AuthManager getById(Long id);
-
-
-    /**
-     * 更新
-     *
-     * @param authManager
-     * @return
-     */
-    BaseResult update(AuthManager authManager);
-
+public interface AuthManagerService extends BaseService<AuthManager, ManagerSearcher> {
 
     /**
      * 模糊查询
@@ -84,31 +37,4 @@ public interface AuthManagerService {
      */
     AuthManager login(String userName, String password);
 
-
-    /**
-     * 获取账户对象
-     *
-     * @param userKey 用户Key
-     * @return
-     */
-    AuthManager getByUserKey(String userKey);
-
-    /**
-     * 搜索
-     *
-     * @param managerSearcher 搜索器
-     * @return
-     */
-    List<AuthManager> search(ManagerSearcher managerSearcher);
-
-    /**
-     * 分页搜索
-     *
-     * @param draw
-     * @param start           起始位置
-     * @param length          每页长度
-     * @param managerSearcher
-     * @return
-     */
-    PageInfo<AuthManager> pageSearch(int draw, int start, int length, ManagerSearcher managerSearcher);
 }

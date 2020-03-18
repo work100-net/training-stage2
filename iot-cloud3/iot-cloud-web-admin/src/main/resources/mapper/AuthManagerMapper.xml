@@ -46,19 +46,6 @@
         )
     </insert>
 
-    <delete id="delete">
-        DELETE FROM auth_manager WHERE user_key = #{userKey}
-    </delete>
-
-    <select id="getById" resultType="AuthManager">
-        SELECT
-          <include refid="authManagerColumns" />
-        FROM
-          auth_manager AS a
-        WHERE
-          a.id = #{id}
-    </select>
-
     <update id="update">
         UPDATE
           auth_manager
@@ -70,6 +57,41 @@
         WHERE
           user_key = #{userKey}
     </update>
+
+    <delete id="delete">
+        DELETE FROM auth_manager WHERE user_key = #{userKey}
+    </delete>
+
+    <delete id="multiDelete">
+        DELETE FROM auth_manager
+        <if test="array != null and array.length > 0">
+            WHERE user_key IN
+            <foreach collection="array" open="(" close=")" item="userKey" separator=",">
+                #{userKey}
+            </foreach>
+        </if>
+        <if test="array == null or array.length == 0">
+            WHERE 1 = 2
+        </if>
+    </delete>
+
+    <select id="getById" resultType="AuthManager">
+        SELECT
+          <include refid="authManagerColumns" />
+        FROM
+          auth_manager AS a
+        WHERE
+          a.id = #{id}
+    </select>
+
+    <select id="getByKey" resultType="AuthManager">
+        SELECT
+        <include refid="authManagerColumns" />
+        FROM
+        auth_manager AS a
+        WHERE
+        a.user_key = #{userKey}
+    </select>
 
     <select id="selectByName" resultType="AuthManager">
         SELECT
@@ -87,15 +109,6 @@
           auth_manager AS a
         WHERE
           a.user_name = #{userName}
-    </select>
-
-    <select id="getByUserKey" resultType="AuthManager">
-        SELECT
-          <include refid="authManagerColumns" />
-        FROM
-          auth_manager AS a
-        WHERE
-          a.user_key = #{userKey}
     </select>
 
     <select id="search" resultType="AuthManager">
@@ -116,19 +129,6 @@
         </where>
         ORDER BY a.id DESC
     </select>
-
-    <delete id="multiDelete">
-        DELETE FROM auth_manager
-        <if test="array != null and array.length > 0">
-            WHERE user_key IN
-            <foreach collection="array" open="(" close=")" item="userKey" separator=",">
-                #{userKey}
-            </foreach>
-        </if>
-        <if test="array == null or array.length == 0">
-            WHERE 1 = 2
-        </if>
-    </delete>
 
     <select id="pageSearch" resultType="AuthManager" parameterType="java.util.Map">
         SELECT
