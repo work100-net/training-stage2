@@ -1,6 +1,7 @@
 package net.work100.training.stage2.iot.cloud.commons.dao;
 
 import net.work100.training.stage2.iot.cloud.commons.dto.AbstractBaseDomain;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Map;

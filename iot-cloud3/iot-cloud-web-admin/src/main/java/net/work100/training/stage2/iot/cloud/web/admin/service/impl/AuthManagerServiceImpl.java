@@ -2,6 +2,7 @@ package net.work100.training.stage2.iot.cloud.web.admin.service.impl;
 
 import net.work100.training.stage2.iot.cloud.commons.dto.BaseResult;
 import net.work100.training.stage2.iot.cloud.commons.dto.PageInfo;
+import net.work100.training.stage2.iot.cloud.commons.service.impl.AbstractBaseServiceImpl;
 import net.work100.training.stage2.iot.cloud.commons.utils.EncryptionUtils;
 import net.work100.training.stage2.iot.cloud.domain.AuthManager;
 import net.work100.training.stage2.iot.cloud.web.admin.dao.AuthManagerDao;
@@ -26,15 +27,10 @@ import java.util.*;
  * -----------------------------------------------
  */
 @Service
-public class AuthManagerServiceImpl implements AuthManagerService {
+public class AuthManagerServiceImpl extends AbstractBaseServiceImpl<AuthManager, ManagerSearcher, AuthManagerDao> implements AuthManagerService {
 
     @Autowired
     private AuthManagerDao authManagerDao;
-
-    @Override
-    public List<AuthManager> selectAll() {
-        return authManagerDao.selectAll();
-    }
 
     @Override
     public BaseResult insert(AuthManager authManager) {
@@ -70,26 +66,6 @@ public class AuthManagerServiceImpl implements AuthManagerService {
         } catch (Exception ex) {
             return BaseResult.fail("未知错误");
         }
-    }
-
-    @Override
-    public void delete(String userKey) {
-        authManagerDao.delete(userKey);
-    }
-
-    @Override
-    public void multiDelete(String[] userKeys) {
-        authManagerDao.multiDelete(userKeys);
-    }
-
-    @Override
-    public AuthManager getById(Long id) {
-        return authManagerDao.getById(id);
-    }
-
-    @Override
-    public AuthManager getByKey(String userKey) {
-        return authManagerDao.getByKey(userKey);
     }
 
     @Override

@@ -53,9 +53,9 @@ public interface BaseService<T extends AbstractBaseDomain, Searcher extends Base
     /**
      * 批量删除
      *
-     * @param userKeys
+     * @param entityKeys
      */
-    void multiDelete(String[] userKeys);
+    void multiDelete(String[] entityKeys);
 
     /**
      * 获取单个对象
