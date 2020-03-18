@@ -1,5 +1,6 @@
 package net.work100.training.stage2.iot.cloud.commons.dto;
 
+import lombok.Data;
 import net.work100.training.stage2.iot.cloud.commons.utils.HttpUtils;
 
 import java.io.Serializable;
@@ -15,10 +16,10 @@ import java.io.Serializable;
  * 2020-03-04   liuxiaojun     初始创建
  * -----------------------------------------------
  */
+@Data
 public class BaseResult implements Serializable {
     private int status;
     private String message;
-
 
     public static BaseResult success() {
         return createResult(HttpUtils.HTTP_STATUS_CODE_OK, "成功");
@@ -38,22 +39,6 @@ public class BaseResult implements Serializable {
 
     public static BaseResult fail(int status, String message) {
         return createResult(status, message);
-    }
-
-    public int getStatus() {
-        return status;
-    }
-
-    public void setStatus(int status) {
-        this.status = status;
-    }
-
-    public String getMessage() {
-        return message;
-    }
-
-    public void setMessage(String message) {
-        this.message = message;
     }
 
     private static BaseResult createResult(int status, String message) {

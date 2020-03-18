@@ -55,7 +55,6 @@ public class ManagerController {
 
     @RequestMapping(value = "search", method = RequestMethod.POST)
     public String search(ManagerSearcher managerSearcher, Model model) {
-
         List<AuthManager> authManagers = authManagerService.search(managerSearcher);
         model.addAttribute("managerSearcher", managerSearcher);
         model.addAttribute("authManagers", authManagers);
@@ -72,7 +71,7 @@ public class ManagerController {
     @RequestMapping(value = "add", method = RequestMethod.POST)
     public String add(AuthManager authManager, Model model, RedirectAttributes redirectAttributes) {
         String validator = BeanValidator.validator(authManager);
-        if(validator!=null){
+        if (validator != null) {
             model.addAttribute("baseResult", BaseResult.fail(validator));
             model.addAttribute("authManager", authManager);
             return "auth/manager_add";
@@ -116,7 +115,7 @@ public class ManagerController {
             return "redirect:/auth/manager/list";
         }
         String validator = BeanValidator.validator(authManager);
-        if(validator!=null){
+        if (validator != null) {
             model.addAttribute("baseResult", BaseResult.fail(validator));
             model.addAttribute("authManager", authManager);
             return "auth/manager_edit";
@@ -182,19 +181,27 @@ public class ManagerController {
         String roles = request.getParameter("roles");
         String strStatus = request.getParameter("status");
 
-        int draw = strDraw == null ? 0 : Integer.parseInt(strDraw);
-        int start = strStart == null ? 0 : Integer.parseInt(strStart);
-        int length = strLength == null ? 0 : Integer.parseInt(strLength);
-        boolean advanced = strAdvanced == null ? false : Boolean.parseBoolean(strAdvanced);
-        int status = strStatus == null ? 0 : Integer.parseInt(strStatus);
+        int draw = StringUtils.isBlank(strDraw) ? 0 : Integer.parseInt(strDraw);
+        int start = StringUtils.isBlank(strStart) ? 0 : Integer.parseInt(strStart);
+        int length = StringUtils.isBlank(strLength) ? 0 : Integer.parseInt(strLength);
+        boolean advanced = StringUtils.isBlank(strAdvanced) ? false : Boolean.parseBoolean(strAdvanced);
+        int status = StringUtils.isBlank(strStatus) ? -1 : Integer.parseInt(strStatus);
 
         ManagerSearcher managerSearcher = new ManagerSearcher();
-        managerSearcher.setAdvanced(advanced);
-        managerSearcher.setKeyword(keyword);
-        managerSearcher.setUserName(userName);
-        managerSearcher.setRoles(roles);
-        managerSearcher.setStatus(status);
+        if (!advanced) {
+            managerSearcher.setAdvanced(advanced);
+            managerSearcher.setKeyword(keyword);
 
-        return authManagerService.pageSearch(draw, start, length, managerSearcher);
+        } else {
+            managerSearcher.setAdvanced(advanced);
+            managerSearcher.setUserName(userName);
+            managerSearcher.setRoles(roles);
+            managerSearcher.setStatus(status);
+        }
+
+        managerSearcher.setStart(start);
+        managerSearcher.setLength(length);
+
+        return authManagerService.pageSearch(draw, managerSearcher);
     }
 }

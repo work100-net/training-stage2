@@ -2,6 +2,7 @@ package net.work100.training.stage2.iot.cloud.web.admin.dao;
 
 import net.work100.training.stage2.iot.cloud.commons.dao.BaseDao;
 import net.work100.training.stage2.iot.cloud.domain.AuthManager;
+import net.work100.training.stage2.iot.cloud.web.admin.dto.auth.ManagerSearcher;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -19,7 +20,7 @@ import java.util.List;
  * -----------------------------------------------
  */
 @Repository
-public interface AuthManagerDao extends BaseDao<AuthManager> {
+public interface AuthManagerDao extends BaseDao<AuthManager, ManagerSearcher> {
 
     /**
      * 模糊查询

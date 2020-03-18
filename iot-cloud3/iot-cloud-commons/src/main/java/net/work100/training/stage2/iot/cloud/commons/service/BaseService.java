@@ -85,10 +85,8 @@ public interface BaseService<T extends AbstractBaseDomain, Searcher extends Base
      * 分页搜索
      *
      * @param draw
-     * @param start    起始位置
-     * @param length   每页长度
      * @param searcher 搜索器
      * @return
      */
-    PageInfo<T> pageSearch(int draw, int start, int length, Searcher searcher);
+    PageInfo<T> pageSearch(int draw, Searcher searcher);
 }

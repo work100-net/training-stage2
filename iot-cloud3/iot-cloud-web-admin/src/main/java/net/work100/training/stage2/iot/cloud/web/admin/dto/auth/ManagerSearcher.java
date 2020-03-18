@@ -1,5 +1,6 @@
 package net.work100.training.stage2.iot.cloud.web.admin.dto.auth;
 
+import lombok.Data;
 import net.work100.training.stage2.iot.cloud.commons.dto.BaseSearcher;
 
 /**
@@ -14,33 +15,9 @@ import net.work100.training.stage2.iot.cloud.commons.dto.BaseSearcher;
  * 2020-03-08   liuxiaojun     初始创建
  * -----------------------------------------------
  */
+@Data
 public class ManagerSearcher extends BaseSearcher {
-
     private String userName;
     private String roles;
     private int status;
-
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
-
-    public String getRoles() {
-        return roles;
-    }
-
-    public void setRoles(String roles) {
-        this.roles = roles;
-    }
-
-    public int getStatus() {
-        return status;
-    }
-
-    public void setStatus(int status) {
-        this.status = status;
-    }
 }

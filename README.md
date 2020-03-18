@@ -102,6 +102,7 @@
         - [重构Dao层](http://www.work100.net/training/monolithic-project-iot-cloud-admin-manager-rebuild-dao.html)
         - [重构Service层](http://www.work100.net/training/monolithic-project-iot-cloud-admin-manager-rebuild-service.html)
         - [重构Service实现](http://www.work100.net/training/monolithic-project-iot-cloud-admin-manager-rebuild-service-impl.html)
+        - [重构搜索功能](http://www.work100.net/training/monolithic-project-iot-cloud-admin-manager-rebuild-search.html)
     - [05.租户管理](http://www.work100.net/training/monolithic-project-iot-cloud-admin-tenant.html)
     - [06.租户账号管理](http://www.work100.net/training/monolithic-project-iot-cloud-admin-tenant-user.html)
     

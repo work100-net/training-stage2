@@ -1,5 +1,7 @@
 package net.work100.training.stage2.iot.cloud.commons.dto;
 
+import lombok.Data;
+
 import java.io.Serializable;
 import java.util.List;
 
@@ -14,50 +16,11 @@ import java.util.List;
  * 2020-03-14   liuxiaojun     初始创建
  * -----------------------------------------------
  */
+@Data
 public class PageInfo<T extends AbstractBaseDomain> implements Serializable {
     private int draw;
     private int recordsTotal;
     private int recordsFiltered;
     private List<T> data;
     private String error;
-
-    public int getDraw() {
-        return draw;
-    }
-
-    public void setDraw(int draw) {
-        this.draw = draw;
-    }
-
-    public int getRecordsTotal() {
-        return recordsTotal;
-    }
-
-    public void setRecordsTotal(int recordsTotal) {
-        this.recordsTotal = recordsTotal;
-    }
-
-    public int getRecordsFiltered() {
-        return recordsFiltered;
-    }
-
-    public void setRecordsFiltered(int recordsFiltered) {
-        this.recordsFiltered = recordsFiltered;
-    }
-
-    public List<T> getData() {
-        return data;
-    }
-
-    public void setData(List<T> data) {
-        this.data = data;
-    }
-
-    public String getError() {
-        return error;
-    }
-
-    public void setError(String error) {
-        this.error = error;
-    }
 }

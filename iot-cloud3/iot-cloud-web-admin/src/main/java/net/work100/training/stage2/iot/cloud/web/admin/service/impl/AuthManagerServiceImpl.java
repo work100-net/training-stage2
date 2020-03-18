@@ -1,7 +1,6 @@
 package net.work100.training.stage2.iot.cloud.web.admin.service.impl;
 
 import net.work100.training.stage2.iot.cloud.commons.dto.BaseResult;
-import net.work100.training.stage2.iot.cloud.commons.dto.PageInfo;
 import net.work100.training.stage2.iot.cloud.commons.service.impl.AbstractBaseServiceImpl;
 import net.work100.training.stage2.iot.cloud.commons.utils.EncryptionUtils;
 import net.work100.training.stage2.iot.cloud.domain.AuthManager;
@@ -68,61 +67,6 @@ public class AuthManagerServiceImpl extends AbstractBaseServiceImpl<AuthManager,
         }
     }
 
-    @Override
-    public List<AuthManager> search(ManagerSearcher managerSearcher) {
-        AuthManager authManager = new AuthManager();
-        if (!managerSearcher.isAdvanced()) {
-            authManager.setUserName(managerSearcher.getKeyword());
-            authManager.setRoles("");
-            authManager.setStatus(-1);
-        } else {
-            authManager.setUserName(managerSearcher.getUserName());
-            authManager.setRoles(managerSearcher.getRoles());
-            authManager.setStatus(managerSearcher.getStatus());
-        }
-        return authManagerDao.search(authManager);
-    }
-
-    @Override
-    public PageInfo<AuthManager> pageSearch(int draw, int start, int length, ManagerSearcher managerSearcher) {
-        Map<String, Object> params = new HashMap<>();
-        params.put("start", start);
-        params.put("length", length);
-        AuthManager authManager = new AuthManager();
-
-        if (!managerSearcher.isAdvanced()) {
-            authManager.setUserName(managerSearcher.getKeyword());
-            authManager.setRoles("");
-            authManager.setStatus(-1);
-
-            params.put("userName", managerSearcher.getKeyword());
-            params.put("roles", "");
-            params.put("status", -1);
-        } else {
-            authManager.setUserName(managerSearcher.getUserName());
-            authManager.setRoles(managerSearcher.getRoles());
-            authManager.setStatus(managerSearcher.getStatus());
-
-            params.put("userName", managerSearcher.getUserName());
-            params.put("roles", managerSearcher.getRoles());
-            params.put("status", managerSearcher.getStatus());
-        }
-
-        // 处理分页结果
-        PageInfo<AuthManager> authManagerPageInfo = new PageInfo<>();
-        authManagerPageInfo.setDraw(draw);
-
-        // 获取记录数
-        int recordsTotal = authManagerDao.count(authManager);
-        authManagerPageInfo.setRecordsTotal(recordsTotal);
-        authManagerPageInfo.setRecordsFiltered(recordsTotal);
-
-        // 获取分页数据
-        List<AuthManager> data = authManagerDao.pageSearch(params);
-        authManagerPageInfo.setData(data);
-
-        return authManagerPageInfo;
-    }
 
     @Override
     public List<AuthManager> selectByName(String userName) {
