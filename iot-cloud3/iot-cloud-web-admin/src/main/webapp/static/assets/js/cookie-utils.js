@@ -5,16 +5,25 @@ let CookieUtils = function() {
 
     let handleInitSidebarCollapse = function() {
         if ($.cookie(cookie_key_sidebar_collapse) == undefined) {
-            $.cookie(cookie_key_sidebar_collapse, defaultSidebarCollapse, { expires: expiresDays });
+            $.cookie(cookie_key_sidebar_collapse, defaultSidebarCollapse, {
+                expires: expiresDays,
+                path: '/'
+            });
         }
     }
 
     let handleChangeSidebarCollapse = function() {
         let sidebar_collapse = $.cookie(cookie_key_sidebar_collapse);
         if (sidebar_collapse == undefined) {
-            $.cookie(cookie_key_sidebar_collapse, defaultSidebarCollapse == 'true' ? 'false' : 'true', { expires: expiresDays });
+            $.cookie(cookie_key_sidebar_collapse, defaultSidebarCollapse == 'true' ? 'false' : 'true', {
+                expires: expiresDays,
+                path: '/'
+            });
         } else {
-            $.cookie(cookie_key_sidebar_collapse, sidebar_collapse == 'true' ? 'false' : 'true', { expires: expiresDays });
+            $.cookie(cookie_key_sidebar_collapse, sidebar_collapse == 'true' ? 'false' : 'true', {
+                expires: expiresDays,
+                path: '/'
+            });
         }
     }
 

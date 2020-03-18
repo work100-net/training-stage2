@@ -87,16 +87,6 @@ public class AuthManagerServiceTest {
     }
 
     @Test
-    public void testSelectByName() {
-        String userName = "xiaojun";
-        List<AuthManager> authManagers = authManagerService.selectByName(userName);
-        for (AuthManager authManager : authManagers) {
-            System.out.println("------------------------------------------------");
-            System.out.println(authManager.toString());
-        }
-    }
-
-    @Test
     public void testLogin()
     {
         String userName = "xiaojun.liu";

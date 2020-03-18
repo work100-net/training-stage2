@@ -67,12 +67,6 @@ public class AuthManagerServiceImpl extends AbstractBaseServiceImpl<AuthManager,
         }
     }
 
-
-    @Override
-    public List<AuthManager> selectByName(String userName) {
-        return authManagerDao.selectByName(userName);
-    }
-
     @Override
     public AuthManager login(String userName, String password) {
         AuthManager authManager = authManagerDao.getByUserName(userName);

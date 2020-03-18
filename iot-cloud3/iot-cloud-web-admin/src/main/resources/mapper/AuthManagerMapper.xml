@@ -112,15 +112,6 @@
         a.user_key = #{userKey}
     </select>
 
-    <select id="selectByName" resultType="AuthManager">
-        SELECT
-          <include refid="authManagerColumns" />
-        FROM
-          auth_manager AS a
-        WHERE
-          a.user_name LIKE CONCAT ('%', #{userName}, '%')
-    </select>
-
     <select id="getByUserName" resultType="AuthManager">
         SELECT
           <include refid="authManagerColumns" />
@@ -141,7 +132,7 @@
         ORDER BY a.id DESC
     </select>
 
-    <select id="pageSearch" resultType="AuthManager" parameterType="java.util.Map">
+    <select id="pageSearch" resultType="AuthManager">
         SELECT
           <include refid="authManagerColumns" />
         FROM

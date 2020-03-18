@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.List;
 
 /**
  * <p>Title: ManagerController</p>
@@ -48,16 +47,6 @@ public class ManagerController {
         managerSearcher.setStatus(-1);
         model.addAttribute(managerSearcher);
 
-        List<AuthManager> authManagers = authManagerService.selectAll();
-        model.addAttribute("authManagers", authManagers);
-        return "auth/manager_list";
-    }
-
-    @RequestMapping(value = "search", method = RequestMethod.POST)
-    public String search(ManagerSearcher managerSearcher, Model model) {
-        List<AuthManager> authManagers = authManagerService.search(managerSearcher);
-        model.addAttribute("managerSearcher", managerSearcher);
-        model.addAttribute("authManagers", authManagers);
         return "auth/manager_list";
     }
 
@@ -171,7 +160,7 @@ public class ManagerController {
 
     @ResponseBody
     @RequestMapping(value = "page-search", method = RequestMethod.POST)
-    public PageInfo<AuthManager> page(HttpServletRequest request) {
+    public PageInfo<AuthManager> pageSearch(HttpServletRequest request) {
         String strDraw = request.getParameter("draw");
         String strStart = request.getParameter("start");
         String strLength = request.getParameter("length");

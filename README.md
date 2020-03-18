@@ -103,7 +103,13 @@
         - [重构Service层](http://www.work100.net/training/monolithic-project-iot-cloud-admin-manager-rebuild-service.html)
         - [重构Service实现](http://www.work100.net/training/monolithic-project-iot-cloud-admin-manager-rebuild-service-impl.html)
         - [重构搜索功能](http://www.work100.net/training/monolithic-project-iot-cloud-admin-manager-rebuild-search.html)
-    - [05.租户管理](http://www.work100.net/training/monolithic-project-iot-cloud-admin-tenant.html)
+    - 05.租户管理
+        - [概述](http://www.work100.net/training/monolithic-project-iot-cloud-admin-tenant.html)
+        - [实体类](http://www.work100.net/training/monolithic-project-iot-cloud-admin-tenant-entity.html)
+        - [Dao层](http://www.work100.net/training/monolithic-project-iot-cloud-admin-tenant-dao.html)
+        - [Service层](http://www.work100.net/training/monolithic-project-iot-cloud-admin-tenant-service.html)
+        - [Controller控制器](http://www.work100.net/training/monolithic-project-iot-cloud-admin-tenant-controller.html)
+        - [视图页面](http://www.work100.net/training/monolithic-project-iot-cloud-admin-tenant-view.html)
     - [06.租户账号管理](http://www.work100.net/training/monolithic-project-iot-cloud-admin-tenant-user.html)
     
   - Spring事务管理

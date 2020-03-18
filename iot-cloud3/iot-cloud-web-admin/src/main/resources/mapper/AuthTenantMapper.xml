@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="net.work100.training.stage2.iot.cloud.web.admin.dao.AuthTenantDao">
+
+    <sql id="authTenantColumns">
+          a.id,
+          a.tenant_code,
+          a.tenant_name,
+          a.tenant_desc,
+          a.created,
+          a.updated
+    </sql>
+
+    <sql id="authTenantSearch">
+        <if test="!advanced">
+            <if test="keyword != null and keyword != ''">
+                AND a.tenant_code LIKE CONCAT('%', #{keyword}, '%')
+            </if>
+        </if>
+        <if test="advanced">
+            <if test="tenantCode != null and tenantCode != ''">
+                AND a.tenant_code LIKE CONCAT('%', #{tenantCode}, '%')
+            </if>
+            <if test="tenantName != null and tenantName != ''">
+                AND a.tenant_name LIKE CONCAT('%', #{tenantName}, '%')
+            </if>
+        </if>
+    </sql>
+
+    <select id="selectAll" resultType="AuthTenant">
+        SELECT
+          <include refid="authTenantColumns" />
+        FROM
+          auth_tenant AS a
+        ORDER BY a.id DESC
+    </select>
+
+    <insert id="insert" >
+        INSERT INTO auth_tenant (
+            `tenant_code`,
+            `tenant_name`,
+            `tenant_desc`,
+            `created`,
+            `updated`
+        )
+        VALUES (
+            #{tenantCode},
+            #{tenantName},
+            #{tenantDesc},
+            #{created},
+            #{updated}
+        )
+    </insert>
+
+    <update id="update">
+        UPDATE
+          auth_tenant
+        SET
+          tenant_name = #{tenantName},
+          tenant_desc = #{tenantDesc},
+          updated = #{updated}
+        WHERE
+          tenant_code = #{tenantCode}
+    </update>
+
+    <delete id="delete">
+        DELETE FROM auth_tenant WHERE tenant_code = #{tenantCode}
+    </delete>
+
+    <delete id="multiDelete">
+        DELETE FROM auth_tenant
+        <if test="array != null and array.length > 0">
+            WHERE tenant_code IN
+            <foreach collection="array" open="(" close=")" item="tenantCode" separator=",">
+                #{tenantCode}
+            </foreach>
+        </if>
+        <if test="array == null or array.length == 0">
+            WHERE 1 = 2
+        </if>
+    </delete>
+
+    <select id="getById" resultType="AuthTenant">
+        SELECT
+          <include refid="authTenantColumns" />
+        FROM
+          auth_tenant AS a
+        WHERE
+          a.id = #{id}
+    </select>
+
+    <select id="getByKey" resultType="AuthTenant">
+        SELECT
+        <include refid="authTenantColumns" />
+        FROM
+        auth_tenant AS a
+        WHERE
+        a.tenant_code = #{tenantCode}
+    </select>
+
+    <select id="search" resultType="AuthTenant">
+        SELECT
+          <include refid="authTenantColumns" />
+        FROM
+          auth_tenant AS a
+        <where>
+            <include refid="authTenantSearch" />
+        </where>
+        ORDER BY a.id DESC
+    </select>
+
+    <select id="pageSearch" resultType="AuthTenant">
+        SELECT
+          <include refid="authTenantColumns" />
+        FROM
+          auth_tenant AS a
+        <where>
+            <include refid="authTenantSearch" />
+        </where>
+        ORDER BY a.id DESC
+        LIMIT #{start}, #{length}
+    </select>
+
+    <select id="count" resultType="int">
+        SELECT
+          COUNT(*)
+        FROM
+          auth_tenant AS a
+        <where>
+            <include refid="authTenantSearch" />
+        </where>
+    </select>
+</mapper>
