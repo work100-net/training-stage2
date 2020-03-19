@@ -17,15 +17,4 @@ import net.work100.training.stage2.iot.cloud.web.admin.dto.auth.TenantUserSearch
  * -----------------------------------------------
  */
 public interface AuthTenantUserService extends BaseService<AuthTenantUser, TenantUserSearcher> {
-
-    /**
-     * 登录验证
-     *
-     * @param tenantCode 租户编码
-     * @param userName   用户名
-     * @param password   密码
-     * @return
-     */
-    AuthTenantUser login(String tenantCode, String userName, String password);
-
 }

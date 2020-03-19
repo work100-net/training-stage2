@@ -5,7 +5,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>编辑账户 - 后台账户 | IoT-Admin</title>
+    <title>编辑账户 - 租户账户 | IoT-Admin</title>
     <jsp:include page="../includes/resources_head.jsp" />
 </head>
 <body class="hold-transition sidebar-mini ${cookie.sidebar_collapse.value=='true'?'sidebar-collapse':''}">
@@ -26,7 +26,7 @@
                     </div><!-- /.col -->
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="#">后台账户</a></li>
+                            <li class="breadcrumb-item"><a href="#">租户账户</a></li>
                             <li class="breadcrumb-item active">编辑账户</li>
                         </ol>
                     </div><!-- /.col -->

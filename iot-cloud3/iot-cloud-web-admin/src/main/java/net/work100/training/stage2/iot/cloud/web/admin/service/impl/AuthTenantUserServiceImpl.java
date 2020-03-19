@@ -67,18 +67,6 @@ public class AuthTenantUserServiceImpl extends AbstractBaseServiceImpl<AuthTenan
         }
     }
 
-    @Override
-    public AuthTenantUser login(String tenantCode, String userName, String password) {
-        AuthTenantUser authTenantUser = authTenantUserDao.getByUserName(tenantCode, userName);
-        if (authTenantUser != null && authTenantUser.getStatus() == 1) {
-            // 验证密码，如果验证通过，则返回用户信息
-            if (EncryptionUtils.validateEncryptPassword(password, authTenantUser.getPassword())) {
-                return authTenantUser;
-            }
-        }
-        return null;
-    }
-
     /**
      * 生成 userKey
      *
