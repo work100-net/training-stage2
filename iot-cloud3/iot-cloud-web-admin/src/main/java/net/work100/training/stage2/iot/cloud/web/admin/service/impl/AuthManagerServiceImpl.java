@@ -38,7 +38,7 @@ public class AuthManagerServiceImpl extends AbstractBaseServiceImpl<AuthManager,
         }
         try {
             // 生成 userKey
-            authManager.setUserKey(EncryptionUtils.encryptText(EncryptionUtils.EncryptionType.MD5, authManager.getUserName().toLowerCase()));
+            authManager.setUserKey(generateUserKey(authManager.getUserName()));
 
             // 密码加密
             authManager.setPassword(EncryptionUtils.encryptPassword(EncryptionUtils.EncryptionType.MD5, authManager.getPassword()));
@@ -86,7 +86,7 @@ public class AuthManagerServiceImpl extends AbstractBaseServiceImpl<AuthManager,
      * @return
      */
     private String generateUserKey(String userName) {
-        String strDate = DateFormatUtils.format(new Date(), "yyyy-MM-ddTHH:mm");
+        String strDate = DateFormatUtils.format(new Date(), "yyyy-MM-dd HH:mm:ss");
         String sourceUserKey = String.format("%s%s", userName.toLowerCase(), strDate);
         return EncryptionUtils.encryptText(EncryptionUtils.EncryptionType.MD5, sourceUserKey);
     }

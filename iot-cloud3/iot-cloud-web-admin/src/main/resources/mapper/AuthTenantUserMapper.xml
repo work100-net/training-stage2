@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="net.work100.training.stage2.iot.cloud.web.admin.dao.AuthTenantUserDao">
+
+    <sql id="authTenantUserColumns">
+          a.id,
+          a.user_key,
+          a.tenant_code,
+          a.user_name,
+          a.password,
+          a.status,
+          a.superuser,
+          a.roles,
+          a.modify_password_time,
+          a.created,
+          a.updated
+    </sql>
+
+    <sql id="authTenantUserSearch">
+        AND a.tenant_code = #{tenantCode}
+        <if test="!advanced">
+            <if test="keyword != null and keyword != ''">
+                AND a.user_name LIKE CONCAT('%', #{keyword}, '%')
+            </if>
+        </if>
+        <if test="advanced">
+            <if test="userName != null and userName != ''">
+                AND a.user_name LIKE CONCAT('%', #{userName}, '%')
+            </if>
+            <if test="roles != null and roles != ''">
+                AND a.roles LIKE CONCAT('%', #{roles}, '%')
+            </if>
+            <if test="status != -1">
+                AND a.status = #{status}
+            </if>
+        </if>
+    </sql>
+
+    <select id="selectAll" resultType="AuthTenantUser">
+        SELECT
+          <include refid="authTenantUserColumns" />
+        FROM
+          auth_tenant_user AS a
+        WHERE
+          a.tenant_code = #{tenantCode}
+        ORDER BY a.id DESC
+    </select>
+
+    <insert id="insert" >
+        INSERT INTO auth_tenant_user (
+            `user_key`,
+            `tenant_code`,
+            `user_name`,
+            `password`,
+            `status`,
+            `superuser`,
+            `roles`,
+            `created`,
+            `updated`
+        )
+        VALUES (
+            #{userKey},
+            #{tenantCode},
+            #{userName},
+            #{password},
+            #{status},
+            #{superuser},
+            #{roles},
+            #{created},
+            #{updated}
+        )
+    </insert>
+
+    <update id="update">
+        UPDATE
+          auth_tenant_user
+        SET
+          status = #{status},
+          superuser = #{superuser},
+          roles = #{roles},
+          updated = #{updated}
+        WHERE user_key = #{userKey}
+    </update>
+
+    <delete id="delete">
+        DELETE FROM auth_tenant_user WHERE user_key = #{userKey}
+    </delete>
+
+    <delete id="multiDelete">
+        DELETE FROM auth_tenant_user
+        <if test="array != null and array.length > 0">
+            WHERE user_key IN
+            <foreach collection="array" open="(" close=")" item="userKey" separator=",">
+                #{userKey}
+            </foreach>
+        </if>
+        <if test="array == null or array.length == 0">
+            WHERE 1 = 2
+        </if>
+    </delete>
+
+    <select id="getById" resultType="AuthTenantUser">
+        SELECT
+          <include refid="authTenantUserColumns" />
+        FROM
+          auth_tenant_user AS a
+        WHERE a.id = #{id}
+    </select>
+
+    <select id="getByKey" resultType="AuthTenantUser">
+        SELECT
+        <include refid="authTenantUserColumns" />
+        FROM
+          auth_tenant_user AS a
+        WHERE a.user_key = #{userKey}
+    </select>
+
+    <select id="getByUserName" resultType="AuthTenantUser">
+        SELECT
+          <include refid="authTenantUserColumns" />
+        FROM
+          auth_tenant_user AS a
+        WHERE
+          a.tenant_code = #{tenantCode} AND a.user_name = #{userName}
+    </select>
+
+    <select id="search" resultType="AuthTenantUser">
+        SELECT
+          <include refid="authTenantUserColumns" />
+        FROM
+          auth_tenant_user AS a
+        <where>
+            <include refid="authTenantUserSearch" />
+        </where>
+        ORDER BY a.id DESC
+    </select>
+
+    <select id="pageSearch" resultType="AuthTenantUser">
+        SELECT
+          <include refid="authTenantUserColumns" />
+        FROM
+          auth_tenant_user AS a
+        <where>
+            <include refid="authTenantUserSearch" />
+        </where>
+        ORDER BY a.id DESC
+        LIMIT #{start}, #{length}
+    </select>
+
+    <select id="count" resultType="int">
+        SELECT
+          COUNT(*)
+        FROM
+          auth_tenant_user AS a
+        <where>
+            <include refid="authTenantUserSearch" />
+        </where>
+    </select>
+</mapper>

@@ -32,7 +32,7 @@
           <include refid="authTenantColumns" />
         FROM
           auth_tenant AS a
-        ORDER BY a.id DESC
+        ORDER BY a.tenant_code
     </select>
 
     <insert id="insert" >

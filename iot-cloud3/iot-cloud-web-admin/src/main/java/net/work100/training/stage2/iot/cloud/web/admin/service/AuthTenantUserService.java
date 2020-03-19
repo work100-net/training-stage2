@@ -1,11 +1,11 @@
 package net.work100.training.stage2.iot.cloud.web.admin.service;
 
 import net.work100.training.stage2.iot.cloud.commons.service.BaseService;
-import net.work100.training.stage2.iot.cloud.domain.AuthManager;
-import net.work100.training.stage2.iot.cloud.web.admin.dto.auth.ManagerSearcher;
+import net.work100.training.stage2.iot.cloud.domain.AuthTenantUser;
+import net.work100.training.stage2.iot.cloud.web.admin.dto.auth.TenantUserSearcher;
 
 /**
- * <p>Title: AuthManagerService</p>
+ * <p>Title: AuthTenantUserService</p>
  * <p>Description: </p>
  * <p>Url: http://www.work100.net/training/monolithic-project-iot-cloud-admin.html</p>
  *
@@ -16,15 +16,16 @@ import net.work100.training.stage2.iot.cloud.web.admin.dto.auth.ManagerSearcher;
  * 2020-02-23   liuxiaojun     初始创建
  * -----------------------------------------------
  */
-public interface AuthManagerService extends BaseService<AuthManager, ManagerSearcher> {
+public interface AuthTenantUserService extends BaseService<AuthTenantUser, TenantUserSearcher> {
 
     /**
      * 登录验证
      *
-     * @param userName 用户名
-     * @param password 密码
+     * @param tenantCode 租户编码
+     * @param userName   用户名
+     * @param password   密码
      * @return
      */
-    AuthManager login(String userName, String password);
+    AuthTenantUser login(String tenantCode, String userName, String password);
 
 }

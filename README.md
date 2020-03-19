@@ -110,7 +110,13 @@
         - [Service层](http://www.work100.net/training/monolithic-project-iot-cloud-admin-tenant-service.html)
         - [Controller控制器](http://www.work100.net/training/monolithic-project-iot-cloud-admin-tenant-controller.html)
         - [视图页面](http://www.work100.net/training/monolithic-project-iot-cloud-admin-tenant-view.html)
-    - [06.租户账号管理](http://www.work100.net/training/monolithic-project-iot-cloud-admin-tenant-user.html)
+    - 06.租户账号管理
+        - [概述](http://www.work100.net/training/monolithic-project-iot-cloud-admin-tenant-user.html)
+        - [实体类](http://www.work100.net/training/monolithic-project-iot-cloud-admin-tenant-user-entity.html)
+        - [Dao层](http://www.work100.net/training/monolithic-project-iot-cloud-admin-tenant-user-dao.html)
+        - [Service层](http://www.work100.net/training/monolithic-project-iot-cloud-admin-tenant-user-service.html)
+        - [Controller控制器](http://www.work100.net/training/monolithic-project-iot-cloud-admin-tenant-user-controller.html)
+        - [视图页面](http://www.work100.net/training/monolithic-project-iot-cloud-admin-tenant-user-view.html)
     
   - Spring事务管理
 
