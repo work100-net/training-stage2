@@ -43,7 +43,7 @@ public class TenantUserController {
 
 
     @ModelAttribute
-    public void init(Model model, @RequestParam(required = false) String tenantCode) {
+    private void init(Model model, @RequestParam(required = false) String tenantCode) {
         List<AuthTenant> authTenants = authTenantService.selectAll();
         model.addAttribute("authTenants", authTenants);
         if (tenantCode == null) {
