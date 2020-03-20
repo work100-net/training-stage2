@@ -1,5 +1,7 @@
 package net.work100.training.stage2.iot.cloud.commons.validator;
 
+import org.springframework.stereotype.Component;
+
 import javax.validation.ConstraintViolation;
 import javax.validation.ConstraintViolationException;
 import javax.validation.Validator;
@@ -16,12 +18,13 @@ import java.util.*;
  * 2020-03-17   liuxiaojun     初始创建
  * -----------------------------------------------
  */
+@Component
 public class BeanValidator {
 
-    private static Validator validator;
+    private Validator validator;
 
-    public static void setValidator(Validator validator) {
-        BeanValidator.validator = validator;
+    public void setValidator(Validator validator) {
+        this.validator = validator;
     }
 
     /**
@@ -109,9 +112,9 @@ public class BeanValidator {
      * @param groups 验证组
      * @return 验证成功：返回 null；验证失败：返回错误信息
      */
-    public static String validator(Object object, Class<?>... groups) {
+    public String validator(Object object, Class<?>... groups) {
         try {
-            validateWithException(validator, object, groups);
+            validateWithException(this.validator, object, groups);
         } catch (ConstraintViolationException ex) {
             List<String> list = extractMessage(ex);
             list.add(0, "数据验证失败：");

@@ -41,6 +41,9 @@ public class TenantUserController {
     @Autowired
     private AuthTenantUserService authTenantUserService;
 
+    @Autowired
+    private BeanValidator beanValidator;
+
 
     @ModelAttribute
     private void init(Model model, @RequestParam(required = false) String tenantCode) {
@@ -78,7 +81,7 @@ public class TenantUserController {
 
     @RequestMapping(value = "add", method = RequestMethod.POST)
     public String add(AuthTenantUser authTenantUser, Model model, RedirectAttributes redirectAttributes) {
-        String validator = BeanValidator.validator(authTenantUser);
+        String validator = beanValidator.validator(authTenantUser);
         if (validator != null) {
             model.addAttribute("baseResult", BaseResult.fail(validator));
             model.addAttribute("authTenantUser", authTenantUser);
@@ -122,7 +125,7 @@ public class TenantUserController {
             redirectAttributes.addFlashAttribute("baseResult", BaseResult.fail("非法请求"));
             return "redirect:/auth/tenant-user/list?tenantCode=" + tenantCode;
         }
-        String validator = BeanValidator.validator(authTenantUser);
+        String validator = beanValidator.validator(authTenantUser);
         if (validator != null) {
             model.addAttribute("baseResult", BaseResult.fail(validator));
             model.addAttribute("authTenantUser", authTenantUser);

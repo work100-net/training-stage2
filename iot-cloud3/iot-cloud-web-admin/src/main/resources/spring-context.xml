@@ -14,6 +14,6 @@
     <!-- 配置 Bean Validator 定义 -->
     <bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean"/>
     <bean id="beanValidator" class="net.work100.training.stage2.iot.cloud.commons.validator.BeanValidator">
-        <property name="validator" ref="validator" />
+        <property name="validator" ref="validator"/>
     </bean>
 </beans>

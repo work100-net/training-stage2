@@ -39,6 +39,7 @@
         <mybatis.version>3.5.4</mybatis.version>
         <mybatis-spring.version>2.0.3</mybatis-spring.version>
         <hibernate-validator.version>6.1.0.Final</hibernate-validator.version>
+        <javax.el.version>3.0.0</javax.el.version>
 
         <!-- Jackson -->
         <jackson.version>2.10.3</jackson.version>
@@ -146,6 +147,11 @@
                 <groupId>org.hibernate.validator</groupId>
                 <artifactId>hibernate-validator</artifactId>
                 <version>${hibernate-validator.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.glassfish</groupId>
+                <artifactId>javax.el</artifactId>
+                <version>${javax.el.version}</version>
             </dependency>
             <!-- Database End -->
 

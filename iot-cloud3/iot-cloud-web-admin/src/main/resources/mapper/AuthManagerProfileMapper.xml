@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="net.work100.training.stage2.iot.cloud.web.admin.dao.AuthManagerProfileDao">
+
+    <sql id="authManagerProfileColumns">
+          a.id,
+          a.user_key,
+          a.profile_key,
+          a.profile_value,
+          a.created,
+          a.updated
+    </sql>
+
+    <sql id="authManagerProfileSearch">
+        AND a.user_key = #{userKey}
+        <if test="!advanced">
+            <if test="keyword != null and keyword != ''">
+                AND a.profile_key LIKE CONCAT('%', #{profileKey}, '%')
+            </if>
+        </if>
+        <if test="advanced">
+            <if test="profileKey != null and profileKey != ''">
+                AND a.profile_key LIKE CONCAT('%', #{profileKey}, '%')
+            </if>
+            <if test="profileValue != null and profileValue != ''">
+                AND a.profile_value LIKE CONCAT('%', #{profileValue}, '%')
+            </if>
+        </if>
+    </sql>
+
+    <select id="selectAll" resultType="AuthManagerProfile">
+        SELECT
+          <include refid="authManagerProfileColumns" />
+        FROM
+          auth_manager_profile AS a
+        ORDER BY a.id DESC
+    </select>
+
+    <insert id="insert" >
+        INSERT INTO auth_manager_profile (
+            `user_key`,
+            `profile_key`,
+            `profile_value`,
+            `created`,
+            `updated`
+        )
+        VALUES (
+            #{userKey},
+            #{profileKey},
+            #{profileValue},
+            #{created},
+            #{updated}
+        )
+    </insert>
+
+    <update id="update">
+        UPDATE
+          auth_manager_profile
+        SET
+          profile_value = #{profileValue},
+          updated = #{updated}
+        WHERE
+          user_key = #{userKey} AND profile_key = #{profileKey}
+    </update>
+
+    <delete id="delete">
+        DELETE FROM auth_manager_profile AS a
+        WHERE
+        a.user_key IN
+        <foreach collection="entityKey.split(',')" open="(" close=")" item="item" index="index" separator=",">
+            <if test="index == 0">
+                #{item}
+            </if>
+        </foreach>
+        AND a.profile_key IN
+        <foreach collection="entityKey.split(',')" open="(" close=")" item="item" index="index" separator=",">
+            <if test="index == 1">
+                #{item}
+            </if>
+        </foreach>
+    </delete>
+
+    <delete id="multiDelete">
+        DELETE FROM auth_manager_profile
+        <if test="array != null and array.length > 0">
+            WHERE user_key IN
+            <foreach collection="array" open="(" close=")" item="userKey" separator=",">
+                #{userKey}
+            </foreach>
+        </if>
+        <if test="array == null or array.length == 0">
+            WHERE 1 = 2
+        </if>
+    </delete>
+
+    <select id="getById" resultType="AuthManagerProfile">
+        SELECT
+          <include refid="authManagerProfileColumns" />
+        FROM
+          auth_manager_profile AS a
+        WHERE
+          a.id = #{id}
+    </select>
+
+    <select id="getByKey" resultType="AuthManagerProfile">
+        SELECT
+          <include refid="authManagerProfileColumns" />
+        FROM
+          auth_manager_profile AS a
+        WHERE
+          a.user_key IN
+            <foreach collection="entityKey.split(',')" open="(" close=")" item="item" index="index" separator=",">
+                <if test="index == 0">
+                    #{item}
+                </if>
+            </foreach>
+          AND a.profile_key IN
+            <foreach collection="entityKey.split(',')" open="(" close=")" item="item" index="index" separator=",">
+                <if test="index == 1">
+                    #{item}
+                </if>
+            </foreach>
+    </select>
+
+    <select id="search" resultType="AuthManagerProfile">
+        SELECT
+          <include refid="authManagerProfileColumns" />
+        FROM
+          auth_manager_profile AS a
+        <where>
+            <include refid="authManagerProfileSearch" />
+        </where>
+        ORDER BY a.id DESC
+    </select>
+
+    <select id="pageSearch" resultType="AuthManagerProfile">
+        SELECT
+          <include refid="authManagerProfileColumns" />
+        FROM
+          auth_manager_profile AS a
+        <where>
+            <include refid="authManagerProfileSearch" />
+        </where>
+        ORDER BY a.id DESC
+        LIMIT #{start}, #{length}
+    </select>
+
+    <select id="count" resultType="int">
+        SELECT
+          COUNT(*)
+        FROM
+          auth_manager_profile AS a
+        <where>
+            <include refid="authManagerProfileSearch" />
+        </where>
+    </select>
+</mapper>

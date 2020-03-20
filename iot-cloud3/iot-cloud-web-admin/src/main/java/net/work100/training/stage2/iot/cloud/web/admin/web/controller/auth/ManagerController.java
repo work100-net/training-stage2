@@ -38,6 +38,9 @@ public class ManagerController {
     @Autowired
     private AuthManagerService authManagerService;
 
+    @Autowired
+    private BeanValidator beanValidator;
+
     @RequestMapping(value = "list", method = RequestMethod.GET)
     public String list(Model model) {
         ManagerSearcher managerSearcher = new ManagerSearcher();
@@ -59,7 +62,7 @@ public class ManagerController {
 
     @RequestMapping(value = "add", method = RequestMethod.POST)
     public String add(AuthManager authManager, Model model, RedirectAttributes redirectAttributes) {
-        String validator = BeanValidator.validator(authManager);
+        String validator = beanValidator.validator(authManager);
         if (validator != null) {
             model.addAttribute("baseResult", BaseResult.fail(validator));
             model.addAttribute("authManager", authManager);
@@ -103,7 +106,7 @@ public class ManagerController {
             redirectAttributes.addFlashAttribute("baseResult", BaseResult.fail("非法请求"));
             return "redirect:/auth/manager/list";
         }
-        String validator = BeanValidator.validator(authManager);
+        String validator = beanValidator.validator(authManager);
         if (validator != null) {
             model.addAttribute("baseResult", BaseResult.fail(validator));
             model.addAttribute("authManager", authManager);
