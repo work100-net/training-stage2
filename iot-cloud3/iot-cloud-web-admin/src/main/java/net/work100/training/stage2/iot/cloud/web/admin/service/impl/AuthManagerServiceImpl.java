@@ -10,6 +10,7 @@ import net.work100.training.stage2.iot.cloud.web.admin.service.AuthManagerServic
 import org.apache.commons.lang3.time.DateFormatUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.*;
 
@@ -26,12 +27,14 @@ import java.util.*;
  * -----------------------------------------------
  */
 @Service
+@Transactional(readOnly = true)
 public class AuthManagerServiceImpl extends AbstractBaseServiceImpl<AuthManager, ManagerSearcher, AuthManagerDao> implements AuthManagerService {
 
     @Autowired
     private AuthManagerDao authManagerDao;
 
     @Override
+    @Transactional(readOnly = false)
     public BaseResult insert(AuthManager authManager) {
         if (authManagerDao.getByUserName(authManager.getUserName()) != null) {
             return BaseResult.fail("用户名已经存在");
@@ -53,6 +56,7 @@ public class AuthManagerServiceImpl extends AbstractBaseServiceImpl<AuthManager,
     }
 
     @Override
+    @Transactional(readOnly = false)
     public BaseResult update(AuthManager authManager) {
         if (authManagerDao.getByKey(authManager.getUserKey()) == null) {
             return BaseResult.fail("用户不存在");

@@ -8,6 +8,7 @@ import net.work100.training.stage2.iot.cloud.web.admin.dto.auth.TenantSearcher;
 import net.work100.training.stage2.iot.cloud.web.admin.service.AuthTenantService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
 
@@ -24,12 +25,14 @@ import java.util.Date;
  * -----------------------------------------------
  */
 @Service
+@Transactional(readOnly = true)
 public class AuthTenantServiceImpl extends AbstractBaseServiceImpl<AuthTenant, TenantSearcher, AuthTenantDao> implements AuthTenantService {
 
     @Autowired
     private AuthTenantDao authTenantDao;
 
     @Override
+    @Transactional(readOnly = false)
     public BaseResult insert(AuthTenant authTenant) {
         if (authTenantDao.getByKey(authTenant.getTenantCode()) != null) {
             return BaseResult.fail("租户编码已经存在");
@@ -46,6 +49,7 @@ public class AuthTenantServiceImpl extends AbstractBaseServiceImpl<AuthTenant, T
     }
 
     @Override
+    @Transactional(readOnly = false)
     public BaseResult update(AuthTenant authTenant) {
         if (authTenantDao.getByKey(authTenant.getTenantCode()) == null) {
             return BaseResult.fail("租户不存在");

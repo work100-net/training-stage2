@@ -2,7 +2,9 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:context="http://www.springframework.org/schema/context"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd http://www.springframework.org/schema/aop https://www.springframework.org/schema/aop/spring-aop.xsd">
 
     <context:annotation-config/>
 
@@ -16,4 +18,27 @@
     <bean id="beanValidator" class="net.work100.training.stage2.iot.cloud.commons.validator.BeanValidator">
         <property name="validator" ref="validator"/>
     </bean>
+
+    <!-- 配置事务管理器 -->
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+
+    <!-- 开始事务注解驱动 -->
+    <tx:annotation-driven transaction-manager="transactionManager" />
+
+    <!-- 配置事务通知 -->
+    <!--<tx:advice id="myAdvice" transaction-manager="transactionManager">-->
+        <!--<tx:attributes>-->
+            <!--<tx:method name="save*" propagation="REQUIRED"/>-->
+            <!--<tx:method name="get*" propagation="NEVER"/>-->
+            <!--<tx:method name="select*" propagation="NEVER"/>-->
+        <!--</tx:attributes>-->
+    <!--</tx:advice>-->
+
+    <!-- 配置顾问和切入点 -->
+    <!--<aop:config>-->
+        <!--<aop:pointcut id="myPointcut" expression="execution(* net.work100.training.stage2.iot.cloud.web.admin.service.*.*(..))"/>-->
+        <!--<aop:advisor advice-ref="myAdvice" pointcut-ref="myPointcut"/>-->
+    <!--</aop:config>-->
 </beans>

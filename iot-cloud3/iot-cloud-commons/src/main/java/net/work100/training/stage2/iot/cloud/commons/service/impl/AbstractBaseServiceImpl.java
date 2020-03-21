@@ -6,6 +6,7 @@ import net.work100.training.stage2.iot.cloud.commons.dto.BaseSearcher;
 import net.work100.training.stage2.iot.cloud.commons.dto.PageInfo;
 import net.work100.training.stage2.iot.cloud.commons.service.BaseService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -43,11 +44,13 @@ public abstract class AbstractBaseServiceImpl<T extends AbstractBaseDomain, Sear
 
 
     @Override
+    @Transactional(readOnly = false)
     public void delete(String entityKey) {
         dao.delete(entityKey);
     }
 
     @Override
+    @Transactional(readOnly = false)
     public void multiDelete(String[] entityKeys) {
         dao.multiDelete(entityKeys);
     }

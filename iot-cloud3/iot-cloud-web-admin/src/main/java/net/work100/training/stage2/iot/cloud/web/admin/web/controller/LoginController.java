@@ -2,7 +2,11 @@ package net.work100.training.stage2.iot.cloud.web.admin.web.controller;
 
 import net.work100.training.stage2.iot.cloud.commons.constant.ConstantUtils;
 import net.work100.training.stage2.iot.cloud.commons.utils.CookieUtils;
+import net.work100.training.stage2.iot.cloud.commons.utils.DateTimeUtils;
+import net.work100.training.stage2.iot.cloud.commons.utils.IpUtils;
 import net.work100.training.stage2.iot.cloud.domain.AuthManager;
+import net.work100.training.stage2.iot.cloud.domain.AuthManagerProfile;
+import net.work100.training.stage2.iot.cloud.web.admin.service.AuthManagerProfileService;
 import net.work100.training.stage2.iot.cloud.web.admin.service.AuthManagerService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +18,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * <p>Title: LoginController</p>
@@ -32,6 +38,9 @@ public class LoginController {
 
     @Autowired
     private AuthManagerService authManagerService;
+
+    @Autowired
+    private AuthManagerProfileService authManagerProfileService;
 
     /**
      * 登录页面
@@ -83,6 +92,26 @@ public class LoginController {
             }
             // 将登录信息记入Session
             request.getSession().setAttribute(ConstantUtils.SESSION_MANAGER, authManager);
+
+            // ---------------- 记录登录信息(begin) ----------------
+            List<AuthManagerProfile> profiles = new ArrayList<>();
+            AuthManagerProfile profileLoginTime = new AuthManagerProfile();
+            profileLoginTime.setUserKey(authManager.getUserKey());
+            profileLoginTime.setProfileKey("last_login_time");
+            profileLoginTime.setProfileValue(DateTimeUtils.currentDate("yyyy-MM-dd HH:mm:ss"));
+            profiles.add(profileLoginTime);
+
+            AuthManagerProfile profileLoginIp = new AuthManagerProfile();
+            profileLoginIp.setUserKey(authManager.getUserKey());
+            profileLoginIp.setProfileKey("last_login_ip");
+            profileLoginIp.setProfileValue(IpUtils.getIpAddress(request));
+            profiles.add(profileLoginIp);
+            try {
+                authManagerProfileService.saveProfiles(profiles);
+            } catch (Exception ex) {
+            }
+            // ---------------- 记录登录信息(end) ----------------
+
             return "redirect:/main";
         }
         // 登录失败

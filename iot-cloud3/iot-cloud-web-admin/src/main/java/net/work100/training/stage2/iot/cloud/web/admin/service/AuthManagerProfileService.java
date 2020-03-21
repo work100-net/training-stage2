@@ -1,5 +1,6 @@
 package net.work100.training.stage2.iot.cloud.web.admin.service;
 
+import net.work100.training.stage2.iot.cloud.commons.dto.BaseResult;
 import net.work100.training.stage2.iot.cloud.commons.service.BaseService;
 import net.work100.training.stage2.iot.cloud.domain.AuthManagerProfile;
 import net.work100.training.stage2.iot.cloud.web.admin.dto.auth.ManagerProfileSearcher;
@@ -19,6 +20,21 @@ import java.util.List;
  * -----------------------------------------------
  */
 public interface AuthManagerProfileService extends BaseService<AuthManagerProfile, ManagerProfileSearcher> {
+
+    /**
+     * 保存单个属性
+     *
+     * @param profile 属性对象
+     * @return
+     */
+    BaseResult saveProfile(AuthManagerProfile profile);
+
+    /**
+     * 保存多个属性
+     *
+     * @param profiles 属性对象集合
+     */
+    void saveProfiles(List<AuthManagerProfile> profiles);
 
     /**
      * 删除属性

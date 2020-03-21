@@ -8,6 +8,7 @@ import net.work100.training.stage2.iot.cloud.web.admin.dto.auth.ManagerProfileSe
 import net.work100.training.stage2.iot.cloud.web.admin.service.AuthManagerProfileService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
 import java.util.List;
@@ -25,52 +26,59 @@ import java.util.List;
  * -----------------------------------------------
  */
 @Service
+@Transactional(readOnly = true)
 public class AuthManagerProfileServiceImpl extends AbstractBaseServiceImpl<AuthManagerProfile, ManagerProfileSearcher, AuthManagerProfileDao> implements AuthManagerProfileService {
 
     @Autowired
     private AuthManagerProfileDao authManagerProfileDao;
 
     @Override
+    @Transactional(readOnly = false)
+    public BaseResult saveProfile(AuthManagerProfile profile) {
+        if (this.getProfile(profile.getUserKey(), profile.getProfileKey()) == null) {
+            return this.insert(profile);
+        } else {
+            return this.update(profile);
+        }
+    }
+
+    @Override
+    @Transactional(readOnly = false)
+    public void saveProfiles(List<AuthManagerProfile> profiles) {
+        for (AuthManagerProfile profile : profiles) {
+            this.saveProfile(profile);
+        }
+    }
+
+    @Override
+    @Transactional(readOnly = false)
     public void deleteProfile(String userKey, String profileKey) {
         this.delete(generateEntityKey(userKey, profileKey));
     }
 
     @Override
+    @Transactional(readOnly = false)
     public void deleteProfiles(String userKey) {
         this.multiDelete(new String[]{userKey});
     }
 
     @Override
+    @Transactional(readOnly = false)
     public BaseResult insert(AuthManagerProfile authManagerProfile) {
-        String entityKey = String.format("%s,%s", authManagerProfile.getUserKey(), authManagerProfile.getProfileKey());
-        if (authManagerProfileDao.getByKey(entityKey) != null) {
-            return BaseResult.fail("属性已经存在");
-        }
-        try {
-            authManagerProfile.setCreated(new Date());
-            authManagerProfile.setUpdated(new Date());
+        authManagerProfile.setCreated(new Date());
+        authManagerProfile.setUpdated(new Date());
 
-            authManagerProfileDao.insert(authManagerProfile);
-            return BaseResult.success("新增属性成功");
-        } catch (Exception ex) {
-            return BaseResult.fail("未知错误");
-        }
+        authManagerProfileDao.insert(authManagerProfile);
+        return BaseResult.success("新增属性成功");
     }
 
     @Override
+    @Transactional(readOnly = false)
     public BaseResult update(AuthManagerProfile authManagerProfile) {
-        String entityKey = String.format("%s,%s", authManagerProfile.getUserKey(), authManagerProfile.getProfileKey());
-        if (authManagerProfileDao.getByKey(entityKey) == null) {
-            return insert(authManagerProfile);
-        }
-        try {
-            authManagerProfile.setUpdated(new Date());
+        authManagerProfile.setUpdated(new Date());
 
-            authManagerProfileDao.update(authManagerProfile);
-            return BaseResult.success("属性更新成功");
-        } catch (Exception ex) {
-            return BaseResult.fail("未知错误");
-        }
+        authManagerProfileDao.update(authManagerProfile);
+        return BaseResult.success("属性更新成功");
     }
 
     @Override

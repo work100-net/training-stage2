@@ -10,6 +10,7 @@ import net.work100.training.stage2.iot.cloud.web.admin.service.AuthTenantUserSer
 import org.apache.commons.lang3.time.DateFormatUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
 
@@ -26,12 +27,14 @@ import java.util.Date;
  * -----------------------------------------------
  */
 @Service
+@Transactional(readOnly = true)
 public class AuthTenantUserServiceImpl extends AbstractBaseServiceImpl<AuthTenantUser, TenantUserSearcher, AuthTenantUserDao> implements AuthTenantUserService {
 
     @Autowired
     private AuthTenantUserDao authTenantUserDao;
 
     @Override
+    @Transactional(readOnly = false)
     public BaseResult insert(AuthTenantUser authTenantUser) {
         if (authTenantUserDao.getByUserName(authTenantUser.getTenantCode(), authTenantUser.getUserName()) != null) {
             return BaseResult.fail("用户名已经存在");
@@ -53,6 +56,7 @@ public class AuthTenantUserServiceImpl extends AbstractBaseServiceImpl<AuthTenan
     }
 
     @Override
+    @Transactional(readOnly = false)
     public BaseResult update(AuthTenantUser authTenantUser) {
         if (authTenantUserDao.getByKey(authTenantUser.getUserKey()) == null) {
             return BaseResult.fail("用户不存在");
