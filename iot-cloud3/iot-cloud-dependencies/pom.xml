@@ -46,6 +46,9 @@
 
         <!-- Lombok -->
         <lombok.version>1.18.8</lombok.version>
+
+        <!-- httpcomponents -->
+        <httpcomponents.version>4.5.9</httpcomponents.version>
     </properties>
 
     <dependencyManagement>
@@ -186,6 +189,25 @@
                 <version>${lombok.version}</version>
             </dependency>
             <!-- Lombok End -->
+
+            <!-- httpcomponents Begin -->
+            <dependency>
+                <groupId>org.apache.httpcomponents</groupId>
+                <artifactId>httpclient</artifactId>
+                <version>${httpcomponents.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.httpcomponents</groupId>
+                <artifactId>fluent-hc</artifactId>
+                <version>${httpcomponents.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.httpcomponents</groupId>
+                <artifactId>httpmime</artifactId>
+                <version>${httpcomponents.version}</version>
+            </dependency>
+            <!-- httpcomponents End -->
+
         </dependencies>
     </dependencyManagement>
 
