@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="net.work100.training.stage2.iot.cloud.web.api.dao.AuthTenantDao">
+
+    <sql id="authTenantColumns">
+          a.id,
+          a.tenant_code,
+          a.tenant_name,
+          a.tenant_desc,
+          a.created,
+          a.updated
+    </sql>
+
+    <select id="getByKey" resultType="AuthTenant">
+        SELECT
+          <include refid="authTenantColumns" />
+        FROM
+          auth_tenant AS a
+        WHERE
+          a.tenant_code = #{tenantCode}
+    </select>
+</mapper>

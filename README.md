@@ -130,7 +130,11 @@
     - [02.Apache HttpClient](http://www.work100.net/training/monolithic-project-module-communication-apache-httpclient.html)
     - [03.Jackson](http://www.work100.net/training/monolithic-project-module-communication-jackson.html)
     - [04.增加API接口模块](http://www.work100.net/training/monolithic-project-module-communication-api-module.html)
-    - [05.RESTful](http://www.work100.net/training/monolithic-project-module-communication-restful.html)
+    - 05.RESTful
+        - [概述](http://www.work100.net/training/monolithic-project-module-communication-restful.html)
+        - [样例演示](http://www.work100.net/training/monolithic-project-module-communication-restful-example.html)
+        - [幂等性](http://www.work100.net/training/monolithic-project-module-communication-restful-idempotency.html)
+        - [完善API模块](http://www.work100.net/training/monolithic-project-module-communication-restful-api.html)
 
   - 项目实战(前台)
 
