@@ -125,11 +125,10 @@
     - [03.通过注解管理事务](http://www.work100.net/training/monolithic-project-spring-transaction-annotation.html)
     
   - 模块间通信
-
     - [01.概述](http://www.work100.net/training/monolithic-project-module-communication.html)
-    - [02.Apache HttpClient](http://www.work100.net/training/monolithic-project-module-communication-apache-httpclient.html)
-    - [03.Jackson](http://www.work100.net/training/monolithic-project-module-communication-jackson.html)
-    - [04.增加API接口模块](http://www.work100.net/training/monolithic-project-module-communication-api-module.html)
+    - [02.增加API接口模块](http://www.work100.net/training/monolithic-project-module-communication-api-module.html)
+    - [03.Apache HttpClient](http://www.work100.net/training/monolithic-project-module-communication-apache-httpclient.html)
+    - [04.Jackson](http://www.work100.net/training/monolithic-project-module-communication-jackson.html)
     - 05.RESTful
         - [概述](http://www.work100.net/training/monolithic-project-module-communication-restful.html)
         - [样例演示](http://www.work100.net/training/monolithic-project-module-communication-restful-example.html)

@@ -19,4 +19,15 @@
         WHERE
           a.tenant_code = #{tenantCode}
     </select>
+
+    <update id="update">
+        UPDATE
+          auth_tenant
+        SET
+          tenant_name = #{tenantName},
+          tenant_desc = #{tenantDesc},
+          updated = #{updated}
+        WHERE
+          tenant_code = #{tenantCode}
+    </update>
 </mapper>

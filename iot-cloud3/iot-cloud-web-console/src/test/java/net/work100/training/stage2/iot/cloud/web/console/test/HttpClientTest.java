@@ -38,7 +38,7 @@ public class HttpClientTest {
         CloseableHttpClient httpClient = HttpClients.createDefault();
 
         // 创建 HttpGet 请求
-        HttpGet httpGet = new HttpGet("http://localhost:8080/login");
+        HttpGet httpGet = new HttpGet("http://localhost:9090/auth/tenant/100001");
         // 设置长连接
         httpGet.setHeader("Connection", "keep-alive");
         // 设置代理（模拟浏览器版本）
@@ -82,7 +82,7 @@ public class HttpClientTest {
         CloseableHttpClient httpClient = HttpClients.createDefault();
 
         // 创建 HttpPost 请求
-        HttpPost httpPost = new HttpPost("http://localhost:8080/login");
+        HttpPost httpPost = new HttpPost("http://localhost:9090/auth/tenant/save");
         // 设置长连接
         httpPost.setHeader("Connection", "keep-alive");
         // 设置代理（模拟浏览器版本）
@@ -92,9 +92,9 @@ public class HttpClientTest {
 
         // 创建 HttpPost 参数
         List<BasicNameValuePair> params = new ArrayList<BasicNameValuePair>();
-        params.add(new BasicNameValuePair("userName", "xiaojun.liu"));
-        params.add(new BasicNameValuePair("password", "111111"));
-        params.add(new BasicNameValuePair("remember", "on"));
+        params.add(new BasicNameValuePair("tenantCode", "100001"));
+        params.add(new BasicNameValuePair("tenantName", "租户名称1-改"));
+        params.add(new BasicNameValuePair("tenantDesc", "test111"));
 
         CloseableHttpResponse httpResponse = null;
         try {

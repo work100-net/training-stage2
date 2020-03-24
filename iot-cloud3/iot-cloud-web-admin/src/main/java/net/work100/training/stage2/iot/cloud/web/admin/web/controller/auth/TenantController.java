@@ -113,7 +113,7 @@ public class TenantController {
             return "auth/tenant_edit";
         }
 
-        // 新增处理
+        // 编辑处理
         BaseResult baseResult = authTenantService.update(authTenant);
         if (baseResult.getStatus() == HttpUtils.HTTP_STATUS_CODE_OK) {
             redirectAttributes.addFlashAttribute("baseResult", baseResult);

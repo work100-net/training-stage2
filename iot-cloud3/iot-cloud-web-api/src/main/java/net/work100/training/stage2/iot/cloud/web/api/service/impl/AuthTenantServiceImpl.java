@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Date;
+
 /**
  * <p>Title: AuthTenantServiceImpl</p>
  * <p>Description: </p>
@@ -38,7 +40,16 @@ public class AuthTenantServiceImpl extends AbstractBaseServiceImpl<AuthTenant, T
     @Override
     @Transactional(readOnly = false)
     public BaseResult update(AuthTenant authTenant) {
-        return null;
-    }
+        if (authTenantDao.getByKey(authTenant.getTenantCode()) == null) {
+            return BaseResult.fail("租户不存在");
+        }
+        try {
+            authTenant.setUpdated(new Date());
 
+            authTenantDao.update(authTenant);
+            return BaseResult.success("租户更新成功");
+        } catch (Exception ex) {
+            return BaseResult.fail("未知错误");
+        }
+    }
 }
