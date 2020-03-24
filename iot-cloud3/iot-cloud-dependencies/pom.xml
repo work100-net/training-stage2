@@ -190,7 +190,7 @@
             </dependency>
             <!-- Lombok End -->
 
-            <!-- httpcomponents Begin -->
+            <!-- Apache HttpClient Begin -->
             <dependency>
                 <groupId>org.apache.httpcomponents</groupId>
                 <artifactId>httpclient</artifactId>
@@ -206,7 +206,7 @@
                 <artifactId>httpmime</artifactId>
                 <version>${httpcomponents.version}</version>
             </dependency>
-            <!-- httpcomponents End -->
+            <!-- Apache HttpClient End -->
 
         </dependencies>
     </dependencyManagement>

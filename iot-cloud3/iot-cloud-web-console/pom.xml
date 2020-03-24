@@ -19,23 +19,32 @@
     <dependencies>
         <dependency>
             <groupId>net.work100.training.stage2</groupId>
+            <artifactId>iot-cloud-domain</artifactId>
+            <version>${project.parent.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>net.work100.training.stage2</groupId>
             <artifactId>iot-cloud-commons</artifactId>
             <version>${project.parent.version}</version>
         </dependency>
 
-        <!-- httpcomponents Begin -->
+        <!-- Servlet Begin -->
         <dependency>
-            <groupId>org.apache.httpcomponents</groupId>
-            <artifactId>httpclient</artifactId>
+            <groupId>javax.servlet</groupId>
+            <artifactId>jstl</artifactId>
+        </dependency>
+        <!-- Servlet End -->
+
+        <!-- Test Begin -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-test</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.apache.httpcomponents</groupId>
-            <artifactId>fluent-hc</artifactId>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
         </dependency>
-        <dependency>
-            <groupId>org.apache.httpcomponents</groupId>
-            <artifactId>httpmime</artifactId>
-        </dependency>
-        <!-- httpcomponents End -->
+        <!-- Test End -->
+
     </dependencies>
 </project>

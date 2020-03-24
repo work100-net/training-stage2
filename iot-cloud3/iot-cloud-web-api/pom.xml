@@ -28,13 +28,6 @@
             <version>${project.parent.version}</version>
         </dependency>
 
-        <!-- Servlet Begin -->
-        <dependency>
-            <groupId>javax.servlet</groupId>
-            <artifactId>jstl</artifactId>
-        </dependency>
-        <!-- Servlet End -->
-
         <!-- Test Begin -->
         <dependency>
             <groupId>org.springframework</groupId>
