@@ -1,8 +1,10 @@
 package net.work100.training.stage2.iot.cloud.web.console.controller;
 
 import net.work100.training.stage2.iot.cloud.commons.constant.ConstantUtils;
+import net.work100.training.stage2.iot.cloud.commons.dto.api.auth.TenantDTO;
+import net.work100.training.stage2.iot.cloud.commons.dto.api.auth.TenantUserDTO;
 import net.work100.training.stage2.iot.cloud.commons.utils.CookieUtils;
-import net.work100.training.stage2.iot.cloud.domain.AuthTenantUser;
+import net.work100.training.stage2.iot.cloud.web.console.api.TenantApi;
 import net.work100.training.stage2.iot.cloud.web.console.dto.LoginDTO;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -49,6 +51,8 @@ public class LoginController {
      */
     @RequestMapping(value = {"", "login"}, method = RequestMethod.GET)
     public String login() {
+        TenantDTO tenantDTO = TenantApi.get("100001");
+        System.out.println(tenantDTO);
         return "login";
     }
 
@@ -66,10 +70,10 @@ public class LoginController {
                         Model model,
                         HttpServletRequest request,
                         HttpServletResponse response) {
-        AuthTenantUser authTenantUser = null;
+        TenantUserDTO tenantUserDTO = null;
 
         // 登录成功
-        if (authTenantUser != null) {
+        if (tenantUserDTO != null) {
             // 处理记住我功能(记住用户名)
             if (loginDTO.isRemember()) {
                 // Cookie 存储一周
@@ -83,7 +87,7 @@ public class LoginController {
                 CookieUtils.deleteCookie(request, response, ConstantUtils.COOKIE_TENANT_USER_USERNAME);
             }
             // 将登录信息记入Session
-            request.getSession().setAttribute(ConstantUtils.SESSION_TENANT_USER, authTenantUser);
+            request.getSession().setAttribute(ConstantUtils.SESSION_TENANT_USER, tenantUserDTO);
 
             return "redirect:/main";
         }

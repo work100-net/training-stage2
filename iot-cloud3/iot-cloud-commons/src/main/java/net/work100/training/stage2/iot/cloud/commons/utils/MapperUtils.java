@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.JavaType;
+import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.util.ArrayList;
@@ -65,6 +66,23 @@ public class MapperUtils {
     public static <T> T json2pojo(String jsonString, Class<T> clazz) throws Exception {
         objectMapper.configure(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY, true);
         return objectMapper.readValue(jsonString, clazz);
+    }
+
+
+    /**
+     * 转换为 JavaBean
+     *
+     * @param jsonString
+     * @param clazz
+     * @return
+     * @throws Exception
+     */
+    public static <T> T json2pojo(String jsonString, String treeNode, Class<T> clazz) throws Exception {
+        objectMapper.configure(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY, true);
+
+        JsonNode jsonNode = objectMapper.readTree(jsonString);
+        String treeNodeJsonString = jsonNode.findPath(treeNode).toString();
+        return objectMapper.readValue(treeNodeJsonString, clazz);
     }
 
     /**
@@ -174,6 +192,24 @@ public class MapperUtils {
      * @throws Exception
      */
     public static <T> List<T> json2list(String jsonArrayStr, Class<T> clazz) throws Exception {
+        JavaType javaType = getCollectionType(ArrayList.class, clazz);
+        List<T> list = (List<T>) objectMapper.readValue(jsonArrayStr, javaType);
+        return list;
+    }
+
+    /**
+     * 将 JSON 数组转换为集合
+     *
+     * @param json     Json字符串
+     * @param treeNode 节点
+     * @param clazz
+     * @param <T>
+     * @return
+     * @throws Exception
+     */
+    public static <T> List<T> json2list(String json, String treeNode, Class<T> clazz) throws Exception {
+        JsonNode jsonNode = objectMapper.readTree(json);
+        String jsonArrayStr = jsonNode.findPath(treeNode).toString();
         JavaType javaType = getCollectionType(ArrayList.class, clazz);
         List<T> list = (List<T>) objectMapper.readValue(jsonArrayStr, javaType);
         return list;

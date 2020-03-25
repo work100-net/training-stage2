@@ -2,7 +2,7 @@ package net.work100.training.stage2.iot.cloud.web.api.web.controller.v1.auth;
 
 import net.work100.training.stage2.iot.cloud.commons.dto.BaseResult;
 import net.work100.training.stage2.iot.cloud.domain.AuthTenant;
-import net.work100.training.stage2.iot.cloud.web.api.dto.auth.TenantDTO;
+import net.work100.training.stage2.iot.cloud.commons.dto.api.auth.TenantDTO;
 import net.work100.training.stage2.iot.cloud.web.api.service.AuthTenantService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;

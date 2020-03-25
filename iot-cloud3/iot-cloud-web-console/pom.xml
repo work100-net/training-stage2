@@ -19,11 +19,6 @@
     <dependencies>
         <dependency>
             <groupId>net.work100.training.stage2</groupId>
-            <artifactId>iot-cloud-domain</artifactId>
-            <version>${project.parent.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>net.work100.training.stage2</groupId>
             <artifactId>iot-cloud-commons</artifactId>
             <version>${project.parent.version}</version>
         </dependency>

@@ -1,7 +1,7 @@
 package net.work100.training.stage2.iot.cloud.web.console.interceptor;
 
 import net.work100.training.stage2.iot.cloud.commons.constant.ConstantUtils;
-import net.work100.training.stage2.iot.cloud.domain.AuthTenantUser;
+import net.work100.training.stage2.iot.cloud.commons.dto.api.auth.TenantDTO;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -23,7 +23,7 @@ import javax.servlet.http.HttpServletResponse;
 public class LoginInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        AuthTenantUser authTenantUser = (AuthTenantUser) request.getSession().getAttribute(ConstantUtils.SESSION_TENANT_USER);
+        TenantDTO authTenantUser = (TenantDTO) request.getSession().getAttribute(ConstantUtils.SESSION_TENANT_USER);
 
         // 未登录
         if (authTenantUser == null) {

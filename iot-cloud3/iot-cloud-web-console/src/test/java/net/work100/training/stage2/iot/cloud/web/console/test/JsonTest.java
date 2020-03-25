@@ -5,10 +5,13 @@ import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import net.work100.training.stage2.iot.cloud.commons.utils.MapperUtils;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
 /**
  * <p>Title: JsonTest</p>
@@ -23,59 +26,41 @@ import java.util.List;
  */
 public class JsonTest {
     public static void main(String[] args) {
-//        serializationAndDeserialization();
+        serializationAndDeserialization();
         serializationAndDeserializationForList();
     }
 
     private static void serializationAndDeserialization() {
-        // 创建 ObjectMapper 对象
-        ObjectMapper mapper = new ObjectMapper();
-        String jsonString = "{\"name\":\"张三\", \"age\":21}";
-
         try {
+            String jsonString = "{\"name\":\"张三\", \"age\":21}";
             // 反序列化 JSON 到对象
-            Student student = mapper.readValue(jsonString, Student.class);
+            Student student = MapperUtils.json2pojo(jsonString, Student.class);
             System.out.println(student);
             System.out.println("------------------------------");
 
             // 序列化对象到 JSON
-            String json = mapper.writeValueAsString(student);
+            String json = MapperUtils.obj2json(student);
             System.out.println(json);
-        } catch (JsonParseException e) {
-            e.printStackTrace();
-        } catch (JsonMappingException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
     private static void serializationAndDeserializationForList() {
-        // 创建 ObjectMapper 对象
-        ObjectMapper mapper = new ObjectMapper();
-        String jsonString = "{\"draw\":1,\"recordsTotal\":1,\"recordsFiltered\":1,\"data\":[{\"name\":\"张三\", \"age\":21},{\"name\":\"李四\", \"age\":25}],\"error\":null}";
-
         try {
-            // 反序列化 JSON 到树
-            JsonNode jsonNode = mapper.readTree(jsonString);
-
-            // 从树中读取 data 节点
-            JsonNode jsonData = jsonNode.findPath("data");
-            System.out.println(jsonData);
-            System.out.println("------------------------------");
+            String jsonString = "{\"draw\":1,\"recordsTotal\":1,\"recordsFiltered\":1,\"data\":[{\"name\":\"张三\", \"age\":21},{\"name\":\"李四\", \"age\":25}],\"error\":null}";
 
             // 反序列化 JSON 到集合
-            JavaType javaType = mapper.getTypeFactory().constructParametricType(ArrayList.class, Student.class);
-            List<Student> students = mapper.readValue(jsonData.toString(), javaType);
+            List<Student> students = MapperUtils.json2list(jsonString, "data", Student.class);
             for (Student student : students) {
                 System.out.println(student);
             }
             System.out.println("------------------------------");
 
             // 序列化集合到 JSON
-            String json = mapper.writeValueAsString(students);
+            String json = MapperUtils.obj2json(students);
             System.out.println(json);
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }

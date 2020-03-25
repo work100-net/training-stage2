@@ -1,8 +1,7 @@
-package net.work100.training.stage2.iot.cloud.web.api.dto.auth;
+package net.work100.training.stage2.iot.cloud.commons.dto.api.auth;
 
 import lombok.Data;
-
-import java.io.Serializable;
+import net.work100.training.stage2.iot.cloud.commons.dto.AbstractBaseDomain;
 
 /**
  * <p>Title: TenantDTO</p>
@@ -16,7 +15,7 @@ import java.io.Serializable;
  * -----------------------------------------------
  */
 @Data
-public class TenantDTO implements Serializable {
+public class TenantDTO extends AbstractBaseDomain {
     private Long id;
     private String tenantCode;
     private String tenantName;
