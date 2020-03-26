@@ -1,14 +1,14 @@
 package net.work100.training.stage2.iot.cloud.web.console.test;
 
-        import net.work100.training.stage2.iot.cloud.commons.dto.api.auth.TenantDTO;
-        import net.work100.training.stage2.iot.cloud.commons.dto.api.auth.TenantUserDTO;
-        import net.work100.training.stage2.iot.cloud.web.console.api.TenantApi;
-        import net.work100.training.stage2.iot.cloud.web.console.api.TenantUserApi;
-        import org.junit.Assert;
-        import org.junit.Test;
-        import org.junit.runner.RunWith;
-        import org.springframework.test.context.ContextConfiguration;
-        import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import net.work100.training.stage2.iot.cloud.commons.dto.api.auth.TenantDTO;
+import net.work100.training.stage2.iot.cloud.commons.dto.api.auth.TenantUserDTO;
+import net.work100.training.stage2.iot.cloud.web.console.api.LoginApi;
+import net.work100.training.stage2.iot.cloud.web.console.api.TenantApi;
+import org.junit.Assert;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 /**
  * <p>Title: ApiTest</p>
@@ -41,9 +41,9 @@ public class ApiTest {
     }
 
     @Test
-    public void testAuthTenantUser() {
+    public void testLogin() {
         // 租户账户登录
-        TenantUserDTO tenantUserDTO = TenantUserApi.login(apiTenantCode, "xiaojun.liu", "123456");
+        TenantUserDTO tenantUserDTO = LoginApi.login(apiTenantCode, "xiaojun.liu", "123456");
         Assert.assertNotNull(tenantUserDTO);
     }
 }

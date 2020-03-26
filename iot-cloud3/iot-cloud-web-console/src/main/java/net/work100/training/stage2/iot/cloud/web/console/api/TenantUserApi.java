@@ -24,21 +24,4 @@ import java.util.List;
  */
 public class TenantUserApi {
 
-    public static TenantUserDTO login(String apiTenantCode, String userName, String password){
-        String url = String.format(API.API_AUTH_TENANT_USER_LOGIN, apiTenantCode);
-        TenantUserDTO tenantUserDTO = null;
-        try {
-            List<BasicNameValuePair> params = new ArrayList<>();
-            params.add(new BasicNameValuePair("userName", userName));
-            params.add(new BasicNameValuePair("password", password));
-            String result = HttpClientUtils.doPost(url, params);
-            BaseResult baseResult = MapperUtils.json2pojo(result, BaseResult.class);
-            if (baseResult.getStatus() == HttpUtils.HTTP_STATUS_CODE_OK) {
-                tenantUserDTO = MapperUtils.json2pojo(result, "data", TenantUserDTO.class);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return tenantUserDTO;
-    }
 }

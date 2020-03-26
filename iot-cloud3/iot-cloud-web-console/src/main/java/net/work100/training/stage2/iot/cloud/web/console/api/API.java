@@ -21,6 +21,8 @@ public class API {
     public static final String API_AUTH_TENANT_GET = API_AUTH_TENANT + "/%s";
     public static final String API_AUTH_TENANT_SAVE = API_AUTH_TENANT + "/%s/save";
 
+    public static final String API_AUTH_TENANT_LOGIN = API_PATH + "/auth/tenant/%s/login";
+
     public static final String API_AUTH_TENANT_USER = API_PATH + "/auth/tenant/%s/user";
-    public static final String API_AUTH_TENANT_USER_LOGIN = API_AUTH_TENANT_USER + "/login";
+    public static final String API_AUTH_TENANT_USER_PAGE_SEARCH = API_AUTH_TENANT_USER + "/page-search";
 }

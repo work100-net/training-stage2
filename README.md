@@ -136,12 +136,13 @@
         - [完善API模块](http://www.work100.net/training/monolithic-project-module-communication-restful-api.html)
 
   - 项目实战(前台)
-
     - [01.概览](http://www.work100.net/training/monolithic-project-iot-cloud-console.html)
-    - [02.前台登录](http://www.work100.net/training/monolithic-project-iot-cloud-console-login.html)
-    - [03.首页布局](http://www.work100.net/training/monolithic-project-iot-cloud-console-index.html)
-    - [04.账户管理](http://www.work100.net/training/monolithic-project-iot-cloud-console-user.html)
-    - [05.设备管理](http://www.work100.net/training/monolithic-project-iot-cloud-console-device.html)
+    - [02.与API模块通信](http://www.work100.net/training/monolithic-project-iot-cloud-console-api-communication.html)
+    - [03.完善API模块](http://www.work100.net/training/monolithic-project-iot-cloud-console-api-upgrade.html)
+    - [04.前台登录](http://www.work100.net/training/monolithic-project-iot-cloud-console-login.html)
+    - [05.首页布局](http://www.work100.net/training/monolithic-project-iot-cloud-console-index.html)
+    - [06.账户管理](http://www.work100.net/training/monolithic-project-iot-cloud-console-user.html)
+    - [07.设备管理](http://www.work100.net/training/monolithic-project-iot-cloud-console-device.html)
 
 
 -------------------

@@ -24,22 +24,4 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping(value = "${api.path.v1}/auth/tenant/{apiTenantCode}/user")
 public class TenantUserController {
 
-    @Autowired
-    private AuthTenantUserService authTenantUserService;
-
-    @RequestMapping(value = "login", method = RequestMethod.POST)
-    public BaseResult login(@PathVariable(required = true) String apiTenantCode,
-                            @RequestParam(required = true) String userName,
-                            @RequestParam(required = true) String password) {
-        try {
-            TenantUserDTO tenantUserDTO = new TenantUserDTO();
-            AuthTenantUser authTenantUser = authTenantUserService.login(apiTenantCode, userName, password);
-            if (authTenantUser != null) {
-                BeanUtils.copyProperties(authTenantUser, tenantUserDTO);
-            }
-            return BaseResult.success("操作成功", tenantUserDTO);
-        } catch (Exception ex) {
-            return BaseResult.fail("未知错误");
-        }
-    }
 }
