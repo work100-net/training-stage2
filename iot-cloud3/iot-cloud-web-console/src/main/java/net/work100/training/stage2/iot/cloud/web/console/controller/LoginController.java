@@ -4,6 +4,7 @@ import net.work100.training.stage2.iot.cloud.commons.constant.ConstantUtils;
 import net.work100.training.stage2.iot.cloud.commons.dto.api.auth.TenantDTO;
 import net.work100.training.stage2.iot.cloud.commons.dto.api.auth.TenantUserDTO;
 import net.work100.training.stage2.iot.cloud.commons.utils.CookieUtils;
+import net.work100.training.stage2.iot.cloud.web.console.api.LoginApi;
 import net.work100.training.stage2.iot.cloud.web.console.api.TenantApi;
 import net.work100.training.stage2.iot.cloud.web.console.dto.LoginDTO;
 import org.springframework.stereotype.Controller;
@@ -70,7 +71,7 @@ public class LoginController {
                         Model model,
                         HttpServletRequest request,
                         HttpServletResponse response) {
-        TenantUserDTO tenantUserDTO = null;
+        TenantUserDTO tenantUserDTO = LoginApi.login(loginDTO.getTenantCode(), loginDTO.getUserName(), loginDTO.getPassword());
 
         // 登录成功
         if (tenantUserDTO != null) {

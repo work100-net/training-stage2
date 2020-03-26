@@ -24,69 +24,46 @@
                         </p>
                     </a>
                 </li>
-                <li class="nav-item has-treeview ${fn:startsWith(requestScope['javax.servlet.forward.servlet_path'],'/auth/manager/')?'menu-open':''}">
+                <li class="nav-item has-treeview ${fn:startsWith(requestScope['javax.servlet.forward.servlet_path'],'/auth/user/')?'menu-open':''}">
                     <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-user"></i>
                         <p>
-                            后台账户
+                            账户
                             <i class="fas fa-angle-left right"></i>
                         </p>
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="/auth/manager/add" class="nav-link ${fn:startsWith(requestScope['javax.servlet.forward.servlet_path'],'/auth/manager/add')?'active':''}">
+                            <a href="/auth/user/add" class="nav-link ${fn:startsWith(requestScope['javax.servlet.forward.servlet_path'],'/auth/user/add')?'active':''}">
                                 <i class="far fa-edit nav-icon"></i>
                                 <p>新增</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="/auth/manager/list" class="nav-link ${fn:startsWith(requestScope['javax.servlet.forward.servlet_path'],'/auth/manager/list') || fn:startsWith(requestScope['javax.servlet.forward.servlet_path'],'/auth/manager/edit')?'active':''}">
+                            <a href="/auth/user/list" class="nav-link ${fn:startsWith(requestScope['javax.servlet.forward.servlet_path'],'/auth/user/list') || fn:startsWith(requestScope['javax.servlet.forward.servlet_path'],'/auth/user/edit')?'active':''}">
                                 <i class="far fa-list-alt nav-icon"></i>
                                 <p>查询列表</p>
                             </a>
                         </li>
                     </ul>
                 </li>
-                <li class="nav-item has-treeview ${fn:startsWith(requestScope['javax.servlet.forward.servlet_path'],'/auth/tenant/')?'menu-open':''}">
+                <li class="nav-item has-treeview ${fn:startsWith(requestScope['javax.servlet.forward.servlet_path'],'/iot/device/')?'menu-open':''}">
                     <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-store-alt"></i>
                         <p>
-                            租户
+                            设备
                             <i class="fas fa-angle-left right"></i>
                         </p>
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="/auth/tenant/add" class="nav-link ${fn:startsWith(requestScope['javax.servlet.forward.servlet_path'],'/auth/tenant/add')?'active':''}">
+                            <a href="/iot/device/add" class="nav-link ${fn:startsWith(requestScope['javax.servlet.forward.servlet_path'],'/iot/device/add')?'active':''}">
                                 <i class="far fa-edit nav-icon"></i>
                                 <p>新增</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="/auth/tenant/list" class="nav-link ${fn:startsWith(requestScope['javax.servlet.forward.servlet_path'],'/auth/tenant/list') || fn:startsWith(requestScope['javax.servlet.forward.servlet_path'],'/auth/tenant/edit')?'active':''}">
-                                <i class="far fa-list-alt nav-icon"></i>
-                                <p>查询列表</p>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
-                <li class="nav-item has-treeview ${fn:startsWith(requestScope['javax.servlet.forward.servlet_path'],'/auth/tenant-user/')?'menu-open':''}">
-                    <a href="#" class="nav-link">
-                        <i class="nav-icon fas fa-user-friends"></i>
-                        <p>
-                            租户账户
-                            <i class="fas fa-angle-left right"></i>
-                        </p>
-                    </a>
-                    <ul class="nav nav-treeview">
-                        <li class="nav-item">
-                            <a href="/auth/tenant-user/add" class="nav-link ${fn:startsWith(requestScope['javax.servlet.forward.servlet_path'],'/auth/tenant-user/add')?'active':''}">
-                                <i class="far fa-edit nav-icon"></i>
-                                <p>新增</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="/auth/tenant-user/list" class="nav-link ${fn:startsWith(requestScope['javax.servlet.forward.servlet_path'],'/auth/tenant-user/list') || fn:startsWith(requestScope['javax.servlet.forward.servlet_path'],'/auth/tenant-user/edit')?'active':''}">
+                            <a href="/iot/device/list" class="nav-link ${fn:startsWith(requestScope['javax.servlet.forward.servlet_path'],'/iot/device/list') || fn:startsWith(requestScope['javax.servlet.forward.servlet_path'],'/iot/device/edit')?'active':''}">
                                 <i class="far fa-list-alt nav-icon"></i>
                                 <p>查询列表</p>
                             </a>

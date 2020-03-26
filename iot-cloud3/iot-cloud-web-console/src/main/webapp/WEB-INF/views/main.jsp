@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>控制台 | IoT-Admin</title>
+    <title>控制台 | IoT-Console</title>
     <jsp:include page="includes/resources_head.jsp" />
 </head>
 <body class="hold-transition sidebar-mini ${cookie.sidebar_collapse.value=='true'?'sidebar-collapse':''}">

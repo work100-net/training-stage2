@@ -11,10 +11,10 @@
             <a href="/" class="nav-link">首页</a>
         </li>
         <li class="nav-item d-none d-sm-inline-block">
-            <a href="/auth/manager/list" class="nav-link">后台账户</a>
+            <a href="/auth/user/list" class="nav-link">账户</a>
         </li>
         <li class="nav-item d-none d-sm-inline-block">
-            <a href="/auth/tenant/list" class="nav-link">租户</a>
+            <a href="/iot/device/list" class="nav-link">设备</a>
         </li>
     </ul>
 
@@ -23,7 +23,7 @@
         <li class="nav-item dropdown">
             <a class="nav-link" data-toggle="dropdown" href="#">
                 <i class="nav-icon fas fa-user-circle"></i>
-                ${manager.userName}
+                ${tenant_user.userName}
                 <i class="fas fa-angle-down right"></i>
             </a>
             <div class="dropdown-menu dropdown-menu-md dropdown-menu-right">
