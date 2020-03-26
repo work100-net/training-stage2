@@ -25,4 +25,9 @@ public class API {
 
     public static final String API_AUTH_TENANT_USER = API_PATH + "/auth/tenant/%s/user";
     public static final String API_AUTH_TENANT_USER_PAGE_SEARCH = API_AUTH_TENANT_USER + "/page-search";
+    public static final String API_AUTH_TENANT_USER_GET = API_AUTH_TENANT_USER + "/%s";
+    public static final String API_AUTH_TENANT_USER_ADD = API_AUTH_TENANT_USER + "/add";
+    public static final String API_AUTH_TENANT_USER_EDIT = API_AUTH_TENANT_USER + "/edit/%s";
+    public static final String API_AUTH_TENANT_USER_DELETE = API_AUTH_TENANT_USER + "/delete/%s";
+    public static final String API_AUTH_TENANT_USER_MULTI_DELETE = API_AUTH_TENANT_USER + "/multi-delete";
 }

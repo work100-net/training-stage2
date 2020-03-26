@@ -59,15 +59,15 @@
             `updated`
         )
         VALUES (
-            #{userKey},
-            #{apiTenantCode},
-            #{userName},
-            #{password},
-            #{status},
-            #{superuser},
-            #{roles},
-            #{created},
-            #{updated}
+            #{entity.userKey},
+            #{entity.tenantCode},
+            #{entity.userName},
+            #{entity.password},
+            #{entity.status},
+            #{entity.superuser},
+            #{entity.roles},
+            #{entity.created},
+            #{entity.updated}
         )
     </insert>
 
@@ -88,14 +88,14 @@
 
     <delete id="multiDelete">
         DELETE FROM auth_tenant_user
-        <if test="array != null and array.length > 0">
+        <if test="entityKeys != null and entityKeys.length > 0">
             WHERE tenant_code = #{apiTenantCode}
               AND user_key IN
-            <foreach collection="array" open="(" close=")" item="userKey" separator=",">
+            <foreach collection="entityKeys" open="(" close=")" item="userKey" separator=",">
                 #{userKey}
             </foreach>
         </if>
-        <if test="array == null or array.length == 0">
+        <if test="entityKeys == null or entityKeys.length == 0">
             WHERE 1 = 2
         </if>
     </delete>

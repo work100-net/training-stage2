@@ -81,7 +81,11 @@ public class MapperUtils {
         objectMapper.configure(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY, true);
 
         JsonNode jsonNode = objectMapper.readTree(jsonString);
-        String treeNodeJsonString = jsonNode.findPath(treeNode).toString();
+        String[] treeNodes = treeNode.split("/");
+        for (String node : treeNodes) {
+            jsonNode = jsonNode.findPath(node);
+        }
+        String treeNodeJsonString = jsonNode.toString();
         return objectMapper.readValue(treeNodeJsonString, clazz);
     }
 
@@ -98,18 +102,18 @@ public class MapperUtils {
         return mapper.readValue(jsonString, Map.class);
     }
 
-//    /**
-//     * 字符串转换为 Map<String, T>
-//     */
-//    public static <T> Map<String, T> json2map(String jsonString, Class<T> clazz) throws Exception {
-//        Map<String, Map<String, T>> map = objectMapper.readValue(jsonString, new TypeReference<Map<String, T>>() {
-//        });
-//        Map<String, T> result = new HashMap<String, T>();
-//        for (Map.Entry<String, Map<String, T>> entry : map.entrySet()) {
-//            result.put(entry.getKey(), map2pojo(entry.getValue(), clazz));
-//        }
-//        return result;
-//    }
+    /**
+     * 字符串转换为 Map<String, T>
+     */
+    public static <T> Map<String, T> json2map(String jsonString, Class<T> clazz) throws Exception {
+        Map<String, Map<String, T>> map = (Map<String, Map<String, T>>) objectMapper.readValue(jsonString, new TypeReference<Map<String, T>>() {
+        });
+        Map<String, T> result = new HashMap<String, T>();
+        for (Map.Entry<String, Map<String, T>> entry : map.entrySet()) {
+            result.put(entry.getKey(), map2pojo(entry.getValue(), clazz));
+        }
+        return result;
+    }
 
     /**
      * 深度转换 JSON 成 Map
@@ -209,7 +213,12 @@ public class MapperUtils {
      */
     public static <T> List<T> json2list(String json, String treeNode, Class<T> clazz) throws Exception {
         JsonNode jsonNode = objectMapper.readTree(json);
-        String jsonArrayStr = jsonNode.findPath(treeNode).toString();
+
+        String[] treeNodes = treeNode.split("/");
+        for (String node : treeNodes) {
+            jsonNode = jsonNode.findPath(node);
+        }
+        String jsonArrayStr = jsonNode.toString();
         JavaType javaType = getCollectionType(ArrayList.class, clazz);
         List<T> list = (List<T>) objectMapper.readValue(jsonArrayStr, javaType);
         return list;
