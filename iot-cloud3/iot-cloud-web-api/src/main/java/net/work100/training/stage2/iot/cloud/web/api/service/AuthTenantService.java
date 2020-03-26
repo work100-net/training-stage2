@@ -1,6 +1,6 @@
 package net.work100.training.stage2.iot.cloud.web.api.service;
 
-import net.work100.training.stage2.iot.cloud.commons.service.BaseService;
+import net.work100.training.stage2.iot.cloud.commons.service.ApiBaseService;
 import net.work100.training.stage2.iot.cloud.domain.AuthTenant;
 import net.work100.training.stage2.iot.cloud.web.api.dto.auth.TenantSearcher;
 
@@ -16,6 +16,6 @@ import net.work100.training.stage2.iot.cloud.web.api.dto.auth.TenantSearcher;
  * 2020-02-23   liuxiaojun     初始创建
  * -----------------------------------------------
  */
-public interface AuthTenantService extends BaseService<AuthTenant, TenantSearcher> {
+public interface AuthTenantService extends ApiBaseService<AuthTenant, TenantSearcher> {
 
 }

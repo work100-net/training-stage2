@@ -17,17 +17,17 @@
         FROM
           auth_tenant AS a
         WHERE
-          a.tenant_code = #{tenantCode}
+          a.tenant_code = #{apiTenantCode}
     </select>
 
     <update id="update">
         UPDATE
           auth_tenant
         SET
-          tenant_name = #{tenantName},
-          tenant_desc = #{tenantDesc},
-          updated = #{updated}
+          tenant_name = #{entity.tenantName},
+          tenant_desc = #{entity.tenantDesc},
+          updated = #{entity.updated}
         WHERE
-          tenant_code = #{tenantCode}
+          tenant_code = #{apiTenantCode}
     </update>
 </mapper>

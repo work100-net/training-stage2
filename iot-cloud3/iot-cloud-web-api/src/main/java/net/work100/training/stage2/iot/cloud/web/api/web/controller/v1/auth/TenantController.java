@@ -27,18 +27,30 @@ public class TenantController {
     @Autowired
     private AuthTenantService authTenantService;
 
-    @RequestMapping(value = "{tenantCode}", method = RequestMethod.GET)
-    public BaseResult get(@PathVariable(required = true) String tenantCode) {
-        TenantDTO tenantDTO = new TenantDTO();
-        AuthTenant authTenant = authTenantService.getByKey(tenantCode);
-        if (authTenant != null) {
-            BeanUtils.copyProperties(authTenant, tenantDTO);
+    @RequestMapping(value = "{apiTenantCode}", method = RequestMethod.GET)
+    public BaseResult get(@PathVariable(required = true) String apiTenantCode) {
+        try {
+            TenantDTO tenantDTO = new TenantDTO();
+            AuthTenant authTenant = authTenantService.getByKey(apiTenantCode, "");
+            if (authTenant != null) {
+                BeanUtils.copyProperties(authTenant, tenantDTO);
+            }
+            return BaseResult.success("操作成功", tenantDTO);
+        } catch (Exception ex) {
+            return BaseResult.fail("未知错误");
         }
-        return BaseResult.success("操作成功", tenantDTO);
     }
 
-    @RequestMapping(value = "save", method = RequestMethod.POST)
-    public BaseResult post(AuthTenant authTenant) {
-        return authTenantService.update(authTenant);
+    @RequestMapping(value = "{apiTenantCode}/save", method = RequestMethod.POST)
+    public BaseResult save(@PathVariable(required = true) String apiTenantCode, String tenantName, String tenantDesc) {
+        try {
+            AuthTenant authTenant = new AuthTenant();
+            authTenant.setTenantCode(apiTenantCode);
+            authTenant.setTenantName(tenantName);
+            authTenant.setTenantDesc(tenantDesc);
+            return authTenantService.update(apiTenantCode, authTenant);
+        } catch (Exception ex) {
+            return BaseResult.fail("未知错误");
+        }
     }
 }

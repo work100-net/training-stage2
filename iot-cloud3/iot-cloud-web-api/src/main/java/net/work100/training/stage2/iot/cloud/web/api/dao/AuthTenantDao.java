@@ -1,6 +1,6 @@
 package net.work100.training.stage2.iot.cloud.web.api.dao;
 
-import net.work100.training.stage2.iot.cloud.commons.dao.BaseDao;
+import net.work100.training.stage2.iot.cloud.commons.dao.ApiBaseDao;
 import net.work100.training.stage2.iot.cloud.domain.AuthTenant;
 import net.work100.training.stage2.iot.cloud.web.api.dto.auth.TenantSearcher;
 import org.springframework.stereotype.Repository;
@@ -18,6 +18,6 @@ import org.springframework.stereotype.Repository;
  * -----------------------------------------------
  */
 @Repository
-public interface AuthTenantDao extends BaseDao<AuthTenant, TenantSearcher> {
+public interface AuthTenantDao extends ApiBaseDao<AuthTenant, TenantSearcher> {
 
 }

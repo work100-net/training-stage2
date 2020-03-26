@@ -5,7 +5,7 @@ import lombok.Data;
 import java.io.Serializable;
 
 /**
- * <p>Title: Searcher</p>
+ * <p>Title: BaseSearcher</p>
  * <p>Description: </p>
  *
  * @author liuxiaojun

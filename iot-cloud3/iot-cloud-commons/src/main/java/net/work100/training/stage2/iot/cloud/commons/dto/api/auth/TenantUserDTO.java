@@ -20,7 +20,6 @@ public class TenantUserDTO implements Serializable {
     private String userKey;
     private String tenantCode;
     private String userName;
-    private String password;
     /**
      * 状态：0=inactive, 1=active, 2=locked, 3=deleted
      */

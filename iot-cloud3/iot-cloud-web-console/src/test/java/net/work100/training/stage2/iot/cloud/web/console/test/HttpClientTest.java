@@ -31,10 +31,9 @@ public class HttpClientTest {
 
     private static void post() {
         List<BasicNameValuePair> params = new ArrayList<>();
-        params.add(new BasicNameValuePair("tenantCode", "100001"));
-        params.add(new BasicNameValuePair("tenantName", "租户名称1-改"));
+        params.add(new BasicNameValuePair("tenantName", "租户名称1"));
         params.add(new BasicNameValuePair("tenantDesc", "test111"));
-        String result = HttpClientUtils.doPost("http://localhost:9090/api/v1/auth/tenant/save", params);
+        String result = HttpClientUtils.doPost("http://localhost:9090/api/v1/auth/tenant/100001/save", params);
         System.out.println(result);
     }
 }

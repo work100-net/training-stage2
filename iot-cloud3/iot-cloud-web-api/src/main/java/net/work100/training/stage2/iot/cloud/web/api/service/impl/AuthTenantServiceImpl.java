@@ -1,7 +1,7 @@
 package net.work100.training.stage2.iot.cloud.web.api.service.impl;
 
 import net.work100.training.stage2.iot.cloud.commons.dto.BaseResult;
-import net.work100.training.stage2.iot.cloud.commons.service.impl.AbstractBaseServiceImpl;
+import net.work100.training.stage2.iot.cloud.commons.service.impl.ApiAbstractBaseServiceImpl;
 import net.work100.training.stage2.iot.cloud.domain.AuthTenant;
 import net.work100.training.stage2.iot.cloud.web.api.dao.AuthTenantDao;
 import net.work100.training.stage2.iot.cloud.web.api.dto.auth.TenantSearcher;
@@ -26,27 +26,27 @@ import java.util.Date;
  */
 @Service
 @Transactional(readOnly = true)
-public class AuthTenantServiceImpl extends AbstractBaseServiceImpl<AuthTenant, TenantSearcher, AuthTenantDao> implements AuthTenantService {
+public class AuthTenantServiceImpl extends ApiAbstractBaseServiceImpl<AuthTenant, TenantSearcher, AuthTenantDao> implements AuthTenantService {
 
     @Autowired
     private AuthTenantDao authTenantDao;
 
     @Override
     @Transactional(readOnly = false)
-    public BaseResult insert(AuthTenant authTenant) {
+    public BaseResult insert(String apiTenantCode, AuthTenant authTenant) {
         return null;
     }
 
     @Override
     @Transactional(readOnly = false)
-    public BaseResult update(AuthTenant authTenant) {
-        if (authTenantDao.getByKey(authTenant.getTenantCode()) == null) {
+    public BaseResult update(String apiTenantCode, AuthTenant authTenant) {
+        if (authTenantDao.getByKey(apiTenantCode, null) == null) {
             return BaseResult.fail("租户不存在");
         }
         try {
             authTenant.setUpdated(new Date());
 
-            authTenantDao.update(authTenant);
+            authTenantDao.update(apiTenantCode, authTenant);
             return BaseResult.success("租户更新成功");
         } catch (Exception ex) {
             return BaseResult.fail("未知错误");
