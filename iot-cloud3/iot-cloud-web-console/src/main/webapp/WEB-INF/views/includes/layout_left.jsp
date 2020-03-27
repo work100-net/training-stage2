@@ -49,7 +49,7 @@
                 </li>
                 <li class="nav-item has-treeview ${fn:startsWith(requestScope['javax.servlet.forward.servlet_path'],'/iot/device/')?'menu-open':''}">
                     <a href="#" class="nav-link">
-                        <i class="nav-icon fas fa-store-alt"></i>
+                        <i class="nav-icon fas fa-cog"></i>
                         <p>
                             设备
                             <i class="fas fa-angle-left right"></i>

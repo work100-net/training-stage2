@@ -138,7 +138,11 @@
   - 项目实战(前台)
     - [01.概览](http://www.work100.net/training/monolithic-project-iot-cloud-console.html)
     - [02.与API模块通信](http://www.work100.net/training/monolithic-project-iot-cloud-console-api-communication.html)
-    - [03.完善API模块](http://www.work100.net/training/monolithic-project-iot-cloud-console-api-upgrade.html)
+    - 03.完善API模块
+        - [通用功能封装](http://www.work100.net/training/monolithic-project-iot-cloud-console-api-upgrade.html)
+        - [Login接口](http://www.work100.net/training/monolithic-project-iot-cloud-console-api-upgrade-login.html)
+        - [TenantUser接口](http://www.work100.net/training/monolithic-project-iot-cloud-console-api-upgrade-tenant-user.html)
+        - [Tenant接口](http://www.work100.net/training/monolithic-project-iot-cloud-console-api-upgrade-tenant.html)
     - [04.前台登录](http://www.work100.net/training/monolithic-project-iot-cloud-console-login.html)
     - [05.首页布局](http://www.work100.net/training/monolithic-project-iot-cloud-console-index.html)
     - [06.账户管理](http://www.work100.net/training/monolithic-project-iot-cloud-console-user.html)
