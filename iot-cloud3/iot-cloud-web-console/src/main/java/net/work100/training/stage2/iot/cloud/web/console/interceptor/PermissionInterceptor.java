@@ -2,6 +2,7 @@ package net.work100.training.stage2.iot.cloud.web.console.interceptor;
 
 import net.work100.training.stage2.iot.cloud.commons.constant.ConstantUtils;
 import net.work100.training.stage2.iot.cloud.commons.dto.api.auth.TenantUserDTO;
+import net.work100.training.stage2.iot.cloud.commons.utils.SessionUtils;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -29,7 +30,7 @@ public class PermissionInterceptor implements HandlerInterceptor {
     @Override
     public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
         if (modelAndView != null && "login".equals(modelAndView.getViewName())) {
-            TenantUserDTO tenantUserDTO = (TenantUserDTO) request.getSession().getAttribute(ConstantUtils.SESSION_TENANT_USER);
+            TenantUserDTO tenantUserDTO = SessionUtils.get(request, ConstantUtils.SESSION_TENANT_USER);
             if (tenantUserDTO != null) {
                 response.sendRedirect("/main");
             }

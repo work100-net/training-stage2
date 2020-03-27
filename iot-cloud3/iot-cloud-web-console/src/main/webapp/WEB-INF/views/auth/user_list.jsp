@@ -5,7 +5,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>查询列表 - 租户账户 | IoT-Admin</title>
+    <title>查询列表 - 账户 | IoT-Console</title>
     <jsp:include page="../includes/resources_head.jsp" />
 </head>
 <body class="hold-transition sidebar-mini ${cookie.sidebar_collapse.value=='true'?'sidebar-collapse':''}">
@@ -26,7 +26,7 @@
                     </div><!-- /.col -->
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="#">租户账户</a></li>
+                            <li class="breadcrumb-item"><a href="#">账户</a></li>
                             <li class="breadcrumb-item active">查询列表</li>
                         </ol>
                     </div><!-- /.col -->
@@ -40,24 +40,13 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col">
-                        <form:form action="/auth/tenant-user/search" method="post" modelAttribute="tenantUserSearcher">
+                        <form:form action="/auth/user/search" method="post" modelAttribute="tenantUserSearcher">
                             <form:hidden path="advanced" />
                             <div class="card">
                                 <div class="card-header">
                                     <div class="card-title">
                                         <div class="btn-group">
-                                            <form:select path="tenantCode" class="form-control select2" style="width: 250px;" onchange="handleTenantChange()">
-                                                <option value="">请选择租户</option>
-                                                <c:forEach items="${authTenants}" var="authTenant">
-                                                    <option value="${authTenant.tenantCode}" ${tenantCode == authTenant.tenantCode ? "selected" : ""}>
-                                                            ${authTenant.tenantCode} - ${authTenant.tenantName}
-                                                    </option>
-                                                </c:forEach>
-                                            </form:select>
-                                        </div>
-                                        <div class="btn-group">
-                                            <button type="button" class="btn btn-primary" onclick="handleAdd()">新增
-                                            </button>
+                                            <a type="button" class="btn btn-primary" href="/auth/user/add">新增</a>
                                             <button type="button" class="btn btn-default">更多...</button>
                                             <button type="button" class="btn btn-default dropdown-toggle dropdown-icon" data-toggle="dropdown">
                                                 <span class="sr-only">Toggle Dropdown</span>
@@ -67,7 +56,7 @@
                                             </button>
                                         </div>
                                         <div class="btn-group">
-                                            <a href="/auth/tenant-user/list?tenantCode=${tenantCode}" type="button" class="btn btn-default" title="重新加载"><i class="fas fa-redo"></i></a>
+                                            <a href="/auth/user/list" type="button" class="btn btn-default" title="重新加载"><i class="fas fa-redo"></i></a>
                                             <button type="button" class="btn btn-default" title="打印">
                                                 <i class="fas fa-print"></i></button>
                                             <button type="button" class="btn btn-default" title="下载">
@@ -137,7 +126,7 @@
                                                 </button>
                                             </div>
                                             <div class="btn-group">
-                                                <a href="/auth/tenant-user/list?tenantCode=${tenantCode}" type="button" class="btn btn-default">重
+                                                <a href="/auth/user/list" type="button" class="btn btn-default">重
                                                     置</a>
                                             </div>
                                         </div>
@@ -257,8 +246,8 @@ function doSearch() {
         {
             'data': function(row, type, val, meta) {
                 return '<div class="btn-group">' +
-                    '   <a href="#" type="button" class="btn btn-default btn-sm" onclick="showDetail(\'' + row.tenantCode + '\',\'' + row.userName + '\',\'' + row.roles + '\',' + row.superuser + ',' + row.status + ',' + row.created + ',' + row.updated + ');"><i class="fas fa-eye"></i></a>' +
-                    '   <a href="/auth/tenant-user/edit/' + row.userKey + '?tenantCode=' + row.tenantCode + '" type="button" class="btn btn-primary btn-sm"><i class="fas fa-edit"></i></a>' +
+                    '   <a href="#" type="button" class="btn btn-default btn-sm" onclick="showDetail(\'' + row.userName + '\',\'' + row.roles + '\',' + row.superuser + ',' + row.status + ',' + row.created + ',' + row.updated + ');"><i class="fas fa-eye"></i></a>' +
+                    '   <a href="/auth/user/edit/' + row.userKey + '" type="button" class="btn btn-primary btn-sm"><i class="fas fa-edit"></i></a>' +
                     '   <button type="button" class="btn btn-danger btn-sm" onclick="singleDelete(\'' + row.userKey + '\');"><i class="fas fa-trash"></i></button>' +
                     '</div>';
             }
@@ -267,7 +256,6 @@ function doSearch() {
 
     let searchParams = {
         'advanced': $('#advanced').val(),
-        'tenantCode': $('#tenantCode').val(),
         'keyword': $('#keyword').val(),
         'userName': $('#userName').val(),
         'roles': $('#roles').val(),
@@ -275,10 +263,10 @@ function doSearch() {
     };
 
     // 加载 DataTable
-    Table.loadDataTable('/auth/tenant-user/page-search', columns, searchParams);
+    Table.loadDataTable('/auth/user/page-search', columns, searchParams);
 }
 
-function showDetail(tenantCode, userName, roles, superuser, status, created, updated) {
+function showDetail(userName, roles, superuser, status, created, updated) {
     superuser = superuser ? '是' : '否';
     switch (status) {
         case 0:
@@ -298,10 +286,6 @@ function showDetail(tenantCode, userName, roles, superuser, status, created, upd
             break;
     }
     let html = '';
-    html = html + '<div class="row" style="padding: 4px;">';
-    html = html + '  <div class="col-md-3" style="font-weight: bold;">租户编码</div>';
-    html = html + '  <div class="col-md-9">' + tenantCode + '</div>';
-    html = html + '</div>';
     html = html + '<div class="row" style="padding: 4px;">';
     html = html + '  <div class="col-md-3" style="font-weight: bold;">用户名</div>';
     html = html + '  <div class="col-md-9">' + userName + '</div>';
@@ -335,7 +319,7 @@ function singleDelete(userKey) {
 }
 
 function singleDelete_callback(userKey) {
-    location.href = '/auth/tenant-user/delete/' + userKey;
+    location.href = '/auth/user/delete/' + userKey;
 }
 
 // 批量删除
@@ -350,32 +334,18 @@ function multiDelete() {
 
 function multiDelete_callback(userKeys) {
     $.ajax({
-        'url': '/auth/tenant-user/multi-delete',
+        'url': '/auth/user/multi-delete',
         'type': 'POST',
         'data': { 'userKeys': userKeys.toString() },
         'dataType': 'JSON',
         'success': function(ret) {
             if (ret.status === 200) {
-                location.href = '/auth/tenant-user/list';
-                // Message.showSuccess(ret.message);
+                location.href = '/auth/user/list';
             } else {
                 Message.showFail(ret.message);
             }
         }
     });
-}
-
-function handleTenantChange() {
-    location.href = '/auth/tenant-user/list?tenantCode=' + $('#tenantCode').val();
-}
-
-function handleAdd() {
-    const tenantCode = $('#tenantCode').val();
-    if (tenantCode == '' || tenantCode == undefined) {
-        Message.showFail('请选择租户，如还没有请先添加');
-    } else {
-        location.href = '/auth/tenant-user/add?tenantCode=' + $('#tenantCode').val();
-    }
 }
 </script>
 <script src="/static/assets/js/select2-utils.js"></script>

@@ -87,6 +87,7 @@ public class TenantUserController {
                 for (AuthTenantUser authTenantUser : authTenantUserPageInfo.getData()) {
                     TenantUserDTO tenantUserDTO = new TenantUserDTO();
                     BeanUtils.copyProperties(authTenantUser, tenantUserDTO);
+                    tenantUserDTO.setPassword("");
                     data.add(tenantUserDTO);
                 }
             }
@@ -114,7 +115,8 @@ public class TenantUserController {
             if (authTenantUser != null) {
                 TenantUserDTO tenantUserDTO = new TenantUserDTO();
                 BeanUtils.copyProperties(authTenantUser, tenantUserDTO);
-                BaseResult.success("成功", tenantUserDTO);
+                tenantUserDTO.setPassword("");
+                return BaseResult.success("成功", tenantUserDTO);
             }
             return BaseResult.fail("未找到相关数据");
         } catch (Exception ex) {

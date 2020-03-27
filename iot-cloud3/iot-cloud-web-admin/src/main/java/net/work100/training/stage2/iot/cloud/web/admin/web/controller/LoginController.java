@@ -4,6 +4,7 @@ import net.work100.training.stage2.iot.cloud.commons.constant.ConstantUtils;
 import net.work100.training.stage2.iot.cloud.commons.utils.CookieUtils;
 import net.work100.training.stage2.iot.cloud.commons.utils.DateTimeUtils;
 import net.work100.training.stage2.iot.cloud.commons.utils.IpUtils;
+import net.work100.training.stage2.iot.cloud.commons.utils.SessionUtils;
 import net.work100.training.stage2.iot.cloud.domain.AuthManager;
 import net.work100.training.stage2.iot.cloud.domain.AuthManagerProfile;
 import net.work100.training.stage2.iot.cloud.web.admin.service.AuthManagerProfileService;
@@ -91,7 +92,7 @@ public class LoginController {
                 CookieUtils.deleteCookie(request, response, ConstantUtils.COOKIE_MANAGER_USERNAME);
             }
             // 将登录信息记入Session
-            request.getSession().setAttribute(ConstantUtils.SESSION_MANAGER, authManager);
+            SessionUtils.set(request, ConstantUtils.SESSION_MANAGER, authManager);
 
             // ---------------- 记录登录信息(begin) ----------------
             List<AuthManagerProfile> profiles = new ArrayList<>();
@@ -131,7 +132,7 @@ public class LoginController {
      */
     @RequestMapping(value = "logout", method = RequestMethod.GET)
     public String logout(HttpServletRequest request) {
-        request.getSession().invalidate();
+        SessionUtils.clear(request);
         return "redirect:/login";
     }
 

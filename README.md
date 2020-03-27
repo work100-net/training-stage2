@@ -147,6 +147,7 @@
     - [05.首页布局](http://www.work100.net/training/monolithic-project-iot-cloud-console-index.html)
     - [06.账户管理](http://www.work100.net/training/monolithic-project-iot-cloud-console-user.html)
     - [07.设备管理](http://www.work100.net/training/monolithic-project-iot-cloud-console-device.html)
+    - [08.总结与拓展](http://www.work100.net/training/monolithic-project-iot-cloud-console-summary.html)
 
 
 -------------------

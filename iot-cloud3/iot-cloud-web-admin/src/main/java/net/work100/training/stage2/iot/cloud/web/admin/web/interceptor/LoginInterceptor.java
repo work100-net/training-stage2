@@ -1,6 +1,7 @@
 package net.work100.training.stage2.iot.cloud.web.admin.web.interceptor;
 
 import net.work100.training.stage2.iot.cloud.commons.constant.ConstantUtils;
+import net.work100.training.stage2.iot.cloud.commons.utils.SessionUtils;
 import net.work100.training.stage2.iot.cloud.domain.AuthManager;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
@@ -23,7 +24,7 @@ import javax.servlet.http.HttpServletResponse;
 public class LoginInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        AuthManager authManager = (AuthManager) request.getSession().getAttribute(ConstantUtils.SESSION_MANAGER);
+        AuthManager authManager = SessionUtils.get(request, ConstantUtils.SESSION_MANAGER);
 
         // 未登录
         if (authManager == null) {

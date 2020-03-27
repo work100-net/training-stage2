@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>新增账户 - 租户账户 | IoT-Admin</title>
+    <title>新增账户 - 账户 | IoT-Console</title>
     <jsp:include page="../includes/resources_head.jsp" />
 </head>
 <body class="hold-transition sidebar-mini ${cookie.sidebar_collapse.value=='true'?'sidebar-collapse':''}">
@@ -25,7 +25,7 @@
                     </div><!-- /.col -->
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="#">租户账户</a></li>
+                            <li class="breadcrumb-item"><a href="#">账户</a></li>
                             <li class="breadcrumb-item active">新增账户</li>
                         </ol>
                     </div><!-- /.col -->
@@ -41,21 +41,10 @@
                     <div class="col">
                         <div class="card card-gray">
                             <!-- form start -->
-                            <form:form action="/auth/tenant-user/add" id="form" method="post" modelAttribute="authTenantUser">
+                            <form:form action="/auth/user/add" id="form" method="post" modelAttribute="tenantUserDTO">
                                 <div class="card-body">
                                     <div class="row">
                                         <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label for="tenantCode">租户</label>
-                                                <form:select path="tenantCode" cssClass="form-control select2" style="width: 100%;">
-                                                    <option value="">请选择租户</option>
-                                                    <c:forEach items="${authTenants}" var="authTenant">
-                                                        <option value="${authTenant.tenantCode}" ${tenantCode == authTenant.tenantCode ? "selected" : ""}>
-                                                                ${authTenant.tenantCode} - ${authTenant.tenantName}
-                                                        </option>
-                                                    </c:forEach>
-                                                </form:select>
-                                            </div>
                                             <div class="form-group">
                                                 <label for="userName">用户名</label>
                                                 <form:input path="userName" cssClass="form-control" placeholder="请输入用户名" />
@@ -69,10 +58,10 @@
                                             <div class="form-group">
                                                 <label for="roles">角色</label>
                                                 <form:select path="roles" cssClass="select2" multiple="multiple" data-placeholder="请选择角色" style="width: 100%;">
-                                                    <option value="admin" ${authTenantUser.roles.contains("admin")?"selected":""}>
+                                                    <option value="admin" ${tenantUserDTO.roles.contains("admin")?"selected":""}>
                                                         admin
                                                     </option>
-                                                    <option value="editor" ${authTenantUser.roles.contains("editor")?"selected":""}>
+                                                    <option value="editor" ${tenantUserDTO.roles.contains("editor")?"selected":""}>
                                                         editor
                                                     </option>
                                                 </form:select>
@@ -100,7 +89,7 @@
 
                                 <div class="card-footer">
                                     <button type="submit" class="btn btn-primary">保存</button>
-                                    <a href="/auth/tenant-user/list?tenantCode=${tenantCode}" type="button" class="btn btn-default">返回列表</a>
+                                    <a href="/auth/user/list" type="button" class="btn btn-default">返回列表</a>
                                 </div>
                             </form:form>
                         </div>
@@ -128,9 +117,6 @@ $(function() {
     FormValidate.validate(
         'form',
         {
-            tenantCode: {
-                required: true
-            },
             userName: {
                 required: true,
                 minlength: 4,
@@ -148,9 +134,6 @@ $(function() {
             }
         },
         {
-            tenantCode: {
-                required: " 请选择租户"
-            },
             userName: {
                 required: " 请输入用户名",
                 minlength: " 用户名不能小于4位",

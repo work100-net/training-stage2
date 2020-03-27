@@ -4,6 +4,7 @@ import net.work100.training.stage2.iot.cloud.commons.constant.ConstantUtils;
 import net.work100.training.stage2.iot.cloud.commons.dto.api.auth.TenantDTO;
 import net.work100.training.stage2.iot.cloud.commons.dto.api.auth.TenantUserDTO;
 import net.work100.training.stage2.iot.cloud.commons.utils.CookieUtils;
+import net.work100.training.stage2.iot.cloud.commons.utils.SessionUtils;
 import net.work100.training.stage2.iot.cloud.web.console.api.LoginApi;
 import net.work100.training.stage2.iot.cloud.web.console.api.TenantApi;
 import net.work100.training.stage2.iot.cloud.web.console.dto.LoginDTO;
@@ -88,7 +89,7 @@ public class LoginController {
                 CookieUtils.deleteCookie(request, response, ConstantUtils.COOKIE_TENANT_USER_USERNAME);
             }
             // 将登录信息记入Session
-            request.getSession().setAttribute(ConstantUtils.SESSION_TENANT_USER, tenantUserDTO);
+            SessionUtils.set(request, ConstantUtils.SESSION_TENANT_USER, tenantUserDTO);
 
             return "redirect:/main";
         }
@@ -109,7 +110,7 @@ public class LoginController {
      */
     @RequestMapping(value = "logout", method = RequestMethod.GET)
     public String logout(HttpServletRequest request) {
-        request.getSession().invalidate();
+        SessionUtils.clear(request);
         return "redirect:/login";
     }
 }

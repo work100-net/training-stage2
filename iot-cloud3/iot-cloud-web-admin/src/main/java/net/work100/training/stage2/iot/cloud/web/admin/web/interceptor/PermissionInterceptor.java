@@ -1,6 +1,7 @@
 package net.work100.training.stage2.iot.cloud.web.admin.web.interceptor;
 
 import net.work100.training.stage2.iot.cloud.commons.constant.ConstantUtils;
+import net.work100.training.stage2.iot.cloud.commons.utils.SessionUtils;
 import net.work100.training.stage2.iot.cloud.domain.AuthManager;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
@@ -29,7 +30,7 @@ public class PermissionInterceptor implements HandlerInterceptor {
     @Override
     public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
         if (modelAndView != null && "login".equals(modelAndView.getViewName())) {
-            AuthManager authManager = (AuthManager) request.getSession().getAttribute(ConstantUtils.SESSION_MANAGER);
+            AuthManager authManager = SessionUtils.get(request, ConstantUtils.SESSION_MANAGER);
             if (authManager != null) {
                 response.sendRedirect("/main");
             }
