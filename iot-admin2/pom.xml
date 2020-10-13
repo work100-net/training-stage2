@@ -13,7 +13,7 @@
         <spring.version>5.2.3.RELEASE</spring.version>
         <javax.servlet-api.version>4.0.1</javax.servlet-api.version>
         <javax.jstl.version>1.2</javax.jstl.version>
-        <junit.version>4.12</junit.version>
+        <junit.version>4.13.1</junit.version>
         <slf4j.version>1.7.25</slf4j.version>
     </properties>
 
