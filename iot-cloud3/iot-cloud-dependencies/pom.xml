@@ -42,7 +42,7 @@
         <javax.el.version>3.0.0</javax.el.version>
 
         <!-- Jackson -->
-        <jackson.version>2.10.3</jackson.version>
+        <jackson.version>2.12.1</jackson.version>
 
         <!-- Lombok -->
         <lombok.version>1.18.8</lombok.version>
