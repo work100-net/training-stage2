@@ -48,7 +48,7 @@
         <lombok.version>1.18.8</lombok.version>
 
         <!-- httpcomponents -->
-        <httpcomponents.version>4.5.9</httpcomponents.version>
+        <httpcomponents.version>4.5.13</httpcomponents.version>
     </properties>
 
     <dependencyManagement>
